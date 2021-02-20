@@ -12,8 +12,5 @@
     "bugs": {
         "url": "https://github.com/MACCNYC/NYCAnarchistEvents/issues"
     },
-    "dependencies": {
-        "@fullcalendar/icalendar": "^5.5.1",
-        "fullcalendar": "3.0.1"
-    }
+    "dependencies": {}
 }

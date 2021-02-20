@@ -3,9 +3,8 @@
 <head>
     <meta charset='utf-8' />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.min.css" integrity="sha256-uq9PNlMzB+1h01Ij9cx7zeE2OR2pLAfRw3uUUOOPKdA=" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="main.css">
-    <link href='node_modules/fullcalendar/dist/fullcalendar.css' rel='stylesheet' />
-    <link href='node_modules/fullcalendar/dist/fullcalendar.print.css' rel='stylesheet' media='print' />
     <link rel="icon" href="favico.png">
 </head>
 
@@ -21,21 +20,16 @@
     </div>
 
     <hr>
-    <div class='to_add text toggle'> Toggle calendars
-        <div id='toggles'></div>
-    </div>
-    <div id='loading'>loading...</div>
 
     <div id='calendar'></div>
     <hr>
 
     <div class="to_add text">
-        To add events, you must publish an iCalendar formatted feed of event data.
+        To add events to this site, you must be publishing an iCalendar formatted feed of event data.
     </div>
 
-    <script src='node_modules/moment/moment.js'></script>
-    <script src='node_modules/jquery/dist/jquery.js'></script>
-    <script src='node_modules/fullcalendar/dist/fullcalendar.js'></script>
-    <script src='node_modules/fullcalendar/dist/gcal.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/ical.js@1.4.0/build/ical.min.js" integrity="sha256-iFbWWsVYU6rIgbq5wJc4mp8zvV3SkqupxgH/7a9PanY=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.min.js" integrity="sha256-rPPF6R+AH/Gilj2aC00ZAuB2EKmnEjXlEWx5MkAp7bw=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/icalendar@5.5.1/main.global.min.js" integrity="sha256-0ORfMzcxYZVoxH9RIqq+DBKrwAWn4V+/DByvDjnXyxs=" crossorigin="anonymous"></script>
     <script src='main.js'></script>
 </body>
