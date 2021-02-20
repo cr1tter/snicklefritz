@@ -1,26 +1,36 @@
 (function () { // begin Immediately-Invoked Function Expression
     $(document).ready(function() {
-        const sources = [{
-            googleCalendarId: '5irab2ggffkj3l451b5qae9l1s@group.calendar.google.com',
-            className: 'anarchist-events',
-            title: "Featured Events",
-            defaultShow: true,
-        }, {
-            googleCalendarId: 'glj5531i5vt6aq3i07vlqo09e1qrbkst@import.calendar.google.com',
-            className: 'the-base',
-            title: 'The Base',
-            defaultShow: true,
-        }, {
-            googleCalendarId: '49d38ogbtcddujpt2u5gm39n9td1bv3p@import.calendar.google.com',
-            className: 'bluestockings',
-            title: 'Bluestockings',
-            defaultShow: false
-        }, {
-            url: 'https://techlearningcollective.com/events/all-fullcalendar-io.json',
-            className: 'tech-learning-collective',
-            title: 'Tech Learning Collective',
-            defaultShow: true
-        }
+        const sources = [
+            {
+                googleCalendarId: '5irab2ggffkj3l451b5qae9l1s@group.calendar.google.com',
+                className: 'anarchist-events',
+                title: "Featured Events",
+                defaultShow: false,
+            },
+            {
+                googleCalendarId: 'glj5531i5vt6aq3i07vlqo09e1qrbkst@import.calendar.google.com',
+                className: 'the-base',
+                title: 'The Base',
+                defaultShow: false,
+            },
+            {
+                googleCalendarId: '49d38ogbtcddujpt2u5gm39n9td1bv3p@import.calendar.google.com',
+                className: 'bluestockings',
+                title: 'Bluestockings',
+                defaultShow: false
+            },
+            {
+                url: 'https://techlearningcollective.com/events/all-fullcalendar-io.json',
+                className: 'tech-learning-collective',
+                title: 'Tech Learning Collective',
+                defaultShow: true
+            },
+            {
+                url: 'https://tockify.com/api/feeds/ics/mlsupport',
+                format: 'ics',
+                title: 'MACC events',
+                defaultShow: false
+            }
         ];
         var initialized = false;
 
