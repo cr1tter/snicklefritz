@@ -24,6 +24,10 @@
 //                    title: 'Bluestockings'
 //                }
             ],
+            eventDidMount: function (info) {
+                info.el.setAttribute('title', info.event.title);
+                return [ info.el ];
+            },
             eventClick: function (info) {
                 info.jsEvent.preventDefault();
                 if (info.event.url) {
