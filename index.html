@@ -7,29 +7,27 @@
     <link rel="stylesheet" type="text/css" href="static/css/main.css">
     <link rel="icon" href="favicon.ico">
 </head>
-
 <body>
-    <h1>
-        <span class="r">Anarchist</span>
-        <span class="l">Events</span>
-        <span class="r">NYC</span>
-    </h1>
+    <header>
+        <h1>
+            <span>NYC</span>
+            <span>Anarchist</span>
+            <span>Events</span>
+        </h1>
+        <p>Public events of New York anarchist and anarchist-ish groups.</p>
+    </header>
 
-    <div class="about text">
-        Public events of New York anarchist and anarchist-ish groups.
-    </div>
+    <main>
+        <div id="calendar"><!-- FullCalendar content generated via JavaScript. --></div>
+    </main>
 
-    <hr>
-
-    <div id="calendar"></div>
-    <hr>
-
-    <div class="to_add text">
-        To add events to this site, you must be publishing an iCalendar formatted feed of event data.
-    </div>
+    <footer>
+        <p>To add events to this site, you must be publishing an iCalendar formatted feed of event data.</p>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/ical.js@1.4.0/build/ical.min.js" integrity="sha256-iFbWWsVYU6rIgbq5wJc4mp8zvV3SkqupxgH/7a9PanY=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.min.js" integrity="sha256-rPPF6R+AH/Gilj2aC00ZAuB2EKmnEjXlEWx5MkAp7bw=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/icalendar@5.5.1/main.global.min.js" integrity="sha256-0ORfMzcxYZVoxH9RIqq+DBKrwAWn4V+/DByvDjnXyxs=" crossorigin="anonymous"></script>
     <script src="static/js/main.js"></script>
 </body>
+</html>

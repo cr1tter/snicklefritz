@@ -1,94 +1,47 @@
-* {
-    -webkit-font-smoothing: antialiased;
-}
-body {
-    font-family: 'helvetica neue' !important;
-    font-weight: 200;
-    display: block;
-    margin: auto;
-    color: #444;
-    background: #CCC;
-    padding: 100;
-}
-h1 {
-    box-sizing: border-box;
-    font-size: 45px;
-    font-weight: normal;
-    line-height: 49.5px;
-    margin: auto;
-    margin-bottom: 20px;
-    text-align: center;
-    border-bottom: 5px solid #444;
-    word-spacing: -0.3em;
-}
-.text {
-    box-sizing: border-box;
-    padding: 10;
-    display: block;
-    font-size: 21px;
-    font-weight: normal;
-    line-height: 31.5px;
-    max-width: 800px;
-    text-align: center;
-}
-.about {
-    margin: auto;
-    margin-bottom: 20px;
-}
-.to_add {
-    font-size: 12px;
-    margin: auto;
-}
-hr {
-    width: 60%;
-    border-bottom: 5px solid #444;
-    margin: 20;
-}
-span.l {
-    font-weight: 100;
-}
-span.r {
-    font-weight: 500;
-}
+/**
+ * @group Layout.
+ */
 body {
     margin: 40px 10px;
     padding: 0;
-}
-#loading {
-    display: none;
-    position: absolute;
-    top: 10px;
-    right: 10px;
+    background: #CCC;
 }
 #calendar {
     max-width: 800px;
     margin: 0 auto;
+    border-width: 5px 0;
+    border-style: solid;
+    padding: 20px 0;
 }
 
-@media all and (max-width:800px) {
-    #calendar {
-        margin: 0 -10px;
-    }
+footer {
+    margin-top: 20px;
+    font-size: 14px;
 }
 
-.the-base.fc-event, .the-base .fc-event-dot {
-    background-color: blue;
+/**
+ * @group Typography.
+ */
+body {
+    font-family: "Helvetica Neue";
+    font-weight: 200;
+    color: #444;
+    text-align: center;
 }
-.bluestockings.fc-event, .bluestockings .fc-event-dot {
-    background-color: hotpink;
+h1 {
+    font-size: 45px;
 }
-.anarchist-events.fc-event, .anarchist-events .fc-event-dot {
-    background-color: red;
+h1 span {
+    font-weight: 100;
 }
-.starr-bar.fc-event, .starr-bar .fc-event-dot {
-    background-color: orange;
-}
-input {margin: 5px;}
-.disabled-button {
-    background-color: lightgrey;
-    color: darkgrey;
+h1 span:first-child, h1 span:last-child {
+    font-weight: bold;
 }
 
-.toggle {
-    font-size: 16px;
+header h1 {
+    margin-bottom: 20px;
+    border-bottom: 5px solid;
+}
+header p {
+    font-size: 21px;
 }
