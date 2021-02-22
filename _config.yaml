@@ -1,0 +1,80 @@
+#####################################################################
+# This is Jekyll's configuration file for this project.
+#
+# For more information, see the documentation:
+#
+#     https://jekyllrb.com/docs/configuration/
+#####################################################################
+
+# Site settings
+title: NYC Anarchist Events
+tagline:
+description: Public events of New York and tri-state area anarchist and anarchist-ish groups.
+lang: "en_US" # The primary human language you write in.
+timezone: "America/New_York"
+type: Website
+logo: &logo favicon.ico
+
+author:
+  name: Anarcho-Tech NYC
+  email:
+
+#twitter:
+#  card: summary_large_image
+#  username:
+
+# Location of this site in Onionland.
+#onion:
+
+# Build settings
+markdown: kramdown
+exclude:
+  - vendor
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - .github
+  - .gitignore
+  - .forestry
+include:
+  - .well-known
+  - .nojekyll
+
+# Blog settings.
+paginate: 5    # How many posts per HTML page.
+paginate_path: "/blog/page/:num/"
+date_format: "%B %e, %Y"
+time_format: "%l:%M %p"
+
+# Collections.
+#
+# Collections are a Jekyll feature that takes structured data and can
+# render a page for each item in that data structure. For example, you
+# can make a collection of baking recipes and then, for each recipe in
+# the collection, you can make a page with its own Web address to show
+# the recipe on your Web site.
+#collections:
+
+# Front Matter defaults.
+#defaults:
+#  - scope:
+#      path: "" # an empty string here means all files in the project
+#    values:
+#      layout: page
+#      image: *logo
+
+# Settings for jekyll-feed plugin.
+#feed:
+#  collections:
+#    - events
+
+# Settings for jekyll-redirect-from plugin.
+redirect_from:
+  json: false
+
+# Load whitelisted plugins.
+# See https://help.github.com/en/articles/configuring-jekyll-plugins
+plugins:
+    - jekyll-seo-tag
+    - jekyll-feed
+    - jekyll-redirect-from
