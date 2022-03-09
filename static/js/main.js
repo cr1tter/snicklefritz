@@ -39,15 +39,37 @@ app = (function () { // begin Immediately-Invoked Function Expression
             {
                 // Maintained by Tech Learning Collective's Partner Operations Team.
                 name: 'Friendly to Anarchism.NYC',
+                id: 'friendlytoanarchismnyc',
                 className: 'friendlytoanarchismnyc',
                 googleCalendarApiKey: 'AIzaSyCgUpmnFFSyarVFGiTSPuzxIdJPr2M-Vic',
                 googleCalendarId: '2om8s9hsd7kkkjcc88kon65i2o@group.calendar.google.com'
+            },
+            {
+                name: 'Phase Space',
+                id: 'phase-space',
+                className: 'phase-space',
+                googleCalendarApiKey: 'AIzaSyCgUpmnFFSyarVFGiTSPuzxIdJPr2M-Vic',
+                googleCalendarId: 'q14jhdv41fng6q1b2826dp92rs@group.calendar.google.com'
             },
             {
                 name: 'Metropolitan Anarchist Coordinating Council of NYC',
                 id: 'maccnyc',
                 className: 'event-maccnyc',
                 url: 'https://tockify.com/api/feeds/ics/mlsupport',
+                format: 'ics'
+            },
+            {
+                name: 'NYC Mesh',
+                id: 'nycmesh',
+                className: 'nycmesh',
+                url: 'https://www.meetup.com/nycmesh/events/ical/',
+                format: 'ics'
+            },
+            {
+                name: 'DEFCON201',
+                id: 'defcon201',
+                className: 'defcon201',
+                url: 'https://www.meetup.com/DEFCON201/events/ical/',
                 format: 'ics'
             }
         ],
