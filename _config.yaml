@@ -7,9 +7,9 @@
 #####################################################################
 
 # Site settings
-title: NYC Anarchist Events
+title: NYC Anarchist(-ish) Events
 tagline:
-description: Public events of New York and tri-state area anarchist and anarchist-ish groups.
+description: Public events of New York and tri-state area anarchist, anarchist-ish, and anarcho-friendly groups.
 lang: "en_US" # The primary human language you write in.
 timezone: "America/New_York"
 type: Website
