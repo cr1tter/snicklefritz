@@ -28,9 +28,9 @@ app = (function () { // begin Immediately-Invoked Function Expression
         headerToolbar: {
             left: 'prev,next today',
             center: 'title',
-            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
             // When ready, we'll add a "Calendars" button. But not yet.
-            //right: 'calendars dayGridMonth,timeGridWeek,timeGridDay'
+            //right: 'calendars dayGridMonth,timeGridWeek,timeGridDay,listWeek'
         },
         eventSources: [
             {
