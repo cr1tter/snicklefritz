@@ -9,7 +9,7 @@
 # Site settings
 title: NYC Anarchist(-ish) Events
 tagline:
-description: Public events of New York and tri-state area anarchist, anarchist-ish, and anarcho-friendly groups.
+description: Public events of New York and tri-state area anarchist, anarchist-ish, and anarcho-friendly groups.<br />(Also heavy on the queer because of course we fucking are.)
 lang: "en_US" # The primary human language you write in.
 timezone: "America/New_York"
 type: Website
