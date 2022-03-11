@@ -58,18 +58,23 @@ app = (function () { // begin Immediately-Invoked Function Expression
                 url: 'https://tockify.com/api/feeds/ics/mlsupport',
                 format: 'ics'
             },
+            // These calendars hosted on Meetup.com will fail due
+            // to a missing CORS header. Current workaround is to
+            // use a CORS proxy. This can be tightened down when
+            // https://github.com/fullcalendar/fullcalendar/issues/4627#issuecomment-831402797 
+            // is resolved.
             {
                 name: 'NYC Mesh',
                 id: 'nycmesh',
                 className: 'nycmesh',
-                url: 'https://www.meetup.com/nycmesh/events/ical/',
+                url: 'http://cors.anarchism.nyc/https://www.meetup.com/nycmesh/events/ical/',
                 format: 'ics'
             },
             {
                 name: 'DEFCON201',
                 id: 'defcon201',
                 className: 'defcon201',
-                url: 'https://www.meetup.com/DEFCON201/events/ical/',
+                url: 'http://cors.anarchism.nyc/https://www.meetup.com/DEFCON201/events/ical/',
                 format: 'ics'
             }
         ],
