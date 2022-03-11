@@ -1,5 +1,8 @@
 app = (function () { // begin Immediately-Invoked Function Expression
     var calendar = new FullCalendar.Calendar(document.getElementById('calendar'), {
+        // TODO: This isn't ready yet but its intent is to be able to toggle a given
+        //       FullCalendar Event Source on or off so that a visitor can view a
+        //       subset of the events on the calendar based on its source at a time.
         customButtons: {
             calendars: {
                 text: 'Calendars',
@@ -25,7 +28,9 @@ app = (function () { // begin Immediately-Invoked Function Expression
         headerToolbar: {
             left: 'prev,next today',
             center: 'title',
-            right: 'calendars dayGridMonth,timeGridWeek,timeGridDay'
+            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            // When ready, we'll add a "Calendars" button. But not yet.
+            //right: 'calendars dayGridMonth,timeGridWeek,timeGridDay'
         },
         eventSources: [
             {
