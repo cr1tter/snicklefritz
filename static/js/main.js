@@ -72,16 +72,24 @@ app = (function () { // begin Immediately-Invoked Function Expression
                 name: 'NYC Mesh',
                 id: 'nycmesh',
                 className: 'nycmesh',
-                url: 'http://cors.anarchism.nyc/https://www.meetup.com/nycmesh/events/ical/',
+                url: 'https://cors.anarchism.nyc/https://www.meetup.com/nycmesh/events/ical/',
                 format: 'ics'
             },
             {
                 name: 'DEFCON201',
                 id: 'defcon201',
                 className: 'defcon201',
-                url: 'http://cors.anarchism.nyc/https://www.meetup.com/DEFCON201/events/ical/',
+                url: 'https://cors.anarchism.nyc/https://www.meetup.com/DEFCON201/events/ical/',
                 format: 'ics'
-            }
+            },
+            // No guarantee this group is actually active. :\
+//            {
+//                name: 'New York CryptoParty Network',
+//                id: 'newyorkcryptopartynetwork',
+//                className: 'newyorkcryptopartynetwork',
+//                url: 'https://cors.anarchism.nyc/https://www.meetup.com/New-York-Cryptoparty-Network/events/ical/',
+//                format: 'ics'
+//            }
         ],
         eventDidMount: function (info) {
             info.el.setAttribute('title', info.event.title);
