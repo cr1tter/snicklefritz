@@ -46,15 +46,15 @@ app = (function () { // begin Immediately-Invoked Function Expression
                 name: 'Friendly to Anarchism.NYC',
                 id: 'friendlytoanarchismnyc',
                 className: 'friendlytoanarchismnyc',
-                googleCalendarApiKey: 'AIzaSyCgUpmnFFSyarVFGiTSPuzxIdJPr2M-Vic',
-                googleCalendarId: '2om8s9hsd7kkkjcc88kon65i2o@group.calendar.google.com'
+                url: 'https://cors.anarchism.nyc/https://calendar.google.com/calendar/ical/2om8s9hsd7kkkjcc88kon65i2o%40group.calendar.google.com/public/basic.ics',
+                format: 'ics'
             },
             {
                 name: 'Phase Space',
                 id: 'phase-space',
                 className: 'phase-space',
-                googleCalendarApiKey: 'AIzaSyCgUpmnFFSyarVFGiTSPuzxIdJPr2M-Vic',
-                googleCalendarId: 'q14jhdv41fng6q1b2826dp92rs@group.calendar.google.com'
+                url: 'https://cors.anarchism.nyc/https://calendar.google.com/calendar/ical/q14jhdv41fng6q1b2826dp92rs@group.calendar.google.com/public/basic.ics',
+                format: 'ics'
             },
             {
                 name: 'Metropolitan Anarchist Coordinating Council of NYC',
