@@ -1,24 +1,90 @@
 app = (function () { // begin Immediately-Invoked Function Expression
 
+    const corsbase = 'https://cors.anarchism.nyc';
+    const domparser = new DOMParser();
+
+    /**
+     * Translate a jCal (RFC 7265) `vevent` component to a FullCalendar event object.
+     *
+     * @param {array} vevent
+     * @return {object}
+     */
+    var jCal2FullCalendar = function (vevent) {
+        var newEvent = {};
+        vevent.forEach(function (property) {
+            switch (property[0]) {
+                case 'summary':
+                    newEvent.title = property[3];
+                    break;
+                case 'dtstart':
+                    newEvent.start = property[3]
+                    break;
+                case 'dtend':
+                    newEvent.end = property[3];
+                    break;
+                case 'url':
+                    newEvent.url = property[3];
+                    break;
+                case 'uid':
+                    newEvent.uid = property[3];
+                    break;
+            }
+        });
+        return newEvent;
+    };
+
     // Convenience method that scrapes the "Upcoming Events" list off
     // of an EventBrite's Organizer Page and transforms them into an
     // event source for FullCalendar.
     var fetchEventBriteEventsByOrganizer = function (url, fetchInfo, successCallback, failureCallback) {
-        fetch('https://cors.anarchism.nyc/' + url)
+        fetch(corsbase + '/' + url)
             .then(function (response) {
                 return response.text();
             }).then(function (data) {
-                const parser = new DOMParser();
-                var doc = parser.parseFromString(data, 'text/html');
+                var doc = domparser.parseFromString(data, 'text/html');
                 var j = JSON.parse(doc.querySelectorAll('script[type="application/ld+json"]')[1].innerText);
-                successCallback(j.map(function (event) {
+                successCallback(j.map(function (vevent) {
                     return {
-                        title: event.name,
-                        start: event.startDate,
-                        end: event.endDate,
-                        url: event.url
+                        title: vevent.name,
+                        start: vevent.startDate,
+                        end: vevent.endDate,
+                        url: vevent.url
                     }
                 }));
+            });
+    };
+
+    var fetchSquarespaceEvents = function (url, fetchInfo, successCallback, failureCallback) {
+        fetch(corsbase + '/' + url)
+            .then(function (response) {
+                return response.text();
+            }).then(function (data) {
+                var doc = domparser.parseFromString(data, 'text/html');
+                var events = [];
+
+                // How many events must we fetch?
+                var x = doc.querySelectorAll('.eventlist-event--upcoming').length;
+                var i = 0; // And how many have we loaded so far?
+
+                // Create an event for each event we have, and keep track of how
+                // many we've loaded so far.
+                doc.querySelectorAll('.eventlist-event--upcoming').forEach(function (h) {
+                    var o = new URL(url).origin;
+                    var icsurl = corsbase + '/' + o + h.querySelector('a.eventlist-meta-export-ical').getAttribute('href');
+                    fetch(icsurl)
+                        .then(function (response) {
+                            return response.text();
+                        }).then(function (data) {
+                            events.push(jCal2FullCalendar(ICAL.parse(data)[2][0][1]));
+                            events[events.length - 1].url = o + h.querySelector('.eventlist-title-link').getAttribute('href');
+                        }).finally(function () {
+                            i++;
+                            if (x === i) {
+                                successCallback(events);
+                            }
+                        });
+                });
+
             });
     };
 
@@ -83,7 +149,7 @@ app = (function () { // begin Immediately-Invoked Function Expression
                 name: 'NYC Mesh',
                 id: 'nycmesh',
                 className: 'nycmesh',
-                url: 'https://cors.anarchism.nyc/https://www.meetup.com/nycmesh/events/ical/',
+                url: corsbase + '/https://www.meetup.com/nycmesh/events/ical/',
                 format: 'ics',
                 color: '#FC0'
             },
@@ -91,18 +157,28 @@ app = (function () { // begin Immediately-Invoked Function Expression
                 name: 'DEFCON201',
                 id: 'defcon201',
                 className: 'defcon201',
-                url: 'https://cors.anarchism.nyc/https://www.meetup.com/DEFCON201/events/ical/',
+                url: corsbase + '/https://www.meetup.com/DEFCON201/events/ical/',
                 format: 'ics'
             },
+// Not sure if this group is active anymore, so remove them for now.
+//            {
+//                name: 'New York CryptoParty Network',
+//                id: 'newyorkcryptopartynetwork',
+//                className: 'newyorkcryptopartynetwork',
+//                url: corsbase + '/https://www.meetup.com/New-York-Cryptoparty-Network/events/ical/',
+//                format: 'ics'
+//            }
+
             // Likewise, these Google Calendars seem to be having trouble loading
             // for mobile users when using the Google Calendar API. Instead, we
             // fallback to the public ICS feed for these (for now) as well.
             {
                 // Maintained by Tech Learning Collective's Partner Operations Team.
+                // This is mostly a stop-gap for events we can't automatically add.
                 name: 'Friendly to Anarchism.NYC',
                 id: 'friendlytoanarchismnyc',
                 className: 'friendlytoanarchismnyc',
-                url: 'https://cors.anarchism.nyc/https://calendar.google.com/calendar/ical/2om8s9hsd7kkkjcc88kon65i2o%40group.calendar.google.com/public/basic.ics',
+                url: corsbase + '/https://calendar.google.com/calendar/ical/2om8s9hsd7kkkjcc88kon65i2o%40group.calendar.google.com/public/basic.ics',
                 format: 'ics',
                 color: 'gray'
             },
@@ -110,7 +186,7 @@ app = (function () { // begin Immediately-Invoked Function Expression
                 name: 'Phase Space',
                 id: 'phase-space',
                 className: 'phase-space',
-                url: 'https://cors.anarchism.nyc/https://calendar.google.com/calendar/ical/q14jhdv41fng6q1b2826dp92rs%40group.calendar.google.com/public/basic.ics',
+                url: corsbase + '/https://calendar.google.com/calendar/ical/q14jhdv41fng6q1b2826dp92rs%40group.calendar.google.com/public/basic.ics',
                 format: 'ics',
                 color: 'white',
                 textColor: 'black'
@@ -162,15 +238,17 @@ app = (function () { // begin Immediately-Invoked Function Expression
                     return fetchEventBriteEventsByOrganizer('https://www.eventbrite.com/o/littlefield-18046024060', fetchInfo, successCallback, failureCallback);
                 },
                 color: 'red'
+            },
+            {
+                name: 'Wonderville',
+                id: 'wonderville',
+                className: 'wonderville',
+                events: function (fetchInfo, successCallback, failureCallback) {
+                    return fetchSquarespaceEvents('https://www.wonderville.nyc/events', fetchInfo, successCallback, failureCallback);
+                },
+                color: 'white',
+                textColor: 'black'
             }
-            // No guarantee this group is actually active. :\
-//            {
-//                name: 'New York CryptoParty Network',
-//                id: 'newyorkcryptopartynetwork',
-//                className: 'newyorkcryptopartynetwork',
-//                url: 'https://cors.anarchism.nyc/https://www.meetup.com/New-York-Cryptoparty-Network/events/ical/',
-//                format: 'ics'
-//            }
         ],
         eventSourceSuccess: function (rawEvents, xhr) {
             if (!xhr) { return rawEvents; }
@@ -195,28 +273,12 @@ app = (function () { // begin Immediately-Invoked Function Expression
 
             jcal[2].forEach(function (component) {
                 if ("vevent" !== component[0]) { return; }
-                var newEvent = {};
-                component[1].forEach(function (property) {
-                    switch (property[0]) {
-                        case 'summary':
-                            newEvent.title = property[3];
-                            break;
-                        case 'dtstart':
-                            newEvent.start = property[3]
-                            break;
-                        case 'dtend':
-                            newEvent.end = property[3];
-                            break;
-                        case 'uid':
-                            // Google Calendars don't provide a URL.
-                            // So we generate one with the event UID ourselves.
-                            newEvent.url = 'https://calendar.google.com/calendar/event?eid='
-                                + btoa(property[3].replace('@google.com', '') + ' ' + calendar + '@g')
-                                + '&ctz=America/New_York';
-                            break;
-                    }
-                });
-                events.push(newEvent);
+                events.push(jCal2FullCalendar(component[1]));
+                // Google Calendars don't provide a URL.
+                // So we generate one with the event UID ourselves.
+                events[events.length - 1].url = 'https://calendar.google.com/calendar/event?eid='
+                        + btoa(events[events.length - 1].uid.replace('@google.com', '') + ' ' + calendar + '@g')
+                        + '&ctz=America/New_York';
             });
 
             return events;
