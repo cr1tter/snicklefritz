@@ -1,4 +1,29 @@
 app = (function () { // begin Immediately-Invoked Function Expression
+
+    // Convenience method that scrapes the "Upcoming Events" list off
+    // of an EventBrite's Organizer Page and transforms them into an
+    // event source for FullCalendar.
+    var fetchEventBriteEventsByOrganizer = function (url, fetchInfo, successCallback, failureCallback) {
+        fetch('https://cors.anarchism.nyc/' + url)
+            .then(function (response) {
+                return response.text();
+            }).then(function (data) {
+                const parser = new DOMParser();
+                var doc = parser.parseFromString(data, 'text/html');
+                var j = JSON.parse(doc.querySelectorAll('script[type="application/ld+json"]')[1].innerText);
+                successCallback(j.map(function (event) {
+                    return {
+                        title: event.name,
+                        start: event.startDate,
+                        end: event.endDate,
+                        url: event.url
+                    }
+                }));
+            });
+    };
+
+    // The app's `calendar` member is the FullCalendar implementation itself.
+    // Think of this as the `main()` function, basically.
     var calendar = new FullCalendar.Calendar(document.getElementById('calendar'), {
         // TODO: This isn't ready yet but its intent is to be able to toggle a given
         //       FullCalendar Event Source on or off so that a visitor can view a
@@ -84,6 +109,41 @@ app = (function () { // begin Immediately-Invoked Function Expression
                 url: 'https://cors.anarchism.nyc/https://calendar.google.com/calendar/ical/q14jhdv41fng6q1b2826dp92rs%40group.calendar.google.com/public/basic.ics',
                 format: 'ics'
             },
+
+            // These event sources are just scraped right off the of
+            // the organizer's page on EventBrite.
+            {
+                name: 'Caveat NYC - EventBrite',
+                id: 'caveat-nyc-eventbrite',
+                className: 'caveat-nyc-eventbrite',
+                events: function (fetchInfo, successCallback, failureCallback) {
+                    return fetchEventBriteEventsByOrganizer('https://www.eventbrite.com/o/caveat-13580085802', fetchInfo, successCallback, failureCallback);
+                }
+            },
+            {
+                name: "Dave's Lesbian Bar - EventBrite",
+                id: 'daves-lesbian-bar-eventbrite',
+                className: 'daves-lesbian-bar-eventbrite',
+                events: function (fetchInfo, successCallback, failureCallback) {
+                    return fetchEventBriteEventsByOrganizer('https://www.eventbrite.com/o/daves-lesbian-bar-34182605937', fetchInfo, successCallback, failureCallback);
+                }
+            },
+            {
+                name: 'House of Yes - EventBrite',
+                id: 'house-of-yes-eventbrite',
+                className: 'house-of-yes-eventbrite',
+                events: function (fetchInfo, successCallback, failureCallback) {
+                    return fetchEventBriteEventsByOrganizer('https://www.eventbrite.com/o/house-of-yes-8534581785', fetchInfo, successCallback, failureCallback);
+                }
+            },
+            {
+                name: 'Littlefield - EventBrite',
+                id: 'littlefield-eventbrite',
+                className: 'littlefield-eventbrite',
+                events: function (fetchInfo, successCallback, failureCallback) {
+                    return fetchEventBriteEventsByOrganizer('https://www.eventbrite.com/o/littlefield-18046024060', fetchInfo, successCallback, failureCallback);
+                }
+            }
             // No guarantee this group is actually active. :\
 //            {
 //                name: 'New York CryptoParty Network',
@@ -94,6 +154,7 @@ app = (function () { // begin Immediately-Invoked Function Expression
 //            }
         ],
         eventSourceSuccess: function (rawEvents, xhr) {
+            if (!xhr) { return rawEvents; }
             // If this is a Google Calendar ICS feed, we need to insert URLs
             // because they're missing from the iCalendar feed provided by Google.
             if (-1 === xhr.responseURL.indexOf('https://calendar.google.com/')) {
