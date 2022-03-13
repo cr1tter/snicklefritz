@@ -63,14 +63,16 @@ app = (function () { // begin Immediately-Invoked Function Expression
                 id: 'techlearningcollective',
                 // Use the FullCalendar custom JSON feed until its bug #6173 is resolved.
                 // See https://github.com/fullcalendar/fullcalendar/issues/6173
-                url: 'https://techlearningcollective.com/events/all-fullcalendar-io.json'
+                url: 'https://techlearningcollective.com/events/all-fullcalendar-io.json',
+                color: 'blue'
             },
             {
                 name: 'Metropolitan Anarchist Coordinating Council of NYC',
                 id: 'maccnyc',
                 className: 'event-maccnyc',
                 url: 'https://tockify.com/api/feeds/ics/mlsupport',
-                format: 'ics'
+                format: 'ics',
+                color: 'black'
             },
             // These calendars hosted on Meetup.com will fail due
             // to a missing CORS header. Current workaround is to
@@ -82,7 +84,8 @@ app = (function () { // begin Immediately-Invoked Function Expression
                 id: 'nycmesh',
                 className: 'nycmesh',
                 url: 'https://cors.anarchism.nyc/https://www.meetup.com/nycmesh/events/ical/',
-                format: 'ics'
+                format: 'ics',
+                color: '#FC0'
             },
             {
                 name: 'DEFCON201',
@@ -100,14 +103,17 @@ app = (function () { // begin Immediately-Invoked Function Expression
                 id: 'friendlytoanarchismnyc',
                 className: 'friendlytoanarchismnyc',
                 url: 'https://cors.anarchism.nyc/https://calendar.google.com/calendar/ical/2om8s9hsd7kkkjcc88kon65i2o%40group.calendar.google.com/public/basic.ics',
-                format: 'ics'
+                format: 'ics',
+                color: 'gray'
             },
             {
                 name: 'Phase Space',
                 id: 'phase-space',
                 className: 'phase-space',
                 url: 'https://cors.anarchism.nyc/https://calendar.google.com/calendar/ical/q14jhdv41fng6q1b2826dp92rs%40group.calendar.google.com/public/basic.ics',
-                format: 'ics'
+                format: 'ics',
+                color: 'white',
+                textColor: 'black'
             },
 
             // These event sources are just scraped right off the of
@@ -118,7 +124,8 @@ app = (function () { // begin Immediately-Invoked Function Expression
                 className: 'caveat-nyc-eventbrite',
                 events: function (fetchInfo, successCallback, failureCallback) {
                     return fetchEventBriteEventsByOrganizer('https://www.eventbrite.com/o/caveat-13580085802', fetchInfo, successCallback, failureCallback);
-                }
+                },
+                color: 'red'
             },
             {
                 name: "Dave's Lesbian Bar - EventBrite",
@@ -126,7 +133,17 @@ app = (function () { // begin Immediately-Invoked Function Expression
                 className: 'daves-lesbian-bar-eventbrite',
                 events: function (fetchInfo, successCallback, failureCallback) {
                     return fetchEventBriteEventsByOrganizer('https://www.eventbrite.com/o/daves-lesbian-bar-34182605937', fetchInfo, successCallback, failureCallback);
-                }
+                },
+                color: 'red'
+            },
+            {
+                name: "Dyke Beer - EventBrite",
+                id: 'dyke-beer-eventbrite',
+                className: 'dyke-beer-eventbrite',
+                events: function (fetchInfo, successCallback, failureCallback) {
+                    return fetchEventBriteEventsByOrganizer('https://www.eventbrite.com/o/dyke-beer-14414017747', fetchInfo, successCallback, failureCallback);
+                },
+                color: 'red'
             },
             {
                 name: 'House of Yes - EventBrite',
@@ -134,7 +151,8 @@ app = (function () { // begin Immediately-Invoked Function Expression
                 className: 'house-of-yes-eventbrite',
                 events: function (fetchInfo, successCallback, failureCallback) {
                     return fetchEventBriteEventsByOrganizer('https://www.eventbrite.com/o/house-of-yes-8534581785', fetchInfo, successCallback, failureCallback);
-                }
+                },
+                color: 'red'
             },
             {
                 name: 'Littlefield - EventBrite',
@@ -142,7 +160,8 @@ app = (function () { // begin Immediately-Invoked Function Expression
                 className: 'littlefield-eventbrite',
                 events: function (fetchInfo, successCallback, failureCallback) {
                     return fetchEventBriteEventsByOrganizer('https://www.eventbrite.com/o/littlefield-18046024060', fetchInfo, successCallback, failureCallback);
-                }
+                },
+                color: 'red'
             }
             // No guarantee this group is actually active. :\
 //            {
