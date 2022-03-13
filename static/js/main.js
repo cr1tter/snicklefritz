@@ -54,6 +54,8 @@ app = (function () { // begin Immediately-Invoked Function Expression
             });
     };
 
+    // Convenience method that scrapes the "Upcoming Events" sections
+    // of a Squarespace-hosted Web site from organizers who use it.
     var fetchSquarespaceEvents = function (url, fetchInfo, successCallback, failureCallback) {
         fetch(corsbase + '/' + url)
             .then(function (response) {
@@ -87,6 +89,11 @@ app = (function () { // begin Immediately-Invoked Function Expression
 
             });
     };
+
+    // TODO:
+    // Convenience method that scrapes the "Upcoming Events" sections
+    // of a ra.co club or promoter.
+    // var fetchRaDotCoEvents = function (url, fetchInfo, successCallback, failureCallback) {};
 
     // The app's `calendar` member is the FullCalendar implementation itself.
     // Think of this as the `main()` function, basically.
@@ -236,6 +243,15 @@ app = (function () { // begin Immediately-Invoked Function Expression
                 className: 'littlefield-eventbrite',
                 events: function (fetchInfo, successCallback, failureCallback) {
                     return fetchEventBriteEventsByOrganizer('https://www.eventbrite.com/o/littlefield-18046024060', fetchInfo, successCallback, failureCallback);
+                },
+                color: 'red'
+            },
+            {
+                name: 'TV Eye - EventBrite',
+                id: 'tv-eye-eventbrite',
+                className: 'tv-eye-eventbrite',
+                events: function (fetchInfo, successCallback, failureCallback) {
+                    return fetchEventBriteEventsByOrganizer('https://www.eventbrite.com/o/tv-eye-28766931741', fetchInfo, successCallback, failureCallback);
                 },
                 color: 'red'
             },
