@@ -8,7 +8,6 @@ app = (function () { // begin Immediately-Invoked Function Expression
                 text: 'Calendars',
                 click: function () {
                     var el = document.getElementById('calendarsButtonModal');
-                    console.log(app.getEventSources());
                     app.getEventSources().forEach(function (s) {
                         var li = document.createElement('li');
                         var input = document.createElement('input');
@@ -42,21 +41,6 @@ app = (function () { // begin Immediately-Invoked Function Expression
                 url: 'https://techlearningcollective.com/events/all-fullcalendar-io.json'
             },
             {
-                // Maintained by Tech Learning Collective's Partner Operations Team.
-                name: 'Friendly to Anarchism.NYC',
-                id: 'friendlytoanarchismnyc',
-                className: 'friendlytoanarchismnyc',
-                url: 'https://cors.anarchism.nyc/https://calendar.google.com/calendar/ical/2om8s9hsd7kkkjcc88kon65i2o%40group.calendar.google.com/public/basic.ics',
-                format: 'ics'
-            },
-            {
-                name: 'Phase Space',
-                id: 'phase-space',
-                className: 'phase-space',
-                url: 'https://cors.anarchism.nyc/https://calendar.google.com/calendar/ical/q14jhdv41fng6q1b2826dp92rs@group.calendar.google.com/public/basic.ics',
-                format: 'ics'
-            },
-            {
                 name: 'Metropolitan Anarchist Coordinating Council of NYC',
                 id: 'maccnyc',
                 className: 'event-maccnyc',
@@ -82,6 +66,24 @@ app = (function () { // begin Immediately-Invoked Function Expression
                 url: 'https://cors.anarchism.nyc/https://www.meetup.com/DEFCON201/events/ical/',
                 format: 'ics'
             },
+            // Likewise, these Google Calendars seem to be having trouble loading
+            // for mobile users when using the Google Calendar API. Instead, we
+            // fallback to the public ICS feed for these (for now) as well.
+            {
+                // Maintained by Tech Learning Collective's Partner Operations Team.
+                name: 'Friendly to Anarchism.NYC',
+                id: 'friendlytoanarchismnyc',
+                className: 'friendlytoanarchismnyc',
+                url: 'https://cors.anarchism.nyc/https://calendar.google.com/calendar/ical/2om8s9hsd7kkkjcc88kon65i2o%40group.calendar.google.com/public/basic.ics',
+                format: 'ics'
+            },
+            {
+                name: 'Phase Space',
+                id: 'phase-space',
+                className: 'phase-space',
+                url: 'https://cors.anarchism.nyc/https://calendar.google.com/calendar/ical/q14jhdv41fng6q1b2826dp92rs%40group.calendar.google.com/public/basic.ics',
+                format: 'ics'
+            },
             // No guarantee this group is actually active. :\
 //            {
 //                name: 'New York CryptoParty Network',
@@ -91,6 +93,54 @@ app = (function () { // begin Immediately-Invoked Function Expression
 //                format: 'ics'
 //            }
         ],
+        eventSourceSuccess: function (rawEvents, xhr) {
+            // If this is a Google Calendar ICS feed, we need to insert URLs
+            // because they're missing from the iCalendar feed provided by Google.
+            if (-1 === xhr.responseURL.indexOf('https://calendar.google.com/')) {
+                return rawEvents; // This is not a GCal ICS feed. Return event source unchanged.
+            }
+
+            // The format for a Google Calendar single event page is this:
+            //
+            //     https://calendar.google.com/calendar/event?eid={eventid}&ctz=America/New_York
+            //
+            // where `{eventid}` is a base64 encoded string constructed as:
+            //
+            //     vEvent UID component + ' ' + calendar ID + '@g'
+            //
+            // The `@g` at the end is literal.
+            var calendar = xhr.responseURL.match(/calendar\/ical\/(.*)%40.*public\/basic.ics/)[1];
+            var events   = [];
+            var jcal     = ICAL.parse(xhr.responseText); // jCal (RFC 7265) formatted data.
+
+            jcal[2].forEach(function (component) {
+                if ("vevent" !== component[0]) { return; }
+                var newEvent = {};
+                component[1].forEach(function (property) {
+                    switch (property[0]) {
+                        case 'summary':
+                            newEvent.title = property[3];
+                            break;
+                        case 'dtstart':
+                            newEvent.start = property[3]
+                            break;
+                        case 'dtend':
+                            newEvent.end = property[3];
+                            break;
+                        case 'uid':
+                            // Google Calendars don't provide a URL.
+                            // So we generate one with the event UID ourselves.
+                            newEvent.url = 'https://calendar.google.com/calendar/event?eid='
+                                + btoa(property[3].replace('@google.com', '') + ' ' + calendar + '@g')
+                                + '&ctz=America/New_York';
+                            break;
+                    }
+                });
+                events.push(newEvent);
+            });
+
+            return events;
+        },
         eventDidMount: function (info) {
             info.el.setAttribute('title', info.event.title);
             return [ info.el ];
