@@ -256,6 +256,17 @@ app = (function () { // begin Immediately-Invoked Function Expression
                 color: 'red'
             },
             {
+                name: 'The Sultan Room - EventBrite',
+                id: 'the-sultan-room-eventbrite',
+                className: 'the-sultan-room-eventbrite',
+                events: function (fetchInfo, successCallback, failureCallback) {
+                    return fetchEventBriteEventsByOrganizer('https://www.eventbrite.com/o/the-sultan-room-18078001345', fetchInfo, successCallback, failureCallback);
+                },
+                color: 'red'
+            },
+
+            // Some Web sites hosted on Squarespace also provide (some) data.
+            {
                 name: 'Wonderville',
                 id: 'wonderville',
                 className: 'wonderville',
