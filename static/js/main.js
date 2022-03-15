@@ -33,9 +33,13 @@ app = (function () { // begin Immediately-Invoked Function Expression
         return newEvent;
     };
 
-    // Convenience method that scrapes the "Upcoming Events" list off
-    // of an EventBrite's Organizer Page and transforms them into an
-    // event source for FullCalendar.
+    /**
+     * Convenience method that scrapes the "Upcoming Events" list off
+     * of an EventBrite's Organizer Page and transforms them into an
+     * event source for FullCalendar.
+     *
+     * @todo Parse individual occurrences instead of treating as one long event.
+     */
     var fetchEventBriteEventsByOrganizer = function (url, fetchInfo, successCallback, failureCallback) {
         fetch(corsbase + '/' + url)
             .then(function (response) {
@@ -228,6 +232,18 @@ app = (function () { // begin Immediately-Invoked Function Expression
                 },
                 color: 'red'
             },
+            // Commented out for now until EventBrite function can handle single events
+            // with multiple occurrences without displaying as "All Day" events across
+            // all occurrences.
+//            {
+//                name: "Good Judy - EventBrite",
+//                id: 'good-judy-eventbrite',
+//                className: 'good-judy-eventbrite',
+//                events: function (fetchInfo, successCallback, failureCallback) {
+//                    return fetchEventBriteEventsByOrganizer('https://www.eventbrite.com/o/good-judy-31484266863', fetchInfo, successCallback, failureCallback);
+//                },
+//                color: 'red'
+//            },
             {
                 name: 'House of Yes - EventBrite',
                 id: 'house-of-yes-eventbrite',
