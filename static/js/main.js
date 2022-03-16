@@ -269,6 +269,16 @@ app = (function () { // begin Immediately-Invoked Function Expression
 
             // Some Web sites hosted on Squarespace also provide (some) data.
             {
+                name: 'Trans Pecos',
+                id: 'trans-pecos',
+                className: 'trans-pecos',
+                events: function (fetchInfo, successCallback, failureCallback) {
+                    return fetchSquarespaceEvents('https://www.thetranspecos.com/cal?format=json', fetchInfo, successCallback, failureCallback);
+                },
+                color: 'white',
+                textColor: 'black'
+            },
+            {
                 name: 'Wonderville',
                 id: 'wonderville',
                 className: 'wonderville',
