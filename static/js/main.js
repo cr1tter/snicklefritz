@@ -58,39 +58,25 @@ app = (function () { // begin Immediately-Invoked Function Expression
             });
     };
 
-    // Convenience method that scrapes the "Upcoming Events" sections
-    // of a Squarespace-hosted Web site from organizers who use it.
+    /**
+     * Convenience method that scrapes the "Upcoming Events" sections
+     * of a Squarespace-hosted Web site from organizers who use it.
+     */
     var fetchSquarespaceEvents = function (url, fetchInfo, successCallback, failureCallback) {
         fetch(corsbase + '/' + url)
             .then(function (response) {
                 return response.text();
             }).then(function (data) {
-                var doc = domparser.parseFromString(data, 'text/html');
-                var events = [];
-
-                // How many events must we fetch?
-                var x = doc.querySelectorAll('.eventlist-event--upcoming').length;
-                var i = 0; // And how many have we loaded so far?
-
-                // Create an event for each event we have, and keep track of how
-                // many we've loaded so far.
-                doc.querySelectorAll('.eventlist-event--upcoming').forEach(function (h) {
-                    var o = new URL(url).origin;
-                    var icsurl = corsbase + '/' + o + h.querySelector('a.eventlist-meta-export-ical').getAttribute('href');
-                    fetch(icsurl)
-                        .then(function (response) {
-                            return response.text();
-                        }).then(function (data) {
-                            events.push(jCal2FullCalendar(ICAL.parse(data)[2][0][1]));
-                            events[events.length - 1].url = o + h.querySelector('.eventlist-title-link').getAttribute('href');
-                        }).finally(function () {
-                            i++;
-                            if (x === i) {
-                                successCallback(events);
-                            }
-                        });
-                });
-
+                var j = JSON.parse(data);
+                var x = j.upcoming || j.items;
+                successCallback(x.map(function (vevent) {
+                    return {
+                        title: vevent.title,
+                        start: vevent.startDate,
+                        end: vevent.endDate,
+                        url: new URL(url).origin + vevent.fullUrl
+                    }
+                }));
             });
     };
 
@@ -287,7 +273,7 @@ app = (function () { // begin Immediately-Invoked Function Expression
                 id: 'wonderville',
                 className: 'wonderville',
                 events: function (fetchInfo, successCallback, failureCallback) {
-                    return fetchSquarespaceEvents('https://www.wonderville.nyc/events', fetchInfo, successCallback, failureCallback);
+                    return fetchSquarespaceEvents('https://www.wonderville.nyc/events?format=json', fetchInfo, successCallback, failureCallback);
                 },
                 color: 'white',
                 textColor: 'black'
