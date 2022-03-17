@@ -82,8 +82,8 @@ app = (function () { // begin Immediately-Invoked Function Expression
 
     // TODO:
     // Convenience method that scrapes the "Upcoming Events" sections
-    // of a ra.co club or promoter.
-    // var fetchRaDotCoEvents = function (url, fetchInfo, successCallback, failureCallback) {};
+    // of a Resident Advisor (ra.co) club or promoter.
+    // var fetchResidentAdvisorEvents = function (url, fetchInfo, successCallback, failureCallback) {};
 
     // The app's `calendar` member is the FullCalendar implementation itself.
     // Think of this as the `main()` function, basically.
@@ -268,6 +268,26 @@ app = (function () { // begin Immediately-Invoked Function Expression
             },
 
             // Some Web sites hosted on Squarespace also provide (some) data.
+            {
+                name: 'Hot Rabbit',
+                id: 'hot-rabbit',
+                className: 'hot-rabbit',
+                events: function (fetchInfo, successCallback, failureCallback) {
+                    return fetchSquarespaceEvents('https://www.hotrabbit.com/new-events?format=json', fetchInfo, successCallback, failureCallback);
+                },
+                color: 'white',
+                textColor: 'black'
+            },
+            {
+                name: 'The Nest Brooklyn',
+                id: 'the-nest-brooklyn',
+                className: 'the-nest-brooklyn',
+                events: function (fetchInfo, successCallback, failureCallback) {
+                    return fetchSquarespaceEvents('https://www.thenestbrooklyn.com/event-calender?format=json', fetchInfo, successCallback, failureCallback);
+                },
+                color: 'white',
+                textColor: 'black'
+            },
             {
                 name: 'Trans Pecos',
                 id: 'trans-pecos',
