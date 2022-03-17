@@ -279,6 +279,16 @@ app = (function () { // begin Immediately-Invoked Function Expression
                 textColor: 'black'
             },
             {
+                name: 'Market Hotel',
+                id: 'market-hotel',
+                className: 'market-hotel',
+                events: function (fetchInfo, successCallback, failureCallback) {
+                    return fetchSquarespaceEvents('https://www.markethotel.org/calendar?format=json', fetchInfo, successCallback, failureCallback);
+                },
+                color: 'white',
+                textColor: 'black'
+            },
+            {
                 name: 'The Nest Brooklyn',
                 id: 'the-nest-brooklyn',
                 className: 'the-nest-brooklyn',
