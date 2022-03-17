@@ -119,6 +119,11 @@ app = (function () { // begin Immediately-Invoked Function Expression
             // When ready, we'll add a "Calendars" button. But not yet.
             //right: 'calendars dayGridMonth,timeGridWeek,timeGridDay,listWeek'
         },
+        initialView: function () {
+            return (window.matchMedia("only screen and (max-width: 540px)").matches)
+                ? 'listWeek': 'dayGridMonth';
+        }(),
+        nowIndicator: true,
         eventSources: [
             {
                 name: 'TechLearningCollective.com',
