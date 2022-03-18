@@ -197,6 +197,15 @@ app = (function () { // begin Immediately-Invoked Function Expression
             // These event sources are just scraped right off the of
             // the organizer's page on EventBrite.
             {
+                name: 'Brooklyn Comedy Collective - EventBrite',
+                id: 'brooklyn-comedy-collective-eventbrite',
+                className: 'brooklyn-comedy-collective-eventbrite',
+                events: function (fetchInfo, successCallback, failureCallback) {
+                    return fetchEventBriteEventsByOrganizer('https://www.eventbrite.com/o/brooklyn-comedy-collective-27620063469', fetchInfo, successCallback, failureCallback);
+                },
+                color: 'red'
+            },
+            {
                 name: 'Caveat NYC - EventBrite',
                 id: 'caveat-nyc-eventbrite',
                 className: 'caveat-nyc-eventbrite',
