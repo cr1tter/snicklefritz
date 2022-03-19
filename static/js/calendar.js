@@ -3,58 +3,13 @@
  *
  * Effectively, the "app" itself.
  */
-import IcalExpander from './ical-expander.index.js';
-
 const corsbase = 'https://cors.anarchism.nyc';
 const domparser = new DOMParser();
-
-/**
- * Translate a jCal (RFC 7265) `vevent` component to a FullCalendar event object.
- *
- * @param {array} vevent
- * @return {object}
- */
-var jCal2FullCalendar = function (vevent) {
-    var newEvent = {};
-    vevent.forEach(function (property) {
-        switch (property[0]) {
-            case 'summary':
-                newEvent.title = property[3];
-                break;
-            case 'dtstart':
-                newEvent.start = property[3]
-                break;
-            case 'dtend':
-                newEvent.end = property[3];
-                break;
-            case 'url':
-                newEvent.url = property[3];
-                break;
-            case 'uid':
-                newEvent.uid = property[3];
-                break;
-        }
-    });
-    return newEvent;
-};
 
 /**
  * Fetch events via Google Calendar ICS.
  */
 var fetchGoogleCalendarICS = async function (url, fetchInfo, successCallback, failureCallback) {
-
-    // Helper to add a URL to a Google Calendar Event.
-    // Google Calendars don't provide a URL.
-    // So we generate one with the event UID ourselves.
-    function addUrlProperty (e) {
-        var uid = e.component.getFirstProperty('uid').getFirstValue();
-        e.component.addPropertyWithValue('url',
-            'https://calendar.google.com/calendar/event?eid='
-                + btoa(uid.replace('@google.com', '') + ' ' + calendar + '@g')
-                + '&ctz=America/New_York'
-        );
-        return e;
-    }
 
     // The format for a Google Calendar single event page is this:
     //
@@ -66,27 +21,34 @@ var fetchGoogleCalendarICS = async function (url, fetchInfo, successCallback, fa
     //
     // The `@g` at the end is literal.
     var calendar = url.match(/calendar\/ical\/(.*)%40.*public\/basic.ics/)[1];
-    var allEvents = [];
+    var events = [];
 
     var ics = await fetch(url).then((data) => {
         return data.text();
     });
+    var jcal = ICAL.parse(ics);
+    var vcal = new ICAL.Component(jcal);
+    var vevents = vcal.getAllSubcomponents('vevent');
+    vevents.forEach(function (e) {
+        var vevent = new ICAL.Event(e);
+        var newEvent = {
+            title: vevent.summary,
+            start: vevent.startDate.toJSDate(),
+            end: vevent.endDate.toJSDate(),
+            // Google Calendars don't provide a URL.
+            // So we generate one with the event UID ourselves.
+            url: 'https://calendar.google.com/calendar/event?eid='
+                + btoa(vevent.uid.replace('@google.com', '') + ' ' + calendar + '@g')
+                + '&ctz=America/New_York',
+        };
+        if (e.hasProperty('rrule')) {
+            newEvent.rrule = 'DTSTART:' + vevent.startDate.toICALString()
+                + '\n' + e.getFirstProperty('rrule').toICALString();
+        }
+        events.push(newEvent);
+    });
 
-    var icalExpander = new IcalExpander({
-        ics: ics,
-        maxIterations: 20
-    });
-    var events = icalExpander.between(fetchInfo.start, fetchInfo.end);
-    events.events.forEach(function (e) {
-        e = addUrlProperty(e);
-        allEvents.push(jCal2FullCalendar(e.component.jCal[1]));
-    });
-    events.occurrences.forEach(function (o) {
-        o.item = addUrlProperty(o.item);
-        allEvents.push(jCal2FullCalendar(o.item.component.jCal[1]));
-    });
-
-    return allEvents;
+    return events;
 };
 
 /**

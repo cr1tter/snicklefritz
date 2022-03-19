@@ -35,9 +35,3 @@ _site/
 # We also don't want to commit the Gems that Bundler installs
 # since they are only useful for developers.
 vendor/
-
-# For the moment, we'll also not include any of the Nodejs stuff since
-# we're actually just doing this "manually" (no build system) for now.
-package.json
-package-lock.json
-node_modules
