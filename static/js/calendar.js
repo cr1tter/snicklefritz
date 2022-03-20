@@ -215,6 +215,15 @@ export default new FullCalendar.Calendar(document.getElementById('calendar'), {
         // These event sources are just scraped right off the of
         // the organizer's page on EventBrite.
         {
+            name: 'Cult 24 - EventBrite',
+            id: 'cult-24',
+            className: 'cult-24',
+            events: function (fetchInfo, successCallback, failureCallback) {
+                return fetchEventBriteEventsByOrganizer('https://www.eventbrite.com/o/24-11905129611', fetchInfo, successCallback, failureCallback);
+            },
+            color: 'red'
+        },
+        {
             name: 'Brooklyn Comedy Collective - EventBrite',
             id: 'brooklyn-comedy-collective-eventbrite',
             className: 'brooklyn-comedy-collective-eventbrite',
@@ -309,6 +318,16 @@ export default new FullCalendar.Calendar(document.getElementById('calendar'), {
         },
 
         // Some Web sites hosted on Squarespace also provide (some) data.
+        {
+            name: 'Club Cumming',
+            id: 'club-cumming',
+            className: 'club-cumming',
+            events: function (fetchInfo, successCallback, failureCallback) {
+                return fetchSquarespaceEvents('https://clubcummingnyc.com/schedule?format=json', fetchInfo, successCallback, failureCallback);
+            },
+            color: 'white',
+            textColor: 'black'
+        },
         {
             name: 'Hot Rabbit',
             id: 'hot-rabbit',
