@@ -7,6 +7,24 @@ const corsbase = 'https://cors.anarchism.nyc';
 const domparser = new DOMParser();
 
 /**
+ * Translates a Schema.org Event type (or more specific type)
+ * to a FullCalendar event object.
+ */
+var schemaDotOrg2FullCalendar = function (ld_json) {
+    return ld_json.map(function (item) {
+        return {
+            title: item.name,
+            start: item.startDate,
+            end: item.endDate,
+            url: item.url,
+            extendedProps: {
+                description: item.description || ''
+            }
+        };
+    });
+};
+
+/**
  * Fetch events via Google Calendar ICS.
  */
 var fetchGoogleCalendarICS = async function (url, fetchInfo, successCallback, failureCallback) {
@@ -64,15 +82,9 @@ var fetchEventBriteEventsByOrganizer = function (url, fetchInfo, successCallback
             return response.text();
         }).then(function (data) {
             var doc = domparser.parseFromString(data, 'text/html');
-            var j = JSON.parse(doc.querySelectorAll('script[type="application/ld+json"]')[1].innerText);
-            successCallback(j.map(function (vevent) {
-                return {
-                    title: vevent.name,
-                    start: vevent.startDate,
-                    end: vevent.endDate,
-                    url: vevent.url
-                }
-            }));
+            successCallback(schemaDotOrg2FullCalendar(
+                JSON.parse(doc.querySelectorAll('script[type="application/ld+json"]')[1].innerText)
+            ));
         });
 };
 
@@ -210,6 +222,21 @@ export default new FullCalendar.Calendar(document.getElementById('calendar'), {
             },
             color: 'white',
             textColor: 'black'
+        },
+
+        // This one-off event source helpfully published Schema.org-style Linked Data JSON!
+        {
+            name: 'EastVille Comedy Club',
+            id: 'eastville-comedy-club',
+            className: 'eastville-comedy-club',
+            events: async function (fetchInfo, successCallback, failureCallback) {
+                var response = await fetch(corsbase + '/https://www.eastvillecomedy.com/calendar')
+                var html = await response.text();
+                var doc = domparser.parseFromString(html, 'text/html');
+                var ld_json = JSON.parse(doc.querySelector('script[type="application/ld+json"]').innerText)
+                successCallback(schemaDotOrg2FullCalendar(ld_json));
+            },
+            color: 'purple'
         },
 
         // These event sources are just scraped right off the of
