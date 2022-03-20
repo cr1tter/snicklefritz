@@ -152,6 +152,7 @@ export default new FullCalendar.Calendar(document.getElementById('calendar'), {
             ? 'listWeek': 'dayGridMonth';
     }(),
     nowIndicator: true,
+    defaultTimedEventDuration: '02:00', // Most events are longer than one hour.
     eventSources: [
         {
             name: 'TechLearningCollective.com',
@@ -416,6 +417,11 @@ export default new FullCalendar.Calendar(document.getElementById('calendar'), {
             textColor: 'black'
         }
     ],
+    // TODO: This should be where we convert any source into an actual
+    // FullCalendar Event Object, not in the custom event source functions.
+    // See https://fullcalendar.io/docs/eventDataTransform
+    eventDataTransform: function (eventData) {
+    },
     eventDidMount: function (info) {
         info.el.setAttribute('title', info.event.title);
         return [ info.el ];
