@@ -290,6 +290,15 @@ export default new FullCalendar.Calendar(document.getElementById('calendar'), {
             color: 'red'
         },
         {
+            name: 'The Bell House - EventBrite',
+            id: 'the-bell-house-eventbrite',
+            className: 'the-bell-house-eventbrite',
+            events: function (fetchInfo, successCallback, failureCallback) {
+                return fetchEventBriteEventsByOrganizer('https://www.eventbrite.com/o/the-bell-house-17899492469', fetchInfo, successCallback, failureCallback);
+            },
+            color: 'red'
+        },
+        {
             name: 'The Sultan Room - EventBrite',
             id: 'the-sultan-room-eventbrite',
             className: 'the-sultan-room-eventbrite',
@@ -316,6 +325,16 @@ export default new FullCalendar.Calendar(document.getElementById('calendar'), {
             className: 'market-hotel',
             events: function (fetchInfo, successCallback, failureCallback) {
                 return fetchSquarespaceEvents('https://www.markethotel.org/calendar?format=json', fetchInfo, successCallback, failureCallback);
+            },
+            color: 'white',
+            textColor: 'black'
+        },
+        {
+            name: 'Talon Bar',
+            id: 'talon-bar',
+            className: 'talon-bar',
+            events: function (fetchInfo, successCallback, failureCallback) {
+                return fetchSquarespaceEvents('https://www.talonbar.com/events?format=json', fetchInfo, successCallback, failureCallback);
             },
             color: 'white',
             textColor: 'black'
