@@ -309,11 +309,30 @@ export default new FullCalendar.Calendar(document.getElementById('calendar'), {
             color: 'red'
         },
         {
+            name: 'Le Organizer - EventBrite',
+            id: 'le-organizer-eventbrite',
+            className: 'le-organizer-eventbrite',
+            events: function (fetchInfo, successCallback, failureCallback) {
+                return fetchEventBriteEventsByOrganizer('https://www.eventbrite.com/o/le-organizer-11067403290', fetchInfo, successCallback, failureCallback);
+            },
+            color: 'red'
+        },
+        {
             name: 'Littlefield - EventBrite',
             id: 'littlefield-eventbrite',
             className: 'littlefield-eventbrite',
             events: function (fetchInfo, successCallback, failureCallback) {
                 return fetchEventBriteEventsByOrganizer('https://www.eventbrite.com/o/littlefield-18046024060', fetchInfo, successCallback, failureCallback);
+            },
+            color: 'red'
+        },
+        {
+            // They have a Tockify but they did not enable Tockify's ICS feed. :(
+            name: 'Pagan\'s Paradise - EventBrite',
+            id: 'pagans-paradise-eventbrite',
+            className: 'pagans-paradise-eventbrite',
+            events: function (fetchInfo, successCallback, failureCallback) {
+                return fetchEventBriteEventsByOrganizer('https://www.eventbrite.com/o/pagans-paradise-16960673418', fetchInfo, successCallback, failureCallback);
             },
             color: 'red'
         },
@@ -392,6 +411,16 @@ export default new FullCalendar.Calendar(document.getElementById('calendar'), {
             className: 'the-nest-brooklyn',
             events: function (fetchInfo, successCallback, failureCallback) {
                 return fetchSquarespaceEvents('https://www.thenestbrooklyn.com/event-calender?format=json', fetchInfo, successCallback, failureCallback);
+            },
+            color: 'white',
+            textColor: 'black'
+        },
+        {
+            name: 'The Taillor Group',
+            id: 'the-taillor-group',
+            className: 'the-taillor-group',
+            events: function (fetchInfo, successCallback, failureCallback) {
+                return fetchSquarespaceEvents('https://www.taillors.com/calendar?format=json', fetchInfo, successCallback, failureCallback);
             },
             color: 'white',
             textColor: 'black'
