@@ -25,6 +25,18 @@ var schemaDotOrg2FullCalendar = function (ld_json) {
 };
 
 /**
+ * The WordPress plugin "Tribe Events" has a neat little JSON endpoint
+ * we can pull from, too.
+ */
+var wpTribe2FullCalendar = function (json_events) {
+    return json_events.map(function (item) {
+        item.start = new Date(item.utc_start_date + 'Z');
+        item.end = new Date(item.utc_end_date + 'Z');
+        return item;
+    });
+}
+
+/**
  * Fetch events via Google Calendar ICS.
  */
 var fetchGoogleCalendarICS = async function (url, fetchInfo, successCallback, failureCallback) {
@@ -93,21 +105,28 @@ var fetchEventBriteEventsByOrganizer = function (url, fetchInfo, successCallback
  * of a Squarespace-hosted Web site from organizers who use it.
  */
 var fetchSquarespaceEvents = function (url, fetchInfo, successCallback, failureCallback) {
-    fetch(corsbase + '/' + url)
-        .then(function (response) {
-            return response.text();
-        }).then(function (data) {
-            var j = JSON.parse(data);
-            var x = j.upcoming || j.items;
-            successCallback(x.map(function (vevent) {
-                return {
-                    title: vevent.title,
-                    start: vevent.startDate,
-                    end: vevent.endDate,
-                    url: new URL(url).origin + vevent.fullUrl
-                }
-            }));
-        });
+    fetch(corsbase + '/' + url).then(function (response) {
+        return response.text();
+    }).then(function (data) {
+        var j = JSON.parse(data);
+        var x = j.upcoming || j.items;
+        successCallback(x.map(function (vevent) {
+            return {
+                title: vevent.title,
+                start: vevent.startDate,
+                end: vevent.endDate,
+                url: new URL(url).origin + vevent.fullUrl
+            }
+        }));
+    });
+};
+
+var fetchWordPressTribeEvents = function (url, fetchInfo, successCallback, failureCallback) {
+    fetch(url).then(function (response) {
+        return response.json();
+    }).then(function (data) {
+        successCallback(wpTribe2FullCalendar(data.events));
+    });
 };
 
 // TODO:
@@ -453,6 +472,17 @@ export default new FullCalendar.Calendar(document.getElementById('calendar'), {
             },
             color: 'white',
             textColor: 'black'
+        },
+
+        // These sources are from WordPress Web sites running Tribe Events plugin.
+        {
+            name: 'WOW Cafe Theatre',
+            id: 'wow-cafe-theatre',
+            className: 'wow-cafe-theatre',
+            events: function (fetchInfo, successCallback, failureCallback) {
+                return fetchWordPressTribeEvents('https://www.wowcafe.org/wp-json/tribe/events/v1/events', fetchInfo, successCallback, failureCallback);
+            },
+            color: 'blue'
         }
     ],
     // TODO: This should be where we convert any source into an actual
