@@ -45,3 +45,55 @@ header h1 {
 header p {
     font-size: 21px;
 }
+
+#calendar-container {
+    position: relative;
+}
+#calendar-loading-spinner {
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -80px;
+    margin-top: -80px;
+    background: gray;
+    opacity: .9;
+    border-radius: 10px;
+    z-index: 999;
+}
+#calendar-loading-spinner span {
+    position: absolute;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    top: 40%;
+    left: 25%;
+}
+
+/**
+ * Loading spinner.
+ */
+.lds-dual-ring {
+    display: inline-block;
+    width: 160px;
+    height: 160px;
+}
+.lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 128px;
+    height: 128px;
+    margin: 16px;
+    border-radius: 50%;
+    border: 12px solid #fff;
+    border-color: #fff transparent #fff transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

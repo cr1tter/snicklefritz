@@ -153,6 +153,15 @@ export default new FullCalendar.Calendar(document.getElementById('calendar'), {
     }(),
     nowIndicator: true,
     defaultTimedEventDuration: '02:00', // Most events are longer than one hour.
+    loading: function (isLoading) {
+        var el = document.getElementById('calendar-loading-spinner');
+        if (isLoading && ! el.dataset.firstLoadCompleted) {
+            el.style.display = 'block';
+            el.setAttribute('data-first-load-completed', true);
+        } else {
+            el.style.display = 'none';
+        }
+    },
     eventSources: [
         {
             name: 'TechLearningCollective.com',
