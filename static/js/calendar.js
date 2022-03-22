@@ -3,7 +3,10 @@
  *
  * Effectively, the "app" itself.
  */
-const corsbase = 'https://cors.anarchism.nyc';
+import GoogleCalendar from './google-calendar.js';
+import EventSources from './event-sources.js';
+
+export const corsbase = 'https://cors.anarchism.nyc';
 const domparser = new DOMParser();
 
 /**
@@ -37,51 +40,6 @@ var wpTribe2FullCalendar = function (json_events) {
 }
 
 /**
- * Fetch events via Google Calendar ICS.
- */
-var fetchGoogleCalendarICS = async function (url, fetchInfo, successCallback, failureCallback) {
-
-    // The format for a Google Calendar single event page is this:
-    //
-    //     https://calendar.google.com/calendar/event?eid={eventid}&ctz=America/New_York
-    //
-    // where `{eventid}` is a base64 encoded string constructed as:
-    //
-    //     vEvent UID component + ' ' + calendar ID + '@g'
-    //
-    // The `@g` at the end is literal.
-    var calendar = url.match(/calendar\/ical\/(.*)%40.*public\/basic.ics/)[1];
-    var events = [];
-
-    var ics = await fetch(url).then((data) => {
-        return data.text();
-    });
-    var jcal = ICAL.parse(ics);
-    var vcal = new ICAL.Component(jcal);
-    var vevents = vcal.getAllSubcomponents('vevent');
-    vevents.forEach(function (e) {
-        var vevent = new ICAL.Event(e);
-        var newEvent = {
-            title: vevent.summary,
-            start: vevent.startDate.toJSDate(),
-            end: vevent.endDate.toJSDate(),
-            // Google Calendars don't provide a URL.
-            // So we generate one with the event UID ourselves.
-            url: 'https://calendar.google.com/calendar/event?eid='
-                + btoa(vevent.uid.replace('@google.com', '') + ' ' + calendar + '@g')
-                + '&ctz=America/New_York',
-        };
-        if (e.hasProperty('rrule')) {
-            newEvent.rrule = 'DTSTART:' + vevent.startDate.toICALString()
-                + '\n' + e.getFirstProperty('rrule').toICALString();
-        }
-        events.push(newEvent);
-    });
-
-    return events;
-};
-
-/**
  * Convenience method that scrapes the "Upcoming Events" list off
  * of an EventBrite's Organizer Page and transforms them into an
  * event source for FullCalendar.
@@ -98,27 +56,6 @@ var fetchEventBriteEventsByOrganizer = function (url, fetchInfo, successCallback
                 JSON.parse(doc.querySelectorAll('script[type="application/ld+json"]')[1].innerText)
             ));
         });
-};
-
-/**
- * Convenience method that scrapes the "Upcoming Events" sections
- * of a Squarespace-hosted Web site from organizers who use it.
- */
-var fetchSquarespaceEvents = function (url, fetchInfo, successCallback, failureCallback) {
-    fetch(corsbase + '/' + url).then(function (response) {
-        return response.text();
-    }).then(function (data) {
-        var j = JSON.parse(data);
-        var x = j.upcoming || j.items;
-        successCallback(x.map(function (vevent) {
-            return {
-                title: vevent.title,
-                start: vevent.startDate,
-                end: vevent.endDate,
-                url: new URL(url).origin + vevent.fullUrl
-            }
-        }));
-    });
 };
 
 var fetchWordPressTribeEvents = function (url, fetchInfo, successCallback, failureCallback) {
@@ -181,7 +118,7 @@ export default new FullCalendar.Calendar(document.getElementById('calendar'), {
             el.style.display = 'none';
         }
     },
-    eventSources: [
+    eventSources: EventSources.concat([
         {
             name: 'TechLearningCollective.com',
             className: 'event-techlearningcollective',
@@ -231,27 +168,6 @@ export default new FullCalendar.Calendar(document.getElementById('calendar'), {
         // Likewise, these Google Calendars seem to be having trouble loading
         // for mobile users when using the Google Calendar API. Instead, we
         // fallback to the public ICS feed for these (for now) as well.
-        {
-            // Maintained by Tech Learning Collective's Partner Operations Team.
-            // This is mostly a stop-gap for events we can't automatically add.
-            name: 'Friendly to Anarchism.NYC',
-            id: 'friendlytoanarchismnyc',
-            className: 'friendlytoanarchismnyc',
-            events: function (fetchInfo, successCallback, failureCallback) {
-                return fetchGoogleCalendarICS(corsbase + '/https://calendar.google.com/calendar/ical/2om8s9hsd7kkkjcc88kon65i2o%40group.calendar.google.com/public/basic.ics', fetchInfo, successCallback, failureCallback);
-            },
-            color: 'gray'
-        },
-        {
-            name: 'Phase Space',
-            id: 'phase-space',
-            className: 'phase-space',
-            events: function (fetchInfo, successCallback, failureCallback) {
-                return fetchGoogleCalendarICS(corsbase + '/https://calendar.google.com/calendar/ical/q14jhdv41fng6q1b2826dp92rs%40group.calendar.google.com/public/basic.ics', fetchInfo, successCallback, failureCallback);
-            },
-            color: 'white',
-            textColor: 'black'
-        },
 
         // This one-off event source helpfully published Schema.org-style Linked Data JSON!
         {
@@ -392,87 +308,6 @@ export default new FullCalendar.Calendar(document.getElementById('calendar'), {
             color: 'red'
         },
 
-        // Some Web sites hosted on Squarespace also provide (some) data.
-        {
-            name: 'Club Cumming',
-            id: 'club-cumming',
-            className: 'club-cumming',
-            events: function (fetchInfo, successCallback, failureCallback) {
-                return fetchSquarespaceEvents('https://clubcummingnyc.com/schedule?format=json', fetchInfo, successCallback, failureCallback);
-            },
-            color: 'white',
-            textColor: 'black'
-        },
-        {
-            name: 'Hot Rabbit',
-            id: 'hot-rabbit',
-            className: 'hot-rabbit',
-            events: function (fetchInfo, successCallback, failureCallback) {
-                return fetchSquarespaceEvents('https://www.hotrabbit.com/new-events?format=json', fetchInfo, successCallback, failureCallback);
-            },
-            color: 'white',
-            textColor: 'black'
-        },
-        {
-            name: 'Market Hotel',
-            id: 'market-hotel',
-            className: 'market-hotel',
-            events: function (fetchInfo, successCallback, failureCallback) {
-                return fetchSquarespaceEvents('https://www.markethotel.org/calendar?format=json', fetchInfo, successCallback, failureCallback);
-            },
-            color: 'white',
-            textColor: 'black'
-        },
-        {
-            name: 'Talon Bar',
-            id: 'talon-bar',
-            className: 'talon-bar',
-            events: function (fetchInfo, successCallback, failureCallback) {
-                return fetchSquarespaceEvents('https://www.talonbar.com/events?format=json', fetchInfo, successCallback, failureCallback);
-            },
-            color: 'white',
-            textColor: 'black'
-        },
-        {
-            name: 'The Nest Brooklyn',
-            id: 'the-nest-brooklyn',
-            className: 'the-nest-brooklyn',
-            events: function (fetchInfo, successCallback, failureCallback) {
-                return fetchSquarespaceEvents('https://www.thenestbrooklyn.com/event-calender?format=json', fetchInfo, successCallback, failureCallback);
-            },
-            color: 'white',
-            textColor: 'black'
-        },
-        {
-            name: 'The Taillor Group',
-            id: 'the-taillor-group',
-            className: 'the-taillor-group',
-            events: function (fetchInfo, successCallback, failureCallback) {
-                return fetchSquarespaceEvents('https://www.taillors.com/calendar?format=json', fetchInfo, successCallback, failureCallback);
-            },
-            color: 'white',
-            textColor: 'black'
-        },
-        {
-            name: 'Trans Pecos',
-            id: 'trans-pecos',
-            className: 'trans-pecos',
-            events: function (fetchInfo, successCallback, failureCallback) {
-                return fetchSquarespaceEvents('https://www.thetranspecos.com/cal?format=json', fetchInfo, successCallback, failureCallback);
-            },
-            color: 'white',
-            textColor: 'black'
-        },
-        {
-            name: 'Wonderville',
-            id: 'wonderville',
-            className: 'wonderville',
-            events: function (fetchInfo, successCallback, failureCallback) {
-                return fetchSquarespaceEvents('https://www.wonderville.nyc/events?format=json', fetchInfo, successCallback, failureCallback);
-            },
-            color: 'white',
-            textColor: 'black'
-        },
 
         // These sources are from WordPress Web sites running Tribe Events plugin.
         {
@@ -484,12 +319,7 @@ export default new FullCalendar.Calendar(document.getElementById('calendar'), {
             },
             color: 'blue'
         }
-    ],
-    // TODO: This should be where we convert any source into an actual
-    // FullCalendar Event Object, not in the custom event source functions.
-    // See https://fullcalendar.io/docs/eventDataTransform
-    eventDataTransform: function (eventData) {
-    },
+    ]),
     eventDidMount: function (info) {
         info.el.setAttribute('title', info.event.title);
         return [ info.el ];
