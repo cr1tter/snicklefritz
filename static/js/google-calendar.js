@@ -97,6 +97,10 @@ GoogleCalendar.prototype.toFullCalendarEventObject = function (e) {
     };
     if (e.hasProperty('rrule')) {
         newEvent.rrule = 'DTSTART:' + vevent.startDate.toICALString()
+            // TODO: This needs to remain commented out until upstream
+            //       FullCalendar RRULE plugin supports DTEND. Details
+            //       https://github.com/jakubroztocil/rrule/pull/421
+            //+ '\nDTEND:' + vevent.endDate.toICALString()
             + '\n' + e.getFirstProperty('rrule').toICALString();
     }
     return newEvent;
