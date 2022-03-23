@@ -38,7 +38,7 @@ export const GoogleCalendarEventSources = [
 export default function GoogleCalendar (optionsObj) {
     return this.fetch(optionsObj.url).then((gcal) => {
         optionsObj.successCallback(gcal.parse().events.map(
-            this.toFullCalendarEventObject
+            this.toFullCalendarEventObject.bind(this)
         ));
     })
 };
@@ -55,16 +55,6 @@ GoogleCalendar.prototype.fetch = async function (url) {
 };
 
 GoogleCalendar.prototype.parse = function () {
-    // The format for a Google Calendar single event page is this:
-    //
-    //     https://calendar.google.com/calendar/event?eid={eventid}&ctz=America/New_York
-    //
-    // where `{eventid}` is a base64 encoded string constructed as:
-    //
-    //     vEvent UID component + ' ' + calendar ID + '@g'
-    //
-    // The `@g` at the end is literal.
-    var calendar = this.url.match(/calendar\/ical\/(.*)%40.*public\/basic.ics/)[1];
     var events = [];
 
     var jcal = ICAL.parse(this.ics);
@@ -82,6 +72,16 @@ GoogleCalendar.prototype.parse = function () {
  * @return {object} FullCalendar Event Object
  */
 GoogleCalendar.prototype.toFullCalendarEventObject = function (e) {
+    // The format for a Google Calendar single event page is this:
+    //
+    //     https://calendar.google.com/calendar/event?eid={eventid}&ctz=America/New_York
+    //
+    // where `{eventid}` is a base64 encoded string constructed as:
+    //
+    //     vEvent UID component + ' ' + calendar ID + '@g'
+    //
+    // The `@g` at the end is literal.
+    var calendar = this.url.match(/calendar\/ical\/(.*)%40.*public\/basic.ics/)[1];
     var vevent = new ICAL.Event(e);
     var newEvent = {
         title: vevent.summary,
@@ -89,9 +89,9 @@ GoogleCalendar.prototype.toFullCalendarEventObject = function (e) {
         end: vevent.endDate.toJSDate(),
         // Google Calendars don't provide a URL.
         // So we generate one with the event UID ourselves.
-        url: 'https://calendar.google.com/calendar/event?eid='
+        url: 'https://www.google.com/calendar/event?eid='
             + btoa(vevent.uid.replace('@google.com', '') + ' ' + calendar + '@g')
-            + '&ctz=America/New_York',
+            + '&ctz=America/New_York'
     };
     if (e.hasProperty('rrule')) {
         newEvent.rrule = 'DTSTART:' + vevent.startDate.toICALString()
