@@ -150,6 +150,14 @@ export default new FullCalendar.Calendar(document.getElementById('calendar'), {
             color: '#FC0'
         },
         {
+            name: 'NYC Tri-State Area Bisexual+ SGL Queer & Questioning Meetup',
+            id: 'nyc-tri-state-area-bisexual-sgl-queer-questioning-meetup',
+            className: 'nyc-tri-state-area-bisexual-sgl-queer-questioning-meetup',
+            url: corsbase + '/https://www.meetup.com/bisexual-nyc/events/ical/',
+            format: 'ics',
+            color: '#FC0'
+        },
+        {
             name: 'DEFCON201',
             id: 'defcon201',
             className: 'defcon201',
