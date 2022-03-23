@@ -90,7 +90,9 @@ GoogleCalendar.prototype.toFullCalendarEventObject = function (e) {
         // Google Calendars don't provide a URL.
         // So we generate one with the event UID ourselves.
         url: 'https://www.google.com/calendar/event?eid='
-            + btoa(vevent.uid.replace('@google.com', '') + ' ' + calendar + '@g')
+            + btoa(
+                vevent.uid.replace('@google.com', '') + ' ' + calendar + '@g'
+            ).replaceAll('=', '')
             + '&ctz=America/New_York'
     };
     if (e.hasProperty('rrule')) {
