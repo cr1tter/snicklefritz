@@ -6,6 +6,19 @@ import { corsbase } from './calendar.js';
 
 export const SquarespaceEventSources = [
     {
+        name: '3 Dollar Bill',
+        id: 'three-dollar-bill',
+        className: 'three-dollar-bill',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new Squarespace({
+                url: 'https://www.3dollarbillbk.com/rsvp?format=json',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'Club Cumming',
         id: 'club-cumming',
         className: 'club-cumming',
