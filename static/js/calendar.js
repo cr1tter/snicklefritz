@@ -96,16 +96,23 @@ export default new FullCalendar.Calendar(document.getElementById('calendar'), {
             }
         }
     },
+    views: {
+        listDay: {
+            type: 'list',
+            duration: { days: 1 },
+            buttonText: 'list'
+        }
+    },
     headerToolbar: {
         left: 'prev,next today',
         center: 'title',
-        right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+        right: 'dayGridMonth,timeGridDay,listDay'
         // When ready, we'll add a "Calendars" button. But not yet.
-        //right: 'calendars dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+        //right: 'calendars dayGridMonth,timeGridDay,listDay'
     },
     initialView: function () {
         return (window.matchMedia("only screen and (max-width: 540px)").matches)
-            ? 'listWeek': 'dayGridMonth';
+            ? 'listDay': 'dayGridMonth';
     }(),
     nowIndicator: true,
     defaultTimedEventDuration: '02:00', // Most events are longer than one hour.
