@@ -286,6 +286,15 @@ export default new FullCalendar.Calendar(document.getElementById('calendar'), {
             color: 'red'
         },
         {
+            name: 'Newtown Creek Alliance - EventBrite',
+            id: 'newtown-creek-alliance-eventbrite',
+            className: 'newtown-creek-alliance-eventbrite',
+            events: function (fetchInfo, successCallback, failureCallback) {
+                return fetchEventBriteEventsByOrganizer('https://www.eventbrite.com/o/newtown-creek-alliance-6350090643', fetchInfo, successCallback, failureCallback);
+            },
+            color: 'red'
+        },
+        {
             // They have a Tockify but they did not enable Tockify's ICS feed. :(
             name: 'Pagan\'s Paradise - EventBrite',
             id: 'pagans-paradise-eventbrite',
