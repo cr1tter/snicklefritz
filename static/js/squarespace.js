@@ -97,6 +97,19 @@ export const SquarespaceEventSources = [
         }
     },
     {
+        name: 'The Tank',
+        id: 'the-tank',
+        className: 'the-tank',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new Squarespace({
+                url: 'https://thetanknyc.org/calendar-1/?format=json',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'Trans Pecos',
         id: 'trans-pecos',
         className: 'trans-pecos',
