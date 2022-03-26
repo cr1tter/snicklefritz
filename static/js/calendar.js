@@ -322,6 +322,15 @@ export default new FullCalendar.Calendar(document.getElementById('calendar'), {
             },
             color: 'red'
         },
+        {
+            name: 'Union Hall - EventBrite',
+            id: 'union-hall-eventbrite',
+            className: 'the-sultan-room-eventbrite',
+            events: function (fetchInfo, successCallback, failureCallback) {
+                return fetchEventBriteEventsByOrganizer('https://www.eventbrite.com/o/union-hall-17899496497', fetchInfo, successCallback, failureCallback);
+            },
+            color: 'red'
+        },
 
 
         // These sources are from WordPress Web sites running Tribe Events plugin.
