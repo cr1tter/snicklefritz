@@ -19,6 +19,19 @@ export const SquarespaceEventSources = [
         }
     },
     {
+        name: 'Black Flamingo',
+        id: 'black-flamingo',
+        className: 'black-flamingo',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new Squarespace({
+                url: 'https://www.blackflamingonyc.com/events?format=json',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'Club Cumming',
         id: 'club-cumming',
         className: 'club-cumming',
