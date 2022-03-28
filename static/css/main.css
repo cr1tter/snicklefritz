@@ -2,12 +2,11 @@
  * @group Layout.
  */
 body {
-    margin: 40px 10px;
+    margin: 40px 2.5%;
     padding: 0;
     background: #CCC;
 }
 #calendar {
-    max-width: 800px;
     margin: 0 auto;
     border-width: 5px 0;
     border-style: solid;
