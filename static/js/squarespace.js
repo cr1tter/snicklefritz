@@ -151,7 +151,13 @@ export const SquarespaceEventSources = [
 ];
 
 export default function Squarespace (optionsObj) {
-    return this.fetch(optionsObj.url).then((ss) => {
+    var url = new URL(optionsObj.url);
+    // TODO: Fetch next month's events, but only after a view change.
+//    var url_start_date = (optionsObj.fetchInfo.start.getMonth() + 1).toString().padStart(2, '0')
+//        + '-' + optionsObj.fetchInfo.start.getFullYear();
+//    url.searchParams.set('month', url_start_date);
+
+    return this.fetch(url).then((ss) => {
         optionsObj.successCallback(ss.parse().events.map(
             this.toFullCalendarEventObject.bind(this)
         ));
