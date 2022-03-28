@@ -115,6 +115,14 @@ export default new FullCalendar.Calendar(document.getElementById('calendar'), {
             color: 'blue'
         },
         {
+            name: 'Bushwick Daily',
+            id: 'bushwick-daily',
+            className: 'bushwick-daily',
+            url: 'https://tockify.com/api/feeds/ics/bushwickdaily',
+            format: 'ics',
+            color: 'black'
+        },
+        {
             name: 'Metropolitan Anarchist Coordinating Council of NYC',
             id: 'maccnyc',
             className: 'event-maccnyc',
