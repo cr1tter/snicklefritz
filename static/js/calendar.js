@@ -3,7 +3,6 @@
  *
  * Effectively, the "app" itself.
  */
-import GoogleCalendar from './google-calendar.js';
 import EventSources from './event-sources.js';
 
 export const corsbase = 'https://cors.anarchism.nyc';
@@ -28,18 +27,6 @@ var schemaDotOrg2FullCalendar = function (ld_json) {
 };
 
 /**
- * The WordPress plugin "Tribe Events" has a neat little JSON endpoint
- * we can pull from, too.
- */
-var wpTribe2FullCalendar = function (json_events) {
-    return json_events.map(function (item) {
-        item.start = new Date(item.utc_start_date + 'Z');
-        item.end = new Date(item.utc_end_date + 'Z');
-        return item;
-    });
-}
-
-/**
  * Convenience method that scrapes the "Upcoming Events" list off
  * of an EventBrite's Organizer Page and transforms them into an
  * event source for FullCalendar.
@@ -56,14 +43,6 @@ var fetchEventBriteEventsByOrganizer = function (url, fetchInfo, successCallback
                 JSON.parse(doc.querySelectorAll('script[type="application/ld+json"]')[1].innerText)
             ));
         });
-};
-
-var fetchWordPressTribeEvents = function (url, fetchInfo, successCallback, failureCallback) {
-    fetch(url).then(function (response) {
-        return response.json();
-    }).then(function (data) {
-        successCallback(wpTribe2FullCalendar(data.events));
-    });
 };
 
 // TODO:
@@ -339,18 +318,6 @@ export default new FullCalendar.Calendar(document.getElementById('calendar'), {
                 return fetchEventBriteEventsByOrganizer('https://www.eventbrite.com/o/union-hall-17899496497', fetchInfo, successCallback, failureCallback);
             },
             color: 'red'
-        },
-
-
-        // These sources are from WordPress Web sites running Tribe Events plugin.
-        {
-            name: 'WOW Cafe Theatre',
-            id: 'wow-cafe-theatre',
-            className: 'wow-cafe-theatre',
-            events: function (fetchInfo, successCallback, failureCallback) {
-                return fetchWordPressTribeEvents('https://www.wowcafe.org/wp-json/tribe/events/v1/events', fetchInfo, successCallback, failureCallback);
-            },
-            color: 'blue'
         }
     ]),
     eventDidMount: function (info) {
