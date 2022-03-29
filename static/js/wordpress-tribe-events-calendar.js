@@ -22,6 +22,19 @@ export const WordPressTribeEventsCalendarSources = [
         color: '#ed008c'
     },
     {
+        name: 'The People\'s Forum',
+        id: 'the-peoples-forum',
+        className: 'the-peoples-forum',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new WordPressTribeEvents({
+                url: 'https://peoplesforum.org/wp-json/tribe/events/v1/events?per_page=50',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'WOW Cafe Theatre',
         id: 'wow-cafe-theatre',
         className: 'wow-cafe-theatre',
