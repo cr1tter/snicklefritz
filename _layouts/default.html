@@ -12,7 +12,10 @@
 </head>
 <body>
     <header>
-        <h1>{% assign words = site.title | split: ' ' %}{% for word in words %}<span>{{ word }}</span>{% unless forloop.last %}&nbsp;{% endunless %}{% endfor %}</h1>
+        <h1>{% assign words = site.title | split: ' ' %}{% for word in words %}
+            <span>{{ word }}</span>
+            {%- endfor %}
+        </h1>
         <p>{{ site.description }}</p>
     </header>
 

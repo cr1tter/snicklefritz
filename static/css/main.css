@@ -6,11 +6,17 @@ body {
     padding: 0;
     background: #CCC;
 }
-#calendar {
+#featured-events, #calendar {
     margin: 0 auto;
-    border-width: 5px 0;
     border-style: solid;
-    padding: 20px 0;
+    padding: 10px 0;
+}
+#featured-events {
+    font-size: 24px;
+    border-width: 5px 0 0 0;
+}
+#calendar {
+    border-width: 5px 0;
 }
 
 footer {
