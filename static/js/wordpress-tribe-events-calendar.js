@@ -50,29 +50,52 @@ export const WordPressTribeEventsCalendarSources = [
 ];
 
 export default function WordPressTribeEvents (optionsObj) {
+    this.events = [];
+
     var url = new URL(optionsObj.url);
     var url_start_date = optionsObj.fetchInfo.start.toISOString().replace(/T.*/, ' 00:00:00');
     var url_end_date = optionsObj.fetchInfo.end.toISOString().replace(/T.*/, ' 00:00:00');
     url.searchParams.set('start_date', url_start_date);
     url.searchParams.set('end_date', url_end_date);
 
-    return this.fetch(url).then((wp) => {
-        optionsObj.successCallback(wp.parse().events.map(
+    return this.fetchAll(url).then((wp) => {
+        optionsObj.successCallback(wp.events.map(
             this.toFullCalendarEventObject.bind(this)
         ));
     });
 };
 
+/**
+ * Fetches all pages in a paginated collection and stores them in the
+ * the object's `events` member array.
+ */
+WordPressTribeEvents.prototype.fetchAll = async function (url) {
+    await this.fetch(url);
+    this.parse();
+    while (this.json.next_rest_url) {
+        await this.fetch(this.json.next_rest_url);
+        this.parse();
+    }
+    return this;
+};
+
 WordPressTribeEvents.prototype.fetch = async function (url) {
     this.url = url;
     var response = await fetch(url);
-    var json = await response.json();
+    var json = {};
+    try {
+        var json = await response.json();
+    } catch (e) {
+        // We'll just print the error, but execution will continue as
+        // we have still caught the error.
+        console.error(e);
+    }
     this.json = json;
     return this;
 };
 
 WordPressTribeEvents.prototype.parse = function () {
-    this.events = this.json.events;
+    this.events = this.events.concat(this.json.events);
     return this;
 };
 
