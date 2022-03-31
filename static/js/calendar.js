@@ -292,6 +292,15 @@ export default new FullCalendar.Calendar(document.getElementById('calendar'), {
             color: 'red'
         },
         {
+            name: 'Queer Social - EventBrite',
+            id: 'queer-social-eventbrite',
+            className: 'queer-social-eventbrite',
+            events: function (fetchInfo, successCallback, failureCallback) {
+                return fetchEventBriteEventsByOrganizer('https://www.eventbrite.com/o/queer-social-18203994164', fetchInfo, successCallback, failureCallback);
+            },
+            color: 'red'
+        },
+        {
             name: 'TV Eye - EventBrite',
             id: 'tv-eye-eventbrite',
             className: 'tv-eye-eventbrite',
