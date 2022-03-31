@@ -167,7 +167,13 @@ export default function Squarespace (optionsObj) {
 Squarespace.prototype.fetch = async function (url) {
     this.url = url;
     var response = await fetch(corsbase + '/' + url);
-    var json = await response.json();
+    var json = {};
+    try {
+        var json = await response.json();
+    }
+    catch (e) {
+        console.error(e);
+    }
     this.json = json;
     return this;
 };
