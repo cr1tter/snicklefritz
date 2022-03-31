@@ -71,6 +71,19 @@ export const SquarespaceEventSources = [
         }
     },
     {
+        name: 'Nowhere Bar',
+        id: 'nowhere-bar',
+        className: 'nowhere-bar',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new Squarespace({
+                url: 'https://www.nowherebarnyc.com/new-events?format=json',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'Talon Bar',
         id: 'talon-bar',
         className: 'talon-bar',
