@@ -73,7 +73,10 @@ WordPressTribeEvents.prototype.fetchAll = async function (url) {
     await this.fetch(url);
     this.parse();
     while (this.json.next_rest_url) {
-        await this.fetch(this.json.next_rest_url);
+        let u = (url.host === new URL(corsbase).host)
+            ? corsbase + '/' + this.json.next_rest_url
+            : this.json.next_rest_url;
+        await this.fetch(u);
         this.parse();
     }
     return this;
