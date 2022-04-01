@@ -2,7 +2,7 @@
  * Utility module to support the calendar's Squarespace
  * event sources.
  */
-import { corsbase } from './calendar.js';
+import { corsbase } from '../calendar.js';
 
 export const SquarespaceEventSources = [
     {

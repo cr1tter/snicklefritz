@@ -2,7 +2,7 @@
  * Utility module to support the calendar's Google Calendar
  * event sources.
  */
-import { corsbase } from './calendar.js'
+import { corsbase } from '../calendar.js'
 
 export const GoogleCalendarEventSources = [
         {

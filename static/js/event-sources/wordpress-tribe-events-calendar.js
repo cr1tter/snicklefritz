@@ -4,7 +4,7 @@
  *
  * @see https://theeventscalendar.com/
  */
-import { corsbase } from './calendar.js';
+import { corsbase } from '../calendar.js';
 
 export const WordPressTribeEventsCalendarSources = [
     {
