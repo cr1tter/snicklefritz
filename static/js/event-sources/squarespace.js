@@ -110,6 +110,19 @@ export const SquarespaceEventSources = [
         }
     },
     {
+        name: 'The Q NYC',
+        id: 'the-q-nyc',
+        className: 'the-q-nyc',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new Squarespace({
+                url: 'https://theqnyc.com/events?format=json',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'The Taillor Group',
         id: 'the-taillor-group',
         className: 'the-taillor-group',
