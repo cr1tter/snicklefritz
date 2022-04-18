@@ -8,19 +8,6 @@ const domparser = new DOMParser();
 
 export const EventBriteEventSources = [
     {
-        name: 'Cult 24',
-        id: 'cult-24',
-        className: 'cult-24',
-        events: async function (fetchInfo, successCallback, failureCallback) {
-            await new EventBrite({
-                url: 'https://www.eventbrite.com/o/24-11905129611',
-                fetchInfo: fetchInfo,
-                successCallback: successCallback,
-                failureCallback: failureCallback
-            });
-        }
-    },
-    {
         name: 'Brooklyn Comedy Collective',
         id: 'brooklyn-comedy-collective',
         className: 'brooklyn-comedy-collective',
@@ -47,6 +34,19 @@ export const EventBriteEventSources = [
         }
     },
     {
+        name: 'Cult 24',
+        id: 'cult-24',
+        className: 'cult-24',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new EventBrite({
+                url: 'https://www.eventbrite.com/o/24-11905129611',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: "Dave's Lesbian Bar",
         id: 'daves-lesbian-bar',
         className: 'daves-lesbian-bar',
@@ -60,12 +60,25 @@ export const EventBriteEventSources = [
         }
     },
     {
-        name: "Dyke Beer",
+        name: 'Dyke Beer',
         id: 'dyke-beer',
         className: 'dyke-beer',
         events: async function (fetchInfo, successCallback, failureCallback) {
             await new EventBrite({
                 url: 'https://www.eventbrite.com/o/dyke-beer-14414017747',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
+        name: 'Geneva Rust-Orta',
+        id: 'geneva-rust-orta',
+        className: 'geneva-rust-orta',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new EventBrite({
+                url: 'https://www.eventbrite.com/o/geneva-rust-orta-29943238651',
                 fetchInfo: fetchInfo,
                 successCallback: successCallback,
                 failureCallback: failureCallback
