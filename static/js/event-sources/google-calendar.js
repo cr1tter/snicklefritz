@@ -21,6 +21,19 @@ export const GoogleCalendarEventSources = [
             }
         },
         {
+            name: 'NYC Resistor',
+            id: 'nycresistor',
+            className: 'nycresistor',
+            events: async function (fetchInfo, successCallback, failureCallback) {
+                await new GoogleCalendar({
+                    url: 'https://calendar.google.com/calendar/ical/p2m2av9dhrh4n1ub7jlsc68s7o%40group.calendar.google.com/public/basic.ics',
+                    fetchInfo: fetchInfo,
+                    successCallback: successCallback,
+                    failureCallback: failureCallback
+                });
+            }
+        },
+        {
             name: 'Phase Space',
             id: 'phase-space',
             className: 'phase-space',
