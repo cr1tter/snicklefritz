@@ -115,6 +115,19 @@ export const EventBriteEventSources = [
         }
     },
     {
+        name: 'House of X',
+        id: 'house-of-x',
+        className: 'house-of-x',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new EventBrite({
+                url: 'https://www.eventbrite.com/o/house-of-x-35646479823',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'Le Organizer',
         id: 'le-organizer',
         className: 'le-organizer',
