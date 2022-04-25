@@ -32,6 +32,19 @@ export const SquarespaceEventSources = [
         }
     },
     {
+        name: 'Cherry on Top',
+        id: 'cherry-on-top',
+        className: 'cherry-on-top',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new Squarespace({
+                url: 'https://www.cherryontopnyc.com/events?format=json',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'Club Cumming',
         id: 'club-cumming',
         className: 'club-cumming',
