@@ -175,6 +175,19 @@ export const SquarespaceEventSources = [
         }
     },
     {
+        name: 'Wandering Barman',
+        id: 'wandering-barman',
+        className: 'wandering-barman',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new Squarespace({
+                url: 'https://www.wanderingbarman.com/events?format=json',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'Wonderville',
         id: 'wonderville',
         className: 'wonderville',
