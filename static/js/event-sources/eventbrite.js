@@ -194,6 +194,19 @@ export const EventBriteEventSources = [
         }
     },
     {
+        name: 'Secret Loft',
+        id: 'secret-loft',
+        className: 'secret-loft',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new EventBrite({
+                url: 'https://www.eventbrite.com/o/secret-loft-11841101530',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'TV Eye',
         id: 'tv-eye',
         className: 'tv-eye',
