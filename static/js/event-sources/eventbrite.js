@@ -233,6 +233,19 @@ export const EventBriteEventSources = [
         }
     },
     {
+        name: 'The Nova Experiment',
+        id: 'the-nova-experiment',
+        className: 'the-nova-experiment',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new EventBrite({
+                url: 'https://www.eventbrite.com/o/the-nova-experiment-17863009866',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'The Sultan Room',
         id: 'the-sultan-room',
         className: 'the-sultan-room',
