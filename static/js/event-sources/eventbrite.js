@@ -128,6 +128,19 @@ export const EventBriteEventSources = [
         }
     },
     {
+        name: 'LasReinas',
+        id: 'lasreinas',
+        className: 'lasreinas',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new EventBrite({
+                url: 'https://www.eventbrite.com/o/lasreinas-2712122890',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'Le Organizer',
         id: 'le-organizer',
         className: 'le-organizer',
