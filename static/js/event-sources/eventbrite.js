@@ -207,6 +207,19 @@ export const EventBriteEventSources = [
         }
     },
     {
+        name: 'QueerSpace NYC',
+        id: 'queerspace-nyc',
+        className: 'queerspace-nyc',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new EventBrite({
+                url: 'https://www.eventbrite.com/o/queerspace-nyc-46274508873',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'Secret Loft',
         id: 'secret-loft',
         className: 'secret-loft',
