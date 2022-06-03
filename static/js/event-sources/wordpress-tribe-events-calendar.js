@@ -22,6 +22,20 @@ export const WordPressTribeEventsCalendarSources = [
         color: '#ed008c'
     },
     {
+        name: 'The Brick',
+        id: 'the-brick',
+        className: 'the-brick',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new WordPressTribeEvents({
+                url: corsbase + '/https://www.bricktheater.com/wp-json/tribe/events/v1/events?per_page=50',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        },
+        color: '#ed008c'
+    },
+    {
         name: 'The People\'s Forum',
         id: 'the-peoples-forum',
         className: 'the-peoples-forum',
