@@ -14,6 +14,13 @@ export const IcalendarEventSources = [
         format: 'ics',
     },
     {
+        name: 'Livecode.NYC',
+        id: 'livecode-nyc',
+        className: 'livecode-nyc',
+        url: 'https://livecode.nyc/calendar.ics',
+        format: 'ics',
+    },
+    {
         name: 'Metropolitan Anarchist Coordinating Council of NYC',
         id: 'maccnyc',
         className: 'event-maccnyc',
