@@ -97,6 +97,19 @@ export const SquarespaceEventSources = [
         }
     },
     {
+        name: 'Scope Tonight',
+        id: 'scope-tonight',
+        className: 'scope-tonight',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new Squarespace({
+                url: 'https://www.scopetonight.com/scope-events?format=json',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'Talon Bar',
         id: 'talon-bar',
         className: 'talon-bar',
