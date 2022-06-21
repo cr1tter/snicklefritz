@@ -97,6 +97,19 @@ export const SquarespaceEventSources = [
         }
     },
     {
+        name: 'NYC Dyke March',
+        id: 'nyc-dyke-march',
+        className: 'nyc-dyke-march',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new Squarespace({
+                url: 'https://www.nycdykemarch.com/upcoming-events?format=json',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'Scope Tonight',
         id: 'scope-tonight',
         className: 'scope-tonight',
