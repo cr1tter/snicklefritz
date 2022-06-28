@@ -11,14 +11,19 @@
  * @TODO: Can we paralellize this in some way to make initial
  *        loading ("time to first (calendar) paint") faster?
  */
+import { DiceEventSources } from './event-sources/dice.js';
 import { EventBriteEventSources } from './event-sources/eventbrite.js';
 import { GoogleCalendarEventSources } from './event-sources/google-calendar.js';
+import { IcalendarEventSources } from './event-sources/icalendar.js';
+import { JSONFeedEventSources } from './event-sources/fullcalendar-json-feed.js';
 import { SquarespaceEventSources } from './event-sources/squarespace.js';
 import { WordPressTribeEventsCalendarSources } from './event-sources/wordpress-tribe-events-calendar.js';
-import { JSONFeedEventSources } from './event-sources/fullcalendar-json-feed.js';
-import { IcalendarEventSources } from './event-sources/icalendar.js';
 
 const EventSources = [].concat(
+    DiceEventSources.map((i) => {
+        i.color = '#E6D500';
+        return i;
+    }),
     EventBriteEventSources.map((i) => {
         i.color = 'red';
         return i;
@@ -27,12 +32,12 @@ const EventSources = [].concat(
         i.color = 'gray';
         return i;
     }),
-    JSONFeedEventSources.map((i) => {
-        return i;
-    }),
     IcalendarEventSources.map((i) => {
         i.color = (i.color) ? i.color : 'black';
         i.textColor = (i.textColor) ? i.textColor : 'white';
+        return i;
+    }),
+    JSONFeedEventSources.map((i) => {
         return i;
     }),
     SquarespaceEventSources.map((i) => {

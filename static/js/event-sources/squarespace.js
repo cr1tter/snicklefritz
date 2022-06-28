@@ -239,7 +239,7 @@ export default function Squarespace (optionsObj) {
         optionsObj.successCallback(ss.parse().events.map(
             this.toFullCalendarEventObject.bind(this)
         ));
-    })
+    });
 };
 
 Squarespace.prototype.fetch = async function (url) {
@@ -267,5 +267,5 @@ Squarespace.prototype.toFullCalendarEventObject = function (e) {
         start: e.startDate,
         end: e.endDate,
         url: new URL(this.url).origin + e.fullUrl
-    }
+    };
 }
