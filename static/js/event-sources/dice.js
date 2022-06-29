@@ -5,6 +5,23 @@
 
 export const DiceEventSources = [
     {
+        name: "C'mon Everybody",
+        id: 'cmon-everybody',
+        className: 'cmon-everybody',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new Dice({
+                // Pulled from https://www.cmoneverybody.com/events
+                url: 'https://events-api.dice.fm/v1/events?page%5Bsize%5D=24&types=linkout,event&filter%5Bvenues%5D%5B%5D=C%27mon%20Everybody&filter%5Bvenues%5D%5B%5D=Cmon%20Everybody',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback,
+                headers: {
+                    'x-api-key': 'PyghT2k59li4oGXIef8t4Git2vRl58H7WAuUJGpd'
+                }
+            });
+        }
+    },
+    {
         name: 'Union Pool',
         id: 'union-pool',
         className: 'union-pool',
