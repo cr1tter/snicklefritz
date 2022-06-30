@@ -6,6 +6,19 @@ import { corsbase } from '../calendar.js'
 
 export const GoogleCalendarEventSources = [
         {
+            name: 'Footlight Presents',
+            id: 'footlight-presents',
+            className: 'footlight-presents',
+            events: async function (fetchInfo, successCallback, failureCallback) {
+                await new GoogleCalendar({
+                    url: 'https://calendar.google.com/calendar/ical/q2eve034kguv4h52j3291udvbo%40group.calendar.google.com/public/basic.ics',
+                    fetchInfo: fetchInfo,
+                    successCallback: successCallback,
+                    failureCallback: failureCallback
+                });
+            }
+        },
+        {
             // Maintained by Tech Learning Collective's Partner Operations Team.
             // This is mostly a stop-gap for events we can't automatically add.
             name: 'Friendly to Anarchism.NYC',
