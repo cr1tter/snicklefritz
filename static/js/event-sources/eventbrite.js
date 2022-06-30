@@ -8,6 +8,19 @@ const domparser = new DOMParser();
 
 export const EventBriteEventSources = [
     {
+        name: 'ArtCrawl Harlem',
+        id: 'artcrawl-harlem',
+        className: 'artcrawl-harlem',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new EventBrite({
+                url: 'https://www.eventbrite.com/o/artcrawl-harlem-33584703715',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'Brooklyn Comedy Collective',
         id: 'brooklyn-comedy-collective',
         className: 'brooklyn-comedy-collective',
@@ -291,6 +304,19 @@ export const EventBriteEventSources = [
         events: async function (fetchInfo, successCallback, failureCallback) {
             await new EventBrite({
                 url: 'https://www.eventbrite.com/o/union-hall-17899496497',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
+        name: 'Wet Spot',
+        id: 'wet-spot',
+        className: 'wet-spot-room',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new EventBrite({
+                url: 'https://www.eventbrite.com/o/wet-spot-33199977351',
                 fetchInfo: fetchInfo,
                 successCallback: successCallback,
                 failureCallback: failureCallback
