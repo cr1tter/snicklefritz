@@ -167,7 +167,10 @@ export default new FullCalendar.Calendar(document.getElementById('calendar'), {
         }
     ]),
     eventContent: function (info) {
-        return `${info.event.title} - via ${info.event.source.internalEventSource?.extendedProps?.name}`;
+        console.log(info);
+        return {
+            html: `<a href="${info.event.url}">${info.event.title} - via ${info.event.source.internalEventSource?.extendedProps?.name}</a>`
+        };
     },
     eventDidMount: function (info) {
         info.el.setAttribute('title', info.event.title);
