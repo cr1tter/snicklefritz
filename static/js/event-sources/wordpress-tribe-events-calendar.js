@@ -22,6 +22,20 @@ export const WordPressTribeEventsCalendarSources = [
         color: '#ed008c'
     },
     {
+        name: 'Lesbian Sex Mafia',
+        id: 'lesbian-sex-mafia',
+        className: 'lesbian-sex-mafia',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new WordPressTribeEvents({
+                url: corsbase + '/https://lesbiansexmafia.org/wp-json/tribe/events/v1/events?per_page=50&geoloc=true&geoloc_lat=40.7127837&geoloc_lng=-74.00594130000002',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        },
+        color: '#ed008c'
+    },
+    {
         name: 'The Brick',
         id: 'the-brick',
         className: 'the-brick',
