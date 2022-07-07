@@ -33,7 +33,8 @@ export const WordPressTribeEventsCalendarSources = [
                 failureCallback: failureCallback
             });
         },
-        color: '#ed008c'
+        color: '#000',
+        textColor: '#FFF'
     },
     {
         name: 'The Brick',
