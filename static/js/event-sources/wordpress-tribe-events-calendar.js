@@ -37,6 +37,21 @@ export const WordPressTribeEventsCalendarSources = [
         textColor: '#FFF'
     },
     {
+        name: 'The Eulenspiegel Society',
+        id: 'the-eulenspiegel-society',
+        className: 'the-eulenspiegel-society',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new WordPressTribeEvents({
+                url: corsbase + '/https://www.tes.org/wp-json/tribe/events/v1/events?per_page=50&geoloc=true&geoloc_lat=40.7127837&geoloc_lng=-74.00594130000002',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        },
+        color: '#000',
+        textColor: '#FFF'
+    },
+    {
         name: 'The Brick',
         id: 'the-brick',
         className: 'the-brick',
