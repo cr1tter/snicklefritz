@@ -22,18 +22,18 @@ export const DiceEventSources = [
         }
     },
     {
-        name: 'Union Pool',
-        id: 'union-pool',
-        className: 'union-pool',
+        name: 'Our Wicked Lady',
+        id: 'our-wicked-lady',
+        className: 'our-wicked-lady',
         events: async function (fetchInfo, successCallback, failureCallback) {
             await new Dice({
-                // Pulled from https://www.union-pool.com/calendar
-                url: 'https://events-api.dice.fm/v1/events?page%5Bsize%5D=24&types=linkout,event&filter%5Bpromoters%5D%5B%5D=Loop%20De%20Lou%20Production%20Corp%20dba%20Union%20Pool&filter%5Bflags%5D%5B%5D=going_ahead&filter%5Bflags%5D%5B%5D=postponed&filter%5Bflags%5D%5B%5D=rescheduled',
+                // Pulled from https://www.ourwickedlady.com/
+                url: 'https://events-api.dice.fm/v1/events?page[size]=24&types=linkout,event&filter[promoters][]=Our%20Wicked%20Lady%20LLC',
                 fetchInfo: fetchInfo,
                 successCallback: successCallback,
                 failureCallback: failureCallback,
                 headers: {
-                   'x-api-key': '7rU0bJyVtM5s3vDdYNiuQ4UtDo6pAnmH1QgXsI7E'
+                   'x-api-key': 'vgtVSu5LGc3TMBuE36FwF1hn26kkt6xi5ThPJrqg'
                 }
             });
         }
@@ -51,6 +51,23 @@ export const DiceEventSources = [
                 failureCallback: failureCallback,
                 headers: {
                    'x-api-key': 'VKEBoWiYzJ9uJ8tjR15aD6lL4RnUz8hb4kIYYxFA'
+                }
+            });
+        }
+    },
+    {
+        name: 'Union Pool',
+        id: 'union-pool',
+        className: 'union-pool',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new Dice({
+                // Pulled from https://www.union-pool.com/calendar
+                url: 'https://events-api.dice.fm/v1/events?page%5Bsize%5D=24&types=linkout,event&filter%5Bpromoters%5D%5B%5D=Loop%20De%20Lou%20Production%20Corp%20dba%20Union%20Pool&filter%5Bflags%5D%5B%5D=going_ahead&filter%5Bflags%5D%5B%5D=postponed&filter%5Bflags%5D%5B%5D=rescheduled',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback,
+                headers: {
+                   'x-api-key': '7rU0bJyVtM5s3vDdYNiuQ4UtDo6pAnmH1QgXsI7E'
                 }
             });
         }
