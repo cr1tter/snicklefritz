@@ -8,6 +8,21 @@ import { corsbase } from '../calendar.js';
 
 export const WordPressTribeEventsCalendarSources = [
     {
+        name: 'Flux Factory',
+        id: 'flux-factory',
+        className: 'flux-factory',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new WordPressTribeEvents({
+                url: corsbase + '/http://www.fluxfactory.org/wp-json/tribe/events/v1/events?per_page=50&geoloc=true&geoloc_lat=40.7127837&geoloc_lng=-74.00594130000002',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        },
+        color: '#597432',
+        textColor: '#FFF'
+    },
+    {
         name: 'GoMag',
         id: 'gomag',
         className: 'gomag',
