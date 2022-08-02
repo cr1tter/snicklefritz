@@ -5,60 +5,69 @@
 import { corsbase } from '../calendar.js'
 
 export const GoogleCalendarEventSources = [
-        {
-            name: 'Footlight Presents',
-            id: 'footlight-presents',
-            className: 'footlight-presents',
-            events: async function (fetchInfo, successCallback, failureCallback) {
-                await new GoogleCalendar({
-                    url: 'https://calendar.google.com/calendar/ical/q2eve034kguv4h52j3291udvbo%40group.calendar.google.com/public/basic.ics',
-                    fetchInfo: fetchInfo,
-                    successCallback: successCallback,
-                    failureCallback: failureCallback
-                });
-            }
-        },
-        {
-            // Maintained by Tech Learning Collective's Partner Operations Team.
-            // This is mostly a stop-gap for events we can't automatically add.
-            name: 'Friendly to Anarchism.NYC',
-            id: 'friendlytoanarchismnyc',
-            className: 'friendlytoanarchismnyc',
-            events: async function (fetchInfo, successCallback, failureCallback) {
-                await new GoogleCalendar({
-                    url: 'https://calendar.google.com/calendar/ical/2om8s9hsd7kkkjcc88kon65i2o%40group.calendar.google.com/public/basic.ics',
-                    fetchInfo: fetchInfo,
-                    successCallback: successCallback,
-                    failureCallback: failureCallback
-                });
-            }
-        },
-        {
-            name: 'NYC Resistor',
-            id: 'nycresistor',
-            className: 'nycresistor',
-            events: async function (fetchInfo, successCallback, failureCallback) {
-                await new GoogleCalendar({
-                    url: 'https://calendar.google.com/calendar/ical/p2m2av9dhrh4n1ub7jlsc68s7o%40group.calendar.google.com/public/basic.ics',
-                    fetchInfo: fetchInfo,
-                    successCallback: successCallback,
-                    failureCallback: failureCallback
-                });
-            }
-        },
-        {
-            name: 'Phase Space',
-            id: 'phase-space',
-            className: 'phase-space',
-            events: async function (fetchInfo, successCallback, failureCallback) {
-                await new GoogleCalendar({
-                    url: 'https://calendar.google.com/calendar/ical/q14jhdv41fng6q1b2826dp92rs%40group.calendar.google.com/public/basic.ics',
-                    fetchInfo: fetchInfo,
-                    successCallback: successCallback,
-                    failureCallback: failureCallback
-                });
-            }
+    {
+        name: 'Footlight Presents',
+        id: 'footlight-presents',
+        className: 'footlight-presents',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new GoogleCalendar({
+                url: 'https://calendar.google.com/calendar/ical/q2eve034kguv4h52j3291udvbo%40group.calendar.google.com/public/basic.ics',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
         }
+    },
+    {
+        // Maintained by Tech Learning Collective's Partner Operations Team.
+        // This is mostly a stop-gap for events we can't automatically add.
+        name: 'Friendly to Anarchism.NYC',
+        id: 'friendlytoanarchismnyc',
+        className: 'friendlytoanarchismnyc',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new GoogleCalendar({
+                url: 'https://calendar.google.com/calendar/ical/2om8s9hsd7kkkjcc88kon65i2o%40group.calendar.google.com/public/basic.ics',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
+        name: 'NYC Resistor',
+        id: 'nycresistor',
+        className: 'nycresistor',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new GoogleCalendar({
+                url: 'https://calendar.google.com/calendar/ical/p2m2av9dhrh4n1ub7jlsc68s7o%40group.calendar.google.com/public/basic.ics',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
+        name: 'Phase Space',
+        id: 'phase-space',
+        className: 'phase-space',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new GoogleCalendar({
+                url: 'https://calendar.google.com/calendar/ical/q14jhdv41fng6q1b2826dp92rs%40group.calendar.google.com/public/basic.ics',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
+        name: 'The Lot Radio',
+        id: 'the-lot-radio',
+        className: 'the-lot-radio',
+        // The Lot Radio uses FullCalendar as well, so we can just replicate their requests.
+        // (Since they have not limited the origin domain on the Google API side at all....)
+        googleCalendarApiKey: 'AIzaSyD7jIVZog7IC--y1RBCiLuUmxEDeBH9wDA',
+        googleCalendarId: 'thelotradio.com_j1ordgiru5n55sa5u312tjgm9k@group.calendar.google.com'
+    }
 ];
 
 export default function GoogleCalendar (optionsObj) {
