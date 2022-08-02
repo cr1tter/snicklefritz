@@ -141,8 +141,9 @@ export default new FullCalendar.Calendar(document.getElementById('calendar'), {
                 var events = [];
                 els.forEach(function (el) {
                     var date = new Date(el.querySelector('.dates').innerText.trim());
-                    var date_string = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate()}`;
-                    var time   = el.querySelector('.detail_door_time .name').innerText.trim();
+                    var date_string = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
+                    var time   = (el.querySelector('.detail_door_time .name') || el.querySelector('.detail_event_time .name'))
+                        .innerText.trim();
                     var hour   = time.split(':')[0];
                     var minute = time.split(':')[1].split(' ')[0].padStart(2, '0');
                     var ampm   = time.match('([Aa]|[Pp])[Mm]$')[0];
@@ -151,7 +152,6 @@ export default new FullCalendar.Calendar(document.getElementById('calendar'), {
                     }
                     hour = hour.toString().padStart(2, '0');
                     date_string = `${date_string}T${hour}:${minute}:00`;
-
                     var title = el.querySelector('h1.event-name').innerText.trim();
                     var start = new Date(date_string);
                     var url = el.querySelector('.buy-tickets').getAttribute('href');
