@@ -35,3 +35,6 @@ _site/
 # We also don't want to commit the Gems that Bundler installs
 # since they are only useful for developers.
 vendor/
+
+# We don't need development IaC generated stuff, either.
+.vagrant

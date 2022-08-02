@@ -29,13 +29,16 @@ author:
 # Build settings
 markdown: kramdown
 exclude:
-  - vendor
-  - README.md
-  - Gemfile
-  - Gemfile.lock
+  - .forestry
   - .github
   - .gitignore
-  - .forestry
+  - .vagrant
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - Vagrantfile
+  - cors-anywhere # Used in development for now.
+  - vendor
 include:
   - .well-known
   - .nojekyll
