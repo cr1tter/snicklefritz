@@ -65,6 +65,8 @@ export const GoogleCalendarEventSources = [
         className: 'the-lot-radio',
         // The Lot Radio uses FullCalendar as well, so we can just replicate their requests.
         // (Since they have not limited the origin domain on the Google API side at all....)
+        // Note this'll trigger security alerts, but it's not really our issue since the API
+        // key is theirs. The secure move is on them to allow requests only from their site.
         googleCalendarApiKey: 'AIzaSyD7jIVZog7IC--y1RBCiLuUmxEDeBH9wDA',
         googleCalendarId: 'thelotradio.com_j1ordgiru5n55sa5u312tjgm9k@group.calendar.google.com'
     }
