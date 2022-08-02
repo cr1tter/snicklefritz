@@ -56,6 +56,23 @@ export const DiceEventSources = [
         }
     },
     {
+        name: 'Saint Vitus',
+        id: 'saint-vitus',
+        className: 'saint-vitus',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new Dice({
+                // Pulled from https://www.saintvitusbar.com/events
+                url: 'https://events-api.dice.fm/v1/events?page[size]=24&types=linkout,event&filter[promoters][]=Saint%20Vitus%20LLC%20(dba%20Saint%20Vitus%20Bar)',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback,
+                headers: {
+                   'x-api-key': '1RsJ9u1HnFaj5F5hqFD7F9Idwsqi0o4z7QMQ2uGw'
+                }
+            });
+        }
+    },
+    {
         name: 'Union Pool',
         id: 'union-pool',
         className: 'union-pool',
