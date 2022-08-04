@@ -272,6 +272,19 @@ export const EventBriteEventSources = [
         }
     },
     {
+        name: 'The Future Now',
+        id: 'the-future-now',
+        className: 'the-future-now',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new EventBrite({
+                url: 'https://www.eventbrite.com/o/the-future-now-41195140453',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'The Nova Experiment',
         id: 'the-nova-experiment',
         className: 'the-nova-experiment',
