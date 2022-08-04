@@ -7,7 +7,7 @@ import EventSources from './event-sources.js';
 
 export const corsbase = 'https://cors.anarchism.nyc';
 
-const domparser = new DOMParser();
+export const domparser = new DOMParser();
 
 /**
  * Translates a Schema.org Event type (or more specific type)

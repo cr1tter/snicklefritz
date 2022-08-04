@@ -2,9 +2,7 @@
  * Utility module to support the calendar's EventBrite
  * event sources.
  */
-import { corsbase, schemaDotOrg2FullCalendar } from '../calendar.js';
-
-const domparser = new DOMParser();
+import { corsbase, domparser, schemaDotOrg2FullCalendar } from '../calendar.js';
 
 export const EventBriteEventSources = [
     {
@@ -343,7 +341,7 @@ export default function EventBrite (optionsObj) {
 
     return this.fetch(url).then((eb) => {
         optionsObj.successCallback(eb.parse().events);
-    })
+    });
 };
 
 EventBrite.prototype.fetch = async function (url) {
