@@ -110,6 +110,19 @@ export const SquarespaceEventSources = [
         }
     },
     {
+        name: 'POWRPLNT',
+        id: 'powrplnt',
+        className: 'powrplnt',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new Squarespace({
+                url: 'https://www.powrplnt.org/calendar-5?format=json',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'Scope Tonight',
         id: 'scope-tonight',
         className: 'scope-tonight',

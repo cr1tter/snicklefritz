@@ -20,6 +20,19 @@ export const WithFriendsEventSources = [
         }
     },
     {
+        name: 'Hex House (WithFriends)',
+        id: 'hex-house',
+        className: 'hex-house',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new WithFriends({
+                movementId: '9492801',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'Mayday Space (WithFriends)',
         id: 'mayday-space',
         className: 'mayday-space',
@@ -33,12 +46,38 @@ export const WithFriendsEventSources = [
         }
     },
     {
+        name: 'Mil Mundos (WithFriends)',
+        id: 'mil-mundos',
+        className: 'mil-mundos',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new WithFriends({
+                movementId: '2108660',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'Rubulad (WithFriends)',
         id: 'rubulad',
         className: 'rubulad',
         events: async function (fetchInfo, successCallback, failureCallback) {
             await new WithFriends({
                 movementId: '239193',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
+        name: 'Spectacle Microcinema (WithFriends)',
+        id: 'spectacle-microcinema',
+        className: 'spectacle-microcinema',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new WithFriends({
+                movementId: '335653',
                 fetchInfo: fetchInfo,
                 successCallback: successCallback,
                 failureCallback: failureCallback
