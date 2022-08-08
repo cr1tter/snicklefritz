@@ -136,6 +136,19 @@ export const SquarespaceEventSources = [
         }
     },
     {
+        name: 'TailGate Brooklyn',
+        id: 'tailgate-brooklyn',
+        className: 'tailgate-brooklyn',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new Squarespace({
+                url: 'https://www.tailgatebk.com/events-one?format=json',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'Talon Bar',
         id: 'talon-bar',
         className: 'talon-bar',
