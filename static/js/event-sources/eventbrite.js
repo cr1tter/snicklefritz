@@ -152,6 +152,19 @@ export const EventBriteEventSources = [
         }
     },
     {
+        name: 'Lakeside Prospect Park',
+        id: 'lakeside-prospect-park',
+        className: 'lakeside-prospect-park',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new EventBrite({
+                url: 'https://www.eventbrite.com/o/lakeside-prospect-park-8423162270',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'LasReinas',
         id: 'lasreinas',
         className: 'lasreinas',
