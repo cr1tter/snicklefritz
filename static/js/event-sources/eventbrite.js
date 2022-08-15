@@ -204,6 +204,19 @@ export const EventBriteEventSources = [
         }
     },
     {
+        name: 'New Women Space',
+        id: 'new-women-space',
+        className: 'new-women-space',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new EventBrite({
+                url: 'https://www.eventbrite.com/o/new-women-space-28254425133',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'Newtown Creek Alliance',
         id: 'newtown-creek-alliance',
         className: 'newtown-creek-alliance',
