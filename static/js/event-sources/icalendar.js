@@ -27,6 +27,13 @@ export const IcalendarEventSources = [
         url: 'https://tockify.com/api/feeds/ics/mlsupport',
         format: 'ics',
     },
+    {
+        name: 'NYC Anarchist Bookfair',
+        id: 'nyc-anarchist-bookfair',
+        className: 'nyc-anarchist-bookfair',
+        url: corsbase + '/https://anarchistbookfair.net/?ical=1',
+        format: 'ics',
+    },
     // These calendars hosted on Meetup.com will fail due
     // to a missing CORS header. Current workaround is to
     // use a CORS proxy. This can be tightened down when
