@@ -126,6 +126,28 @@ export default new FullCalendar.Calendar(document.getElementById('calendar'), {
             }
         },
 
+        // Elsewhere uses Dice.fm but they don't use its widget. So we'll just get
+        // the same data the way their own Web site does, by requesting a JSON file.
+        {
+            name: 'Elsewhere Brooklyn',
+            id: 'elsewhere-brooklyn',
+            className: 'elsewhere-brooklyn',
+            events: async function (fetchInfo, successCallback, failureCallback) {
+                var response = await fetch(corsbase + '/https://www.elsewherebrooklyn.com/_next/data/1kHs63EO_t4PWMKMBQz4q/events.json');
+                var json = await response.json();
+                successCallback(json.pageProps.events.data.map(function (item) {
+                    return {
+                        title: item.name,
+                        start: new Date(item.date),
+                        end: new Date(item.dateEnd),
+                        url: item.url
+                    };
+                }));
+            },
+            color: "#42d177",
+            textColor: "#000"
+        },
+
         // TV Eye uses SeeTickets.us but scraping that is confusing so instead we'll
         // just pull from their own Web site.
         {
