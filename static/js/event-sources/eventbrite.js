@@ -97,6 +97,19 @@ export const EventBriteEventSources = [
         }
     },
     {
+        name: 'Farm to People',
+        id: 'farm-to-people',
+        className: 'farm-to-people',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new EventBrite({
+                url: 'https://www.eventbrite.com/o/farm-to-people-19804387040',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'Geneva Rust-Orta',
         id: 'geneva-rust-orta',
         className: 'geneva-rust-orta',
