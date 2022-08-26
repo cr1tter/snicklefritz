@@ -73,6 +73,23 @@ export const DiceEventSources = [
         }
     },
     {
+        name: 'The Brooklyn Monarch',
+        id: 'the-brooklyn-monarch',
+        className: 'the-brooklyn-monarch',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new Dice({
+                // Pulled from https://www.thebrooklynmonarch.com/shows
+                url: 'https://events-api.dice.fm/v1/events?page[size]=24&types=linkout,event&filter[venues][]=The%20Brooklyn%20Monarch',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback,
+                headers: {
+                   'x-api-key': 'IC6oEVsHlf1eZRkq5Oeuc9XszjvuJCw76K8NSeip'
+                }
+            });
+        }
+    },
+    {
         name: 'Union Pool',
         id: 'union-pool',
         className: 'union-pool',
