@@ -69,7 +69,20 @@ export const GoogleCalendarEventSources = [
         // key is theirs. The secure move is on them to allow requests only from their site.
         googleCalendarApiKey: 'AIzaSyD7jIVZog7IC--y1RBCiLuUmxEDeBH9wDA',
         googleCalendarId: 'thelotradio.com_j1ordgiru5n55sa5u312tjgm9k@group.calendar.google.com'
-    }
+    },
+    {
+        name: 'Queer Flatbush',
+        id: 'queer-flatbush',
+        className: 'queer-flatbush',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new GoogleCalendar({
+                url: 'https://calendar.google.com/calendar/ical/queerflatbush%40gmail.com/public/basic.ics',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
 ];
 
 export default function GoogleCalendar (optionsObj) {

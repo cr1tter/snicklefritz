@@ -32,6 +32,19 @@ export const SquarespaceEventSources = [
         }
     },
     {
+        name: 'Brooklyn Art Cave',
+        id: 'brooklyn-art-cave',
+        className: 'brooklyn-art-cave',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new Squarespace({
+                url: 'https://www.brooklynartcave.com/events-one?format=json',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'Cherry on Top',
         id: 'cherry-on-top',
         className: 'cherry-on-top',
