@@ -97,6 +97,19 @@ export const SquarespaceEventSources = [
         }
     },
     {
+        name: 'Mood Ring',
+        id: 'mood-ring',
+        className: 'mood-ring',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new Squarespace({
+                url: 'https://moodringnyc.squarespace.com/events?format=json',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'Nowhere Bar',
         id: 'nowhere-bar',
         className: 'nowhere-bar',
