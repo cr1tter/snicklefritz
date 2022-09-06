@@ -34,6 +34,19 @@ export const GoogleCalendarEventSources = [
         }
     },
     {
+        name: 'Hart Bar',
+        id: 'hart-bar',
+        className: 'hart-bar',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new GoogleCalendar({
+                url: 'https://calendar.google.com/calendar/ical/qhsrkjv5s7mb4vidjem575jvt4%40group.calendar.google.com/public/basic.ics',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'NYC Resistor',
         id: 'nycresistor',
         className: 'nycresistor',
