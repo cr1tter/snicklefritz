@@ -257,6 +257,19 @@ export const EventBriteEventSources = [
         }
     },
     {
+        name: 'Parker RopeBoi',
+        id: 'parker-ropeboi',
+        className: 'parker-ropeboi',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new EventBrite({
+                url: 'https://www.eventbrite.com/o/parker-ropeboi-2021938181',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'Queer Social',
         id: 'queer-social',
         className: 'queer-social',
