@@ -133,7 +133,11 @@ export default new FullCalendar.Calendar(document.getElementById('calendar'), {
             id: 'elsewhere-brooklyn',
             className: 'elsewhere-brooklyn',
             events: async function (fetchInfo, successCallback, failureCallback) {
-                var response = await fetch(corsbase + '/https://www.elsewherebrooklyn.com/_next/data/1kHs63EO_t4PWMKMBQz4q/events.json');
+                var response = await fetch(corsbase + '/https://www.elsewherebrooklyn.com/events');
+                var html = await response.text();
+                var doc = domparser.parseFromString(html, 'text/html');
+                var buildId = JSON.parse(doc.getElementById('__NEXT_DATA__').textContent).buildId;;
+                var response = await fetch(corsbase + `/https://www.elsewherebrooklyn.com/_next/data/${buildId}/events.json`);
                 var json = await response.json();
                 successCallback(json.pageProps.events.data.map(function (item) {
                     return {
