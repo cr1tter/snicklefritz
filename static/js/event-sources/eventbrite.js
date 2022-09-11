@@ -217,6 +217,19 @@ export const EventBriteEventSources = [
         }
     },
     {
+        name: 'Museum of Reclaimed Urban Space (MoRUS)',
+        id: 'morus',
+        className: 'morus',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new EventBrite({
+                url: 'https://www.eventbrite.com/o/museum-of-reclaimed-urban-space-18102992064',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'New Women Space',
         id: 'new-women-space',
         className: 'new-women-space',
