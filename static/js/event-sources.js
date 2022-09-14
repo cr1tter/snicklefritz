@@ -13,6 +13,7 @@
  */
 import { DiceEventSources } from './event-sources/dice.js';
 import { EventBriteEventSources } from './event-sources/eventbrite.js';
+import { GoDaddyCalendarWidgetSources } from './event-sources/godaddy-calendar.js';
 import { GoogleCalendarEventSources } from './event-sources/google-calendar.js';
 import { IcalendarEventSources } from './event-sources/icalendar.js';
 import { JSONFeedEventSources } from './event-sources/fullcalendar-json-feed.js';
@@ -27,6 +28,10 @@ const EventSources = [].concat(
     }),
     EventBriteEventSources.map((i) => {
         i.color = 'red';
+        return i;
+    }),
+    GoDaddyCalendarWidgetSources.map((i) => {
+        i.color = '#14DCDC';
         return i;
     }),
     GoogleCalendarEventSources.map((i) => {
