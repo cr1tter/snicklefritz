@@ -74,9 +74,9 @@ export default new FullCalendar.Calendar(document.getElementById('calendar'), {
     headerToolbar: {
         left: 'prev,next today',
         center: 'title',
-        right: 'dayGridMonth,timeGridDay,listDay,map'
-        // When ready, we'll add a "Calendars" button. But not yet.
-        //right: 'calendars dayGridMonth,timeGridDay,listDay'
+        right: 'dayGridMonth,timeGridDay,listDay'
+        // When ready, we'll add a "Calendars" and "Map" button. But not yet.
+        //right: 'calendars dayGridMonth,timeGridDay,listDay,map'
     },
     initialView: function () {
         return (window.matchMedia("only screen and (max-width: 540px)").matches)
