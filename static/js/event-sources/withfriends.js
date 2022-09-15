@@ -20,6 +20,19 @@ export const WithFriendsEventSources = [
         }
     },
     {
+        name: 'City Reliquary (WithFriends)',
+        id: 'city-reliquary',
+        className: 'city-reliquary',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new WithFriends({
+                movementId: '3850819',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'Hex House (WithFriends)',
         id: 'hex-house',
         className: 'hex-house',
