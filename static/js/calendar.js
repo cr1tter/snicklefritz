@@ -55,6 +55,13 @@ export default new FullCalendar.Calendar(document.getElementById('calendar'), {
                 var m = new bootstrap.Modal(el);
                 m.show();
             }
+        },
+        // TODO: This should show and hide the Map view.
+        map: {
+            text: 'map',
+            click: function () {
+                console.log('clicked Map button');
+            }
         }
     },
     views: {
@@ -67,7 +74,7 @@ export default new FullCalendar.Calendar(document.getElementById('calendar'), {
     headerToolbar: {
         left: 'prev,next today',
         center: 'title',
-        right: 'dayGridMonth,timeGridDay,listDay'
+        right: 'dayGridMonth,timeGridDay,listDay,map'
         // When ready, we'll add a "Calendars" button. But not yet.
         //right: 'calendars dayGridMonth,timeGridDay,listDay'
     },
@@ -148,8 +155,31 @@ export default new FullCalendar.Calendar(document.getElementById('calendar'), {
                     };
                 }));
             },
-            color: "#42d177",
-            textColor: "#000"
+            color: '#42D177',
+            textColor: '#000'
+        },
+
+        // Jupiter Disco also uses something very similar to Elsewhere, but there's
+        // no second XHR to get a separate JSON file; it's right on the site!
+        {
+            name: 'Jupiter Disco',
+            id: 'jupiter-disco',
+            className: 'jupiter-disco',
+            events: async function (fetchInfo, successCallback, failureCallback) {
+                var response = await fetch(corsbase + '/https://www.jupiterdisco.com/calendar');
+                var html = await response.text();
+                var doc = domparser.parseFromString(html, 'text/html');
+                var events = JSON.parse(doc.getElementById('__NEXT_DATA__').textContent).props.pageProps.events;
+                successCallback(events.map(function (item) {
+                    return {
+                        title: item.eventName,
+                        start: new Date(item.date),
+                        url: 'https://www.jupiterdisco.com/calendar/' + item.slug.current
+                    };
+                }));
+            },
+            color: '#2E2E2D',
+            textColor: '#FFF',
         },
 
         // TV Eye uses SeeTickets.us but scraping that is confusing so instead we'll
@@ -185,7 +215,13 @@ export default new FullCalendar.Calendar(document.getElementById('calendar'), {
                     events.push({
                         title: title,
                         start: start,
-                        url: url
+                        url: url,
+                        // All events at TV Eye are, well,
+                        // at TV Eye, so, lol.
+                        location: {
+                            lat: '40.6978584',
+                            lon: '-73.9074125'
+                        }
                     });
                 });
                 return events;
