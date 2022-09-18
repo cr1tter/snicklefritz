@@ -6,6 +6,19 @@ import { corsbase } from '../calendar.js'
 
 export const GoogleCalendarEventSources = [
     {
+        name: 'Caffiene Underground',
+        id: 'caffiene-underground',
+        className: 'caffiene-underground',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new GoogleCalendar({
+                url: 'https://calendar.google.com/calendar/ical/013k1i3tkls5tas280vio8cfm4%40group.calendar.google.com/public/basic.ics',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'Footlight Presents',
         id: 'footlight-presents',
         className: 'footlight-presents',
