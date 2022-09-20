@@ -136,6 +136,19 @@ export const SquarespaceEventSources = [
         }
     },
     {
+        name: 'Nook BK',
+        id: 'nook-bk',
+        className: 'nook-bk',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new Squarespace({
+                url: 'https://nookbk.com/events?format=json',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'POWRPLNT',
         id: 'powrplnt',
         className: 'powrplnt',
