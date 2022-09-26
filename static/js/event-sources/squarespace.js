@@ -110,6 +110,19 @@ export const SquarespaceEventSources = [
         }
     },
     {
+        name: 'Morbid Anatomy',
+        id: 'morbid-anatomy',
+        className: 'morbid-anatomy',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new Squarespace({
+                url: 'https://www.morbidanatomy.org/events?format=json',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'Nowhere Bar',
         id: 'nowhere-bar',
         className: 'nowhere-bar',

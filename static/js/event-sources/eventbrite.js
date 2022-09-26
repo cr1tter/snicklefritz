@@ -45,6 +45,19 @@ export const EventBriteEventSources = [
         }
     },
     {
+        name: 'Brooklyn Psychedelic Society',
+        id: 'brooklyn-psychedelic-society',
+        className: 'brooklyn-psychedelic-society',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new EventBrite({
+                url: 'https://www.eventbrite.com/o/brooklyn-psychedelic-society-46486784473',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'Caveat NYC',
         id: 'caveat-nyc',
         className: 'caveat-nyc',
