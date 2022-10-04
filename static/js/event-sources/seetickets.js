@@ -20,6 +20,20 @@ export const SeeTicketsEventsCalendarSources = [
                 failureCallback: failureCallback
             });
         }
+    },
+    {
+        name: 'TV Eye',
+        id: 'tv-eye',
+        className: 'tv-eye',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new SeeTicketsEvents({
+                // From https://wl.seetickets.us/TVEye
+                url: corsbase + '/https://wl.seetickets.us/wafform.aspx?_act=eventcalendarwidget&AJAX=1&FetchEvents=1&_pky=9324820&afflky=TVEye',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
     }
 ];
 

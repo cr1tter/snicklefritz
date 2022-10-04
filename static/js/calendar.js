@@ -180,53 +180,8 @@ export default new FullCalendar.Calendar(document.getElementById('calendar'), {
             },
             color: '#2E2E2D',
             textColor: '#FFF',
-        },
-
-        // TV Eye uses SeeTickets.us but scraping that is confusing so instead we'll
-        // just pull from their own Web site.
-        {
-            name: 'TV Eye',
-            id: 'tv-eye',
-            className: 'tv-eye',
-            color: '#F113A2',
-            events: async function (fetchInfo, successCallback, failureCallback) {
-                var response = await fetch(corsbase + '/https://tveyenyc.com/calendar/');
-                var html = await response.text();
-                var doc = domparser.parseFromString(html, 'text/html');
-                var els = doc.querySelectorAll('#seetickets article.list-view-item');
-                var events = [];
-                els.forEach(function (el) {
-                    var date = new Date(el.querySelector('.dates').innerText.trim());
-                    var date_string = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
-                    var time   = (el.querySelector('.detail_door_time .name') || el.querySelector('.detail_event_time .name'))
-                        .innerText.trim();
-                    var hour   = time.split(':')[0];
-                    var minute = time.split(':')[1].split(' ')[0].padStart(2, '0');
-                    var ampm   = time.match('([Aa]|[Pp])[Mm]$')[0];
-                    if ('PM' === ampm.toUpperCase()) {
-                        hour = parseInt(hour) + 12; // Naively convert to 24 hour time.
-                    }
-                    hour = hour.toString().padStart(2, '0');
-                    date_string = `${date_string}T${hour}:${minute}:00`;
-                    var title = el.querySelector('h1.event-name').innerText.trim();
-                    var start = new Date(date_string);
-                    var url = el.querySelector('.buy-tickets').getAttribute('href');
-
-                    events.push({
-                        title: title,
-                        start: start,
-                        url: url,
-                        // All events at TV Eye are, well,
-                        // at TV Eye, so, lol.
-                        location: {
-                            lat: '40.6978584',
-                            lon: '-73.9074125'
-                        }
-                    });
-                });
-                return events;
-            }
         }
+
     ]),
     eventContent: function (info) {
         if ( 'listDay' == info.view.type ) {
