@@ -17,6 +17,7 @@ import { GoDaddyCalendarWidgetSources } from './event-sources/godaddy-calendar.j
 import { GoogleCalendarEventSources } from './event-sources/google-calendar.js';
 import { IcalendarEventSources } from './event-sources/icalendar.js';
 import { JSONFeedEventSources } from './event-sources/fullcalendar-json-feed.js';
+import { SeeTicketsEventsCalendarSources } from './event-sources/seetickets.js';
 import { SquarespaceEventSources } from './event-sources/squarespace.js';
 import { WithFriendsEventSources } from './event-sources/withfriends.js';
 import { WordPressTribeEventsCalendarSources } from './event-sources/wordpress-tribe-events-calendar.js';
@@ -44,6 +45,10 @@ const EventSources = [].concat(
         return i;
     }),
     JSONFeedEventSources.map((i) => {
+        return i;
+    }),
+    SeeTicketsEventsCalendarSources.map((i) => {
+        i.color = '#FFB200';
         return i;
     }),
     SquarespaceEventSources.map((i) => {
