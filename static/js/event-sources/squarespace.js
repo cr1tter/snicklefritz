@@ -214,6 +214,19 @@ export const SquarespaceEventSources = [
         }
     },
     {
+        name: 'The Broadway',
+        id: 'the-broadway',
+        className: 'the-broadway',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new Squarespace({
+                url: 'https://www.thebroadway.nyc/showcalendar?format=json',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'The Nest Brooklyn',
         id: 'the-nest-brooklyn',
         className: 'the-nest-brooklyn',
