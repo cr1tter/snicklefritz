@@ -58,6 +58,19 @@ export const EventBriteEventSources = [
         }
     },
     {
+        name: 'Brooklyn Transcore',
+        id: 'brooklyn-transcore',
+        className: 'brooklyn-transcore',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new EventBrite({
+                url: 'https://www.eventbrite.com/o/brooklyn-transcore-54036656203',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'Caveat NYC',
         id: 'caveat-nyc',
         className: 'caveat-nyc',
