@@ -191,6 +191,32 @@ export const EventBriteEventSources = [
         }
     },
     {
+        name: 'I\'m Baby x Kaylita',
+        id: 'im-baby-x-kaylita',
+        className: 'im-baby-x-kaylita',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new EventBrite({
+                url: 'https://www.eventbrite.com/o/im-baby-x-kaylita-40383327263',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
+        name: 'Soo Intoit and RoiiiBoiiii',
+        id: 'soo-intoit-and-roiii-boiiii',
+        className: 'soo-intoit-and-roiii-boiiii',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new EventBrite({
+                url: 'https://www.eventbrite.com/o/soo-intoit-amp-roiiiboiiii-49152333613',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'Lakeside Prospect Park',
         id: 'lakeside-prospect-park',
         className: 'lakeside-prospect-park',
