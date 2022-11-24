@@ -100,13 +100,43 @@ export default new FullCalendar.Calendar(document.getElementById('calendar'), {
             id: 'eastville-comedy-club',
             className: 'eastville-comedy-club',
             events: async function (fetchInfo, successCallback, failureCallback) {
-                var response = await fetch(corsbase + '/https://www.eastvillecomedy.com/calendar')
+                var response = await fetch(corsbase + '/https://www.eastvillecomedy.com/calendar');
                 var html = await response.text();
                 var doc = domparser.parseFromString(html, 'text/html');
-                var ld_json = JSON.parse(doc.querySelector('script[type="application/ld+json"]').innerText)
+                var ld_json = JSON.parse(doc.querySelector('script[type="application/ld+json"]').innerText);
                 successCallback(schemaDotOrg2FullCalendar(ld_json));
             },
             color: 'purple'
+        },
+
+        // Eris Evolution is another venue but they only have a simplistic HTML page for a "calendar."
+        {
+            name: 'Eris Evolution',
+            id: 'eris-evolution',
+            className: 'eris-evolution',
+            events: async function (fetchInfo, successCallback, failureCallback) {
+                var response = await fetch(corsbase + '/https://www.erisevolution.com/events/');
+                var html = await response.text();
+                var doc = domparser.parseFromString(html, 'text/html');
+                var events = [];
+                var items = doc.querySelectorAll('.event');
+                for (var i = 0; i < items.length; i++) {
+                    var date_info = items[i].querySelector('b').textContent.split(',').map(function (i) {
+                        return i.trim();
+                    });
+                    var start_date = date_info[0].substring(0, date_info[0].length - 2);
+                    var start_year = date_info[1];
+                    var time_info  = items[i].textContent.match(/(\d?\d:\d\d) (am|pm)/i)[0];
+                    var event_link = items[i].querySelector('[href^="/tickets/"]');
+                    events.push({
+                        title: items[i].querySelector('i').textContent,
+                        start: new Date(`${start_date} ${start_year} ${time_info}`),
+                        url: event_link ? `https://www.erisevolution.com${event_link.getAttribute('href')}` : null
+                    });
+                }
+                successCallback(events);
+            },
+            color: '#243C94'
         },
 
         // This is actually Bluestockings, but they use Bookmanager for events now.
