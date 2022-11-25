@@ -19,6 +19,19 @@ export const EventBriteEventSources = [
         }
     },
     {
+        name: 'Alphaville',
+        id: 'alphaville',
+        className: 'alphaville',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new EventBrite({
+                url: 'https://www.eventbrite.com/o/alphaville-52151572343',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'ArtCrawl Harlem',
         id: 'artcrawl-harlem',
         className: 'artcrawl-harlem',
