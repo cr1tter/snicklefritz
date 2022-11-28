@@ -73,6 +73,19 @@ export const GoogleCalendarEventSources = [
         }
     },
     {
+        name: 'NYSEC.io',
+        id: 'nysec-io',
+        className: 'nysec-io',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new GoogleCalendar({
+                url: 'https://calendar.google.com/calendar/ical/tvrptkil8r120s1guaefhp23hs%40group.calendar.google.com/public/basic.ics',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'Phase Space',
         id: 'phase-space',
         className: 'phase-space',
