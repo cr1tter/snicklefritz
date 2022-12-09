@@ -476,6 +476,19 @@ export const EventBriteEventSources = [
                 failureCallback: failureCallback
             });
         }
+    },
+    {
+        name: 'Zara Franke/Lucy Gaehring',
+        id: 'zara-franke-lucy-gaehring',
+        className: 'zara-franke-lucy-gaehring',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new EventBrite({
+                url: 'https://www.eventbrite.com/o/zara-frankelucy-gaehring-58162939403',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
     }
 ];
 
