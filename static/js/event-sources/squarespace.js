@@ -227,19 +227,6 @@ export const SquarespaceEventSources = [
         }
     },
     {
-        name: 'The Nest Brooklyn',
-        id: 'the-nest-brooklyn',
-        className: 'the-nest-brooklyn',
-        events: async function (fetchInfo, successCallback, failureCallback) {
-            await new Squarespace({
-                url: 'https://www.thenestbrooklyn.com/event-calender?format=json',
-                fetchInfo: fetchInfo,
-                successCallback: successCallback,
-                failureCallback: failureCallback
-            });
-        }
-    },
-    {
         name: 'The Q NYC',
         id: 'the-q-nyc',
         className: 'the-q-nyc',
