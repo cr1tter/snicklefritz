@@ -303,6 +303,19 @@ export const SquarespaceEventSources = [
                 failureCallback: failureCallback
             });
         }
+    },
+    {
+        name: 'Yu and Me Books',
+        id: 'yu-and-me-books',
+        className: 'yu-and-me-books',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new Squarespace({
+                url: 'https://www.yuandmebooks.com/events?format=json',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
     }
 ];
 
