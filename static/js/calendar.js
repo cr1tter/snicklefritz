@@ -213,15 +213,13 @@ export default new FullCalendar.Calendar(document.getElementById('calendar'), {
         }
 
     ]),
-    eventContent: function (info) {
-        if ( 'listDay' == info.view.type ) {
-            return {
-                html: `<a href="${info.event.url}">${info.event.title} - via ${info.event.source.internalEventSource?.extendedProps?.name}</a>`
-            };
-        }
-    },
     eventDidMount: function (info) {
         info.el.setAttribute('title', info.event.title);
+        if ('listDay' == info.view.type) {
+            info.el.querySelector('a').appendChild(document.createTextNode(
+                ` - via ${info.event.source.internalEventSource?.extendedProps?.name}`
+            ));
+        }
         return [ info.el ];
     },
     eventClick: function (info) {
