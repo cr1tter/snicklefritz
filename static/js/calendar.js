@@ -85,14 +85,15 @@ export default new FullCalendar.Calendar(document.getElementById('calendar'), {
     nowIndicator: true,
     defaultTimedEventDuration: '02:00', // Most events are longer than one hour.
     loading: function (isLoading) {
-        var el = document.getElementById('calendar-loading-spinner');
-        if (isLoading && ! el.dataset.firstLoadCompleted) {
-            el.style.display = 'block';
-            el.setAttribute('data-first-load-completed', true);
-        } else {
-            el.style.display = 'none';
+        if (isLoading) {
+            document.getElementById('calendar-loading-spinner').style.display = 'block';
         }
     },
+    eventSourceSuccess: function (rawEvents, response) {
+        // Whenever an Event Source succeeds, make sure the "Loading..." spinner is off.
+        document.getElementById('calendar-loading-spinner').style.display = 'none';
+    },
+    progressiveEventRendering: true,
     eventSources: EventSources.concat([
         // This one-off event source helpfully published Schema.org-style Linked Data JSON!
         {
