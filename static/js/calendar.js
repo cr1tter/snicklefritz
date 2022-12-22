@@ -190,6 +190,38 @@ export default new FullCalendar.Calendar(document.getElementById('calendar'), {
             textColor: '#000'
         },
 
+        // Hacienda simply published HTML from what looks like a custom-ish PHP system.
+        {
+            name: 'Hacienda Villa',
+            id: 'hacienda-villa',
+            className: 'hacienda-villa',
+            events: async function (fetchInfo, successCallback, failureCallback) {
+                var response = await fetch(corsbase + '/https://www.wearehacienda.com/events');
+                var html = await response.text();
+                var doc = domparser.parseFromString(html, 'text/html');
+                var items = doc.querySelectorAll('.more-event');
+                var events = [];
+                for (var i = 0; i < items.length; i++) {
+                    var date = items[i].querySelector('.event-date').textContent.trim();
+                    var time = items[i].querySelector('.event-date + h5').textContent.match(/\d?\d:\d\d [AP]M/i);
+                    var title = items[i].querySelector('.event-title').textContent.trim();
+                    title += ' - ' + items[i].querySelector('.event-short').textContent.trim();
+                    var url = items[i].querySelector('.reserve-btn-right').getAttribute('href');
+                    if (! url.match(/^http?/)) {
+                        url = 'https://www.wearehacienda.com/' + url;
+                    }
+                    events.push({
+                        title: title,
+                        start: new Date(`${date} ${time}`),
+                        url: url
+                    });
+                }
+                successCallback(events);
+            },
+            color: '#000',
+            textColor: '#FFF'
+        },
+
         // Jupiter Disco also uses something very similar to Elsewhere, but there's
         // no second XHR to get a separate JSON file; it's right on the site!
         {
