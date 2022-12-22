@@ -95,6 +95,30 @@ export default new FullCalendar.Calendar(document.getElementById('calendar'), {
     },
     progressiveEventRendering: true,
     eventSources: EventSources.concat([
+        // This is actually Bluestockings, but they use Bookmanager for events now.
+        // So here is a simple implementation of a Bookmanager event scraper.
+        {
+            name: 'Bluestockings Cooperative',
+            id: 'bluestocksings-cooperative',
+            className: 'bluestockings-cooperative',
+            events: async function (fetchInfo, successCallback, failureCallback) {
+                var session_id = 'x'; // This can be whatever.
+                var store_id = '576827';
+                var response = await fetch('https://api.bookmanager.com/customer/event/getList?session_id=' + session_id + '&store_id=' + store_id);
+                var json = await response.json();
+                // This needs some work.
+                successCallback(json.rows.map(function (item) {
+                    var tz_offset_milliseconds = (new Date()).getTimezoneOffset() * 60 * 1000;
+                    return {
+                        title: item.info.name,
+                        start: new Date(item.from * 1000 - tz_offset_milliseconds),
+                        end: new Date(item.to * 1000 - tz_offset_milliseconds),
+                        url: 'https://bluestockings.com/events/' + item.id
+                    };
+                }));
+            }
+        },
+
         // This one-off event source helpfully published Schema.org-style Linked Data JSON!
         {
             name: 'EastVille Comedy Club',
@@ -138,30 +162,6 @@ export default new FullCalendar.Calendar(document.getElementById('calendar'), {
                 successCallback(events);
             },
             color: '#243C94'
-        },
-
-        // This is actually Bluestockings, but they use Bookmanager for events now.
-        // So here is a simple implementation of a Bookmanager event scraper.
-        {
-            name: 'Bluestockings Cooperative',
-            id: 'bluestocksings-cooperative',
-            className: 'bluestockings-cooperative',
-            events: async function (fetchInfo, successCallback, failureCallback) {
-                var session_id = 'x'; // This can be whatever.
-                var store_id = '576827';
-                var response = await fetch('https://api.bookmanager.com/customer/event/getList?session_id=' + session_id + '&store_id=' + store_id);
-                var json = await response.json();
-                // This needs some work.
-                successCallback(json.rows.map(function (item) {
-                    var tz_offset_milliseconds = (new Date()).getTimezoneOffset() * 60 * 1000;
-                    return {
-                        title: item.info.name,
-                        start: new Date(item.from * 1000 - tz_offset_milliseconds),
-                        end: new Date(item.to * 1000 - tz_offset_milliseconds),
-                        url: 'https://bluestockings.com/events/' + item.id
-                    };
-                }));
-            }
         },
 
         // Elsewhere uses Dice.fm but they don't use its widget. So we'll just get
