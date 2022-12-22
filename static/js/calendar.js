@@ -174,7 +174,7 @@ export default new FullCalendar.Calendar(document.getElementById('calendar'), {
                 var response = await fetch(corsbase + '/https://www.elsewherebrooklyn.com/events');
                 var html = await response.text();
                 var doc = domparser.parseFromString(html, 'text/html');
-                var buildId = JSON.parse(doc.getElementById('__NEXT_DATA__').textContent).buildId;;
+                var buildId = JSON.parse(doc.getElementById('__NEXT_DATA__').textContent).buildId;
                 var response = await fetch(corsbase + `/https://www.elsewherebrooklyn.com/_next/data/${buildId}/events.json`);
                 var json = await response.json();
                 successCallback(json.pageProps.initialEventData.events.map(function (item) {
