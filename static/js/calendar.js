@@ -3,10 +3,17 @@
  *
  * Effectively, the "app" itself.
  */
+// Import the FullCalendar vendor modules.
+import { Calendar } from '@fullcalendar/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import listPlugin from '@fullcalendar/list';
+
+// Import our own module code sources.
+import mapPlugin from './custom-views/map.js';
 import EventSources from './event-sources.js';
 
 export const corsbase = 'https://cors.anarchism.nyc';
-
 export const domparser = new DOMParser();
 
 /**
@@ -27,8 +34,13 @@ export var schemaDotOrg2FullCalendar = function (ld_json) {
     });
 };
 
-
-export default new FullCalendar.Calendar(document.getElementById('calendar'), {
+export default new Calendar(document.getElementById('calendar'), {
+    plugins: [
+        dayGridPlugin,
+        timeGridPlugin,
+        listPlugin,
+        mapPlugin
+    ],
     // TODO: This isn't ready yet but its intent is to be able to toggle a given
     //       FullCalendar Event Source on or off so that a visitor can view a
     //       subset of the events on the calendar based on its source at a time.
@@ -52,13 +64,6 @@ export default new FullCalendar.Calendar(document.getElementById('calendar'), {
                 m.show();
             }
         },
-        // TODO: This should show and hide the Map view.
-        map: {
-            text: 'map',
-            click: function () {
-                console.log('clicked Map button');
-            }
-        }
     },
     views: {
         listDay: {
@@ -70,9 +75,9 @@ export default new FullCalendar.Calendar(document.getElementById('calendar'), {
     headerToolbar: {
         left: 'prev,next today',
         center: 'title',
+        // When ready, we'll add a "Map" button. But not yet.
+        //right: 'dayGridMonth,timeGridDay,listDay,map'
         right: 'dayGridMonth,timeGridDay,listDay'
-        // When ready, we'll add a "Calendars" and "Map" button. But not yet.
-        //right: 'calendars dayGridMonth,timeGridDay,listDay,map'
     },
     initialView: function () {
         return (window.matchMedia("only screen and (max-width: 540px)").matches)
