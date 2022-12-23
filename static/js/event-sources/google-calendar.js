@@ -172,6 +172,7 @@ GoogleCalendar.prototype.toFullCalendarEventObject = function (e) {
     // The `@g` at the end is literal.
     var calendar = this.url.match(/calendar\/ical\/(.*)%40.*public\/basic.ics/)[1];
     var vevent = new ICAL.Event(e);
+    // TODO: Add location information to this.
     var newEvent = {
         title: vevent.summary,
         start: vevent.startDate.toJSDate(),

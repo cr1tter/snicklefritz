@@ -143,6 +143,15 @@ Dice.prototype.toFullCalendarEventObject = function (e) {
         title: e.name,
         start: e.date,
         end: e.date_end,
-        url: e.url
+        url: e.url,
+        extendedProps: {
+            location: {
+                geoJSON: {
+                    type: "Point",
+                    coordinates: [e.location.lng, e.location.lat]
+                },
+                raw: e.location
+            }
+        }
     };
 }

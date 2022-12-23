@@ -357,6 +357,15 @@ Squarespace.prototype.toFullCalendarEventObject = function (e) {
         title: e.title,
         start: e.startDate,
         end: e.endDate,
-        url: new URL(this.url).origin + e.fullUrl
+        url: new URL(this.url).origin + e.fullUrl,
+        extendedProps: {
+            location: {
+                geoJSON: {
+                    type: "Point",
+                    coordinates: [e.location.mapLng, e.location.mapLat]
+                },
+                raw: e.location
+            }
+        }
     };
 }

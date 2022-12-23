@@ -179,6 +179,15 @@ WordPressTribeEvents.prototype.toFullCalendarEventObject = function (e) {
         title: e.title,
         start: new Date(e.utc_start_date + 'Z'),
         end: new Date(e.utc_end_date + 'Z'),
-        url: e.url
+        url: e.url,
+        extendedProps: {
+            location: {
+                geoJSON: {
+                    type: "Point",
+                    coordinates: [e.venue.geo_lng, e.venue.geo_lat]
+                },
+                raw: e.venue // Maybe we should just have a "Venue" object.
+            }
+        }
     };
 }

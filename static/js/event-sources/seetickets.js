@@ -15,6 +15,12 @@ export const SeeTicketsEventsCalendarSources = [
             await new SeeTicketsEvents({
                 // From https://wl.seetickets.us/BabysAllRightBrooklyn
                 url: corsbase + '/https://wl.seetickets.us/wafform.aspx?_act=eventcalendarwidget&AJAX=1&FetchEvents=1&_pky=6066969&afflky=BabysAllRightBrooklyn',
+                location: {
+                    geoJSON: {
+                        type: "Point",
+                        coordinates: [-73.9656801, 40.7101318]
+                    }
+                },
                 fetchInfo: fetchInfo,
                 successCallback: successCallback,
                 failureCallback: failureCallback
@@ -29,6 +35,12 @@ export const SeeTicketsEventsCalendarSources = [
             await new SeeTicketsEvents({
                 // From https://wl.seetickets.us/TVEye
                 url: corsbase + '/https://wl.seetickets.us/wafform.aspx?_act=eventcalendarwidget&AJAX=1&FetchEvents=1&_pky=9324820&afflky=TVEye',
+                location: {
+                    geoJSON: {
+                        type: "Point",
+                        coordinates: [-73.9074125, 40.6978584]
+                    }
+                },
                 fetchInfo: fetchInfo,
                 successCallback: successCallback,
                 failureCallback: failureCallback
@@ -39,6 +51,7 @@ export const SeeTicketsEventsCalendarSources = [
 
 export default function SeeTicketsEvents (optionsObj) {
     this.events = [];
+    this.location = optionsObj.location;
 
     var url = new URL(optionsObj.url);
     var url_start_date = optionsObj.fetchInfo.start.getTime() / 1000;
@@ -77,6 +90,9 @@ SeeTicketsEvents.prototype.toFullCalendarEventObject = function (e) {
     return {
         title: e.title,
         start: new Date(e.start),
-        url: e.url.match(/href='(.*)';$/)[1] || e.url
+        url: e.url.match(/href='(.*)';$/)[1] || e.url,
+        // SeeTickets doesn't provide location data in their API
+        // so we instead use our own knowledge of the event source.
+        location: this.location
     };
 }

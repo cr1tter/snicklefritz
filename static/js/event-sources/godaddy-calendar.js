@@ -64,7 +64,12 @@ GoDaddy.prototype.toFullCalendarEventObject = function (e) {
         start: new Date(e.start),
         end: new Date(e.end),
         url: this.originUrl, // Individual GoDaddy events don't have a URL sadly.
-        location: e.location,
-        description: e.desc
+        extendedProps: {
+            description: e.desc,
+            location: {
+                geoJSON: null,
+                raw: e.location
+            }
+        }
     }
 }

@@ -22,13 +22,25 @@ export const domparser = new DOMParser();
  */
 export var schemaDotOrg2FullCalendar = function (ld_json) {
     return ld_json.map(function (item) {
+        // If we have a `geo` object, format it to geoJSON.
+        var geoJSON = (item.location.geo) ? {
+            type: "Point",
+            coordinates: [
+                item.location.geo.longitude,
+                item.location.geo.latitude
+            ]
+        } : null; // Otherwise, set it to null.
         return {
             title: item.name,
             start: item.startDate,
             end: item.endDate,
             url: item.url,
             extendedProps: {
-                description: item.description || ''
+                description: item.description || '',
+                location: {
+                    geoJSON: geoJSON,
+                    raw: item.location
+                }
             }
         };
     });

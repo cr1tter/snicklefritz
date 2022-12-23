@@ -136,7 +136,13 @@ WithFriends.prototype.parse = function () {
         events.push({
             title: item.querySelector('[data-property="Name"]').textContent.trim(),
             start: new Date(date_string),
-            url: 'https://withfriends.co' + item.querySelector('.wf-event-link').getAttribute('href')
+            url: 'https://withfriends.co' + item.querySelector('.wf-event-link').getAttribute('href'),
+            extendedProps: {
+                location: {
+                    geoJSON: null,
+                    raw: item.querySelector('[data-type="Location"]').textContent.trim()
+                }
+            }
         });
     });
     this.events = events;
