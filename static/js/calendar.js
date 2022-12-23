@@ -27,10 +27,6 @@ export var schemaDotOrg2FullCalendar = function (ld_json) {
     });
 };
 
-// TODO:
-// Convenience method that scrapes the "Upcoming Events" sections
-// of a Resident Advisor (ra.co) club or promoter.
-// var fetchResidentAdvisorEvents = function (url, fetchInfo, successCallback, failureCallback) {};
 
 export default new FullCalendar.Calendar(document.getElementById('calendar'), {
     // TODO: This isn't ready yet but its intent is to be able to toggle a given
@@ -244,6 +240,37 @@ export default new FullCalendar.Calendar(document.getElementById('calendar'), {
             color: '#2E2E2D',
             textColor: '#FFF',
         }
+
+        // Paragon uses Resident Advisor, which is hard(?) to scrape because they never
+        // reveal show times on listing pages, only on individual pages. However, this
+        // club's shows are always 9pm to 3am, so we can simply hardcode that data now.
+        // Frustratingly, Resident Advisor also actively blocks certain IP ranges.
+//        {
+//            name: 'Paragon Broadway',
+//            id: 'paragon-broadway',
+//            className: 'paragon-broadway',
+//            events: async function (fetchInfo, successCallback, failureCallback) {
+//                var response = await fetch(corsbase + '/https://ra.co/widget/eventlisting?promoter=108635');
+//                var html = await response.text();
+//                var doc = domparser.parseFromString(html, 'text/html');
+//                var items = doc.querySelectorAll('.events');
+//                events = [];
+//                for (var i = 0; i < items.length; i++) {
+//                    var date_el = items[i].querySelector('.flag').textContent.trim();
+//                    var date = date_el.substring(0, date_el.length - 2); // Strip the annoying slash.
+//                    var title = items[i].querySelector('.title a').textContent.trim();
+//                    var event_id = items[i].querySelector('.title a').getAttribute('href').match(/\d+$/)[0];
+//                    events.push({
+//                        title: title,
+//                        start: new Date(`${date} 21:00`), // Paragon's shows always start at 9 PM.
+//                        url: `https://ra.co/events/${url}`
+//                    });
+//                }
+//                successCallback(events);
+//            },
+//            color: '#2E2E2D',
+//            textColor: '#FFF',
+//        }
 
     ]),
     eventDidMount: function (info) {
