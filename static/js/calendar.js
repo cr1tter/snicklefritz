@@ -12,39 +12,10 @@ import listPlugin from '@fullcalendar/list';
 // Import our own module code sources.
 import mapPlugin from './custom-views/map.js';
 import EventSources from './event-sources.js';
+import FullCalendarEvent from './event.js';
 
 export const corsbase = 'https://cors.anarchism.nyc';
 export const domparser = new DOMParser();
-
-/**
- * Translates a Schema.org Event type (or more specific type)
- * to a FullCalendar event object.
- */
-export var schemaDotOrg2FullCalendar = function (ld_json) {
-    return ld_json.map(function (item) {
-        // If we have a `geo` object, format it to geoJSON.
-        var geoJSON = (item.location.geo) ? {
-            type: "Point",
-            coordinates: [
-                item.location.geo.longitude,
-                item.location.geo.latitude
-            ]
-        } : null; // Otherwise, set it to null.
-        return {
-            title: item.name,
-            start: item.startDate,
-            end: item.endDate,
-            url: item.url,
-            extendedProps: {
-                description: item.description || '',
-                location: {
-                    geoJSON: geoJSON,
-                    raw: item.location
-                }
-            }
-        };
-    });
-};
 
 export default new Calendar(document.getElementById('calendar'), {
     plugins: [
@@ -142,7 +113,7 @@ export default new Calendar(document.getElementById('calendar'), {
                 var html = await response.text();
                 var doc = domparser.parseFromString(html, 'text/html');
                 var ld_json = JSON.parse(doc.querySelector('script[type="application/ld+json"]').innerText);
-                successCallback(schemaDotOrg2FullCalendar(ld_json));
+                successCallback(ld_json.map(FullCalendarEvent.fromSchemaDotOrg));
             },
             color: 'purple'
         },

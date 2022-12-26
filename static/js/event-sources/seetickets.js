@@ -5,6 +5,7 @@
  * @see https://seetickets.us/
  */
 import { corsbase } from '../calendar.js';
+import FullCalendarEvent from '../event.js';
 
 export const SeeTicketsEventsCalendarSources = [
     {
@@ -87,12 +88,14 @@ SeeTicketsEvents.prototype.parse = function () {
 };
 
 SeeTicketsEvents.prototype.toFullCalendarEventObject = function (e) {
-    return {
+    return new FullCalendarEvent({
         title: e.title,
         start: new Date(e.start),
         url: e.url.match(/href='(.*)';$/)[1] || e.url,
         // SeeTickets doesn't provide location data in their API
         // so we instead use our own knowledge of the event source.
-        location: this.location
-    };
+        extendedProps: {
+            location: this.location
+        }
+    });
 }

@@ -2,6 +2,7 @@
  * Utility module to support the calendar's Squarespace
  * event sources.
  */
+import FullCalendarEvent from '../event.js';
 
 export const DiceEventSources = [
     {
@@ -139,19 +140,34 @@ Dice.prototype.parse = function () {
 }
 
 Dice.prototype.toFullCalendarEventObject = function (e) {
-    return {
+    return new FullCalendarEvent({
         title: e.name,
         start: e.date,
         end: e.date_end,
         url: e.url,
         extendedProps: {
+            description: e.raw_description,
+            image: e?.event_images?.square,
             location: {
                 geoJSON: {
                     type: "Point",
                     coordinates: [e.location.lng, e.location.lat]
                 },
-                raw: e.location
+                eventVenue: {
+                    name: e.venue,
+                    address: {
+                        streetAddress: e.location.street,
+                        addressLocality: e.location.city,
+                        addressRegion: e.location.state,
+                        postalCode: e.location.zip,
+                        addressCountry: e.location.country
+                    },
+                    geo: {
+                        latitude: e.location.lat,
+                        longitude: e.location.lng
+                    }
+                }
             }
         }
-    };
+    });
 }

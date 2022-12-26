@@ -1,4 +1,5 @@
 import { sliceEvents, createPlugin } from '@fullcalendar/core';
+import FullCalendarEvent from '../event.js';
 
 const MapViewConfig = {
     classNames: [ 'map-view' ],
@@ -11,6 +12,7 @@ const MapViewConfig = {
     didMount: function (props) {
         // Get today's events.
         var segs = sliceEvents(props, true); // allDay=true
+
         var geojson = {
             type: 'FeatureCollection',
             features: []
@@ -18,14 +20,15 @@ const MapViewConfig = {
 
         segs.forEach(function (e) {
             if (e.def.extendedProps?.location?.geoJSON) {
-                geojson.features.push({
+                var f = {
                     type: 'Feature',
                     geometry: e.def.extendedProps.location.geoJSON,
-                    properties: {
-                        title: e.def.title,
-                        description: e.def.extendedProps?.description
-                    }
-                });
+                    properties: Object.assign({}, e.def.extendedProps)
+                };
+                f.properties.title = e.def.title;
+                f.properties.dateRange = e.instance.range; // TODO: Are these times wrong?
+                f.properties.description =  e.def.extendedProps?.description;
+                geojson.features.push(f);
             }
         });
 
@@ -39,7 +42,11 @@ const MapViewConfig = {
         // Add the features.
         L.geoJSON(geojson, {
             onEachFeature: function (feature, layer) {
-                layer.bindPopup(feature.properties.title + ' - ' + feature.properties.description);
+                layer.bindTooltip(`${feature.properties.dateRange.start.toLocaleTimeString()}: ${feature.properties.title} @ ${feature.properties?.location?.eventVenue?.name}`);
+                layer.bindPopup(feature.properties.description, {
+                    maxHeight: '250'
+                });
+
             }
         }).addTo(map);
     },

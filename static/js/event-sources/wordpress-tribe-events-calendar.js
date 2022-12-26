@@ -5,6 +5,7 @@
  * @see https://theeventscalendar.com/
  */
 import { corsbase } from '../calendar.js';
+import FullCalendarEvent from '../event.js';
 
 export const WordPressTribeEventsCalendarSources = [
     {
@@ -175,19 +176,34 @@ WordPressTribeEvents.prototype.parse = function () {
 };
 
 WordPressTribeEvents.prototype.toFullCalendarEventObject = function (e) {
-    return {
+    return new FullCalendarEvent({
         title: e.title,
         start: new Date(e.utc_start_date + 'Z'),
         end: new Date(e.utc_end_date + 'Z'),
         url: e.url,
         extendedProps: {
+            description: e.description,
+            image: e.image.url,
             location: {
                 geoJSON: {
                     type: "Point",
                     coordinates: [e.venue.geo_lng, e.venue.geo_lat]
                 },
-                raw: e.venue // Maybe we should just have a "Venue" object.
+                eventVenue: {
+                    name: e.venue.venue,
+                    address: {
+                        streetAddress: e.venue.address,
+                        addressLocality: e.venue.city,
+                        //addressRegion: e.venue.state,
+                        postalCode: e.venue.zip,
+                        addressCountry: e.venue.country
+                    },
+                    geo: {
+                        latitude: e.venue.geo_lat,
+                        longitude: e.venue.geo_lng
+                    }
+                }
             }
         }
-    };
-}
+    });
+};

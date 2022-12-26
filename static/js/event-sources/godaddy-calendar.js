@@ -6,6 +6,7 @@
  * https://www.godaddy.com/help/show-a-public-calendar-on-my-website-24592
  */
 import { corsbase } from '../calendar.js';
+import FullCalendarEvent from '../event.js';
 
 export const GoDaddyCalendarWidgetSources = [
     {
@@ -59,7 +60,7 @@ GoDaddy.prototype.parse = function () {
 }
 
 GoDaddy.prototype.toFullCalendarEventObject = function (e) {
-    return {
+    return new FullCalendarEvent({
         title: e.title,
         start: new Date(e.start),
         end: new Date(e.end),
@@ -67,9 +68,8 @@ GoDaddy.prototype.toFullCalendarEventObject = function (e) {
         extendedProps: {
             description: e.desc,
             location: {
-                geoJSON: null,
-                raw: e.location
+                geoJSON: null
             }
         }
-    }
+    });
 }

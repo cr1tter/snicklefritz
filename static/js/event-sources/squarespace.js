@@ -3,6 +3,7 @@
  * event sources.
  */
 import { corsbase } from '../calendar.js';
+import FullCalendarEvent from '../event.js';
 
 export const SquarespaceEventSources = [
     {
@@ -353,19 +354,36 @@ Squarespace.prototype.parse = function () {
 };
 
 Squarespace.prototype.toFullCalendarEventObject = function (e) {
-    return {
+    return new FullCalendarEvent({
         title: e.title,
         start: e.startDate,
         end: e.endDate,
         url: new URL(this.url).origin + e.fullUrl,
         extendedProps: {
+            description: e.body,
+            image: e.assetUrl,
             location: {
                 geoJSON: {
                     type: "Point",
                     coordinates: [e.location.mapLng, e.location.mapLat]
                 },
-                raw: e.location
-            }
+                eventVenue: {
+                    name: e.location.addressTitle,
+                    address: {
+                        streetAddress: e.location.addressLine1,
+                        // TODO: Some of these are not provided.
+//                        addressLocality: e.location.addressLine2.split(',')[0].trim(),
+//                        addressRegion: e.location.addressLine2.split(',')[1].trim(),
+//                        postalCode: e.location.addressLine2.split(',')[2].trim(),
+                        addressCountry: e.location.addressCountry
+                    },
+                    geo: {
+                        latitude: e.location.mapLat,
+                        longitude: e.location.mapLng,
+                    }
+                },
+            },
+            raw: e
         }
-    };
+    });
 }

@@ -2,8 +2,8 @@
  * Utility module to support the calendar's WithFriends
  * event sources.
  */
-
 import { corsbase, domparser } from '../calendar.js';
+import FullCalendarEvent from '../event.js';
 
 export const WithFriendsEventSources = [
     {
@@ -133,17 +133,16 @@ WithFriends.prototype.parse = function () {
     this.items.forEach(function (item) {
         var date_string = item.querySelector('[data-property="Start_Time"]').textContent.trim()
             .replace('at', new Date().getFullYear()); // Withfriends doesn't publish a full year, so we just guess.
-        events.push({
+        events.push(new FullCalendarEvent({
             title: item.querySelector('[data-property="Name"]').textContent.trim(),
             start: new Date(date_string),
             url: 'https://withfriends.co' + item.querySelector('.wf-event-link').getAttribute('href'),
             extendedProps: {
                 location: {
-                    geoJSON: null,
-                    raw: item.querySelector('[data-type="Location"]').textContent.trim()
+                    geoJSON: null
                 }
             }
-        });
+        }));
     });
     this.events = events;
     return this;

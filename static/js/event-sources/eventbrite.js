@@ -2,7 +2,8 @@
  * Utility module to support the calendar's EventBrite
  * event sources.
  */
-import { corsbase, domparser, schemaDotOrg2FullCalendar } from '../calendar.js';
+import { corsbase, domparser } from '../calendar.js';
+import FullCalendarEvent from '../event.js';
 
 export const EventBriteEventSources = [
     {
@@ -520,6 +521,6 @@ EventBrite.prototype.fetch = async function (url) {
  * @TODO Parse individual occurrences instead of treating as one long event.
  */
 EventBrite.prototype.parse = function () {
-    this.events = schemaDotOrg2FullCalendar(this.json);
+    this.events = this.json.map(FullCalendarEvent.fromSchemaDotOrg);
     return this;
 };
