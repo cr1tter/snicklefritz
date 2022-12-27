@@ -8,6 +8,8 @@ import { Calendar } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
+import iCalendarPlugin from '@fullcalendar/icalendar';
+import rrulePlugin from '@fullcalendar/rrule';
 
 // Import our own module code sources.
 import mapPlugin from './custom-views/map.js';
@@ -22,6 +24,8 @@ export default new Calendar(document.getElementById('calendar'), {
         dayGridPlugin,
         timeGridPlugin,
         listPlugin,
+        iCalendarPlugin,
+        rrulePlugin,
         mapPlugin
     ],
     // TODO: This isn't ready yet but its intent is to be able to toggle a given
