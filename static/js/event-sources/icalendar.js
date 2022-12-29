@@ -7,24 +7,10 @@ const corsbase = 'https://cors.anarchism.nyc';
 
 export const IcalendarEventSources = [
     {
-        name: 'Bushwick Daily',
-        id: 'bushwick-daily',
-        className: 'bushwick-daily',
-        url: 'https://tockify.com/api/feeds/ics/bushwickdaily',
-        format: 'ics',
-    },
-    {
         name: 'Livecode.NYC',
         id: 'livecode-nyc',
         className: 'livecode-nyc',
         url: 'https://livecode.nyc/calendar.ics',
-        format: 'ics',
-    },
-    {
-        name: 'Metropolitan Anarchist Coordinating Council of NYC',
-        id: 'maccnyc',
-        className: 'event-maccnyc',
-        url: 'https://tockify.com/api/feeds/ics/mlsupport',
         format: 'ics',
     },
     {

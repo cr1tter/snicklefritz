@@ -19,6 +19,7 @@ import { IcalendarEventSources } from './event-sources/icalendar.js';
 import { JSONFeedEventSources } from './event-sources/fullcalendar-json-feed.js';
 import { SeeTicketsEventsCalendarSources } from './event-sources/seetickets.js';
 import { SquarespaceEventSources } from './event-sources/squarespace.js';
+import { TockifyEventSources } from './event-sources/tockify.js';
 import { WithFriendsEventSources } from './event-sources/withfriends.js';
 import { WordPressTribeEventsCalendarSources } from './event-sources/wordpress-tribe-events-calendar.js';
 
@@ -54,6 +55,11 @@ const EventSources = [].concat(
     SquarespaceEventSources.map((i) => {
         i.color = 'white';
         i.textColor = 'black';
+        return i;
+    }),
+    TockifyEventSources.map((i) => {
+        i.color = '#0497E5';
+        i.textColor = '#FFF';
         return i;
     }),
     WithFriendsEventSources.map((i) => {
