@@ -176,6 +176,12 @@ WordPressTribeEvents.prototype.parse = function () {
 };
 
 WordPressTribeEvents.prototype.toFullCalendarEventObject = function (e) {
+    var geoJSON = (e.venue.geo_lat && e.venue.geo_lng)
+        ? {
+            type: "Point",
+            coordinates: [e.venue.geo_lng, e.venue.geo_lat]
+        }
+        : null;
     return new FullCalendarEvent({
         title: e.title,
         start: new Date(e.utc_start_date + 'Z'),
@@ -185,10 +191,7 @@ WordPressTribeEvents.prototype.toFullCalendarEventObject = function (e) {
             description: e.description,
             image: e.image.url,
             location: {
-                geoJSON: {
-                    type: "Point",
-                    coordinates: [e.venue.geo_lng, e.venue.geo_lat]
-                },
+                geoJSON: geoJSON,
                 eventVenue: {
                     name: e.venue.venue,
                     address: {

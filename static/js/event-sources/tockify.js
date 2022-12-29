@@ -67,6 +67,14 @@ Tockify.prototype.toFullCalendarEventObject = function (e) {
     var url = (e.content.customButtonLink)
         ? e.content.customButtonLink
         : `${this.url.origin}/${this.url.searchParams.get('calname')}/detail/${e.eid.uid}/${e.eid.tid}`;
+    var geoJSON = (e.content.location?.latitude && e.content.location?.longitude)
+        ? {
+            type: "Point",
+            coordinates: [
+                e.content.location.longitude,
+                e.content.location.latitude
+            ]
+        } : null;
     return new FullCalendarEvent({
         title: e.content.summary.text,
         start: start.setTime(e.when.start.millis),
@@ -76,13 +84,7 @@ Tockify.prototype.toFullCalendarEventObject = function (e) {
             description: e.content.description.text,
             image: null,
             location: {
-                geoJSON: {
-                    type: "Point",
-                    coordinates: [
-                        e.content?.location?.longitude,
-                        e.content?.location?.latitude
-                    ]
-                },
+                geoJSON: geoJSON,
                 eventVenue: {
                     name: e.content.place,
                     address: {
