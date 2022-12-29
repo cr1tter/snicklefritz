@@ -12,7 +12,7 @@ export const TockifyEventSources = [
         className: 'bushwick-daily',
         events: async function (fetchInfo, successCallback, failureCallback) {
             await new Tockify({
-                url: `https://tockify.com/api/ngevent?max=100&calname=bushwickdaily&start-inclusive=true&longForm=true&showAll=true&startms=${new Date().getTime()}`,
+                url: `https://tockify.com/api/ngevent?max=100&calname=bushwickdaily&start-inclusive=true&longForm=true&showAll=true`,
                 fetchInfo: fetchInfo,
                 successCallback: successCallback,
                 failureCallback: failureCallback
@@ -25,7 +25,7 @@ export const TockifyEventSources = [
         className: 'event-maccnyc',
         events: async function (fetchInfo, successCallback, failureCallback) {
             await new Tockify({
-                url: `https://tockify.com/api/ngevent?max=100&calname=mlsupport&start-inclusive=true&longForm=true&showAll=true&startms=${new Date().getTime()}`,
+                url: `https://tockify.com/api/ngevent?max=100&calname=mlsupport&start-inclusive=true&longForm=true&showAll=true`,
                 fetchInfo: fetchInfo,
                 successCallback: successCallback,
                 failureCallback: failureCallback
@@ -36,7 +36,9 @@ export const TockifyEventSources = [
 
 export default function Tockify (optionsObj) {
     var url = new URL(optionsObj.url);
-    return this.fetch(url).then((t) => {
+    url.searchParams.append('startms', optionsObj.fetchInfo.start.getTime());
+    this.url = url;
+    return this.fetch(this.url).then((t) => {
         optionsObj.successCallback(t.parse().events.map(
             this.toFullCalendarEventObject.bind(this)
         ));
@@ -44,7 +46,6 @@ export default function Tockify (optionsObj) {
 }
 
 Tockify.prototype.fetch = async function (url) {
-    this.url = new URL(url);
     var response = await fetch(url);
     var json = {};
     try {
