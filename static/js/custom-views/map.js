@@ -1,4 +1,4 @@
-import { sliceEvents, createPlugin } from '@fullcalendar/core';
+import { sliceEvents, createPlugin } from 'https://cdn.skypack.dev/@fullcalendar/core@6.0.1?min';
 import FullCalendarEvent from '../event.js';
 
 const MapViewConfig = {

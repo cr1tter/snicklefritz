@@ -4,12 +4,12 @@
  * Effectively, the "app" itself.
  */
 // Import the FullCalendar vendor modules.
-import { Calendar } from '@fullcalendar/core';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import timeGridPlugin from '@fullcalendar/timegrid';
-import listPlugin from '@fullcalendar/list';
-import iCalendarPlugin from '@fullcalendar/icalendar';
-import rrulePlugin from '@fullcalendar/rrule';
+import { Calendar } from 'https://cdn.skypack.dev/@fullcalendar/core@6.0.1?min';
+import dayGridPlugin from 'https://cdn.skypack.dev/@fullcalendar/daygrid@6.0.1?min';
+import timeGridPlugin from 'https://cdn.skypack.dev/@fullcalendar/timegrid@6.0.1?min';
+import listPlugin from 'https://cdn.skypack.dev/@fullcalendar/list@6.0.1?min';
+import iCalendarPlugin from 'https://cdn.skypack.dev/@fullcalendar/icalendar@6.0.1?min';
+import rrulePlugin from 'https://cdn.skypack.dev/@fullcalendar/rrule@6.0.1?min';
 
 // Import our own module code sources.
 import mapPlugin from './custom-views/map.js';
