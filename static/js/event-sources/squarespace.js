@@ -20,6 +20,19 @@ export const SquarespaceEventSources = [
         }
     },
     {
+        name: 'Avant Gardner',
+        id: 'avant-gardner',
+        className: 'avant-gardner',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new Squarespace({
+                url: 'https://www.avant-gardner.com/?format=json',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'Black Flamingo',
         id: 'black-flamingo',
         className: 'black-flamingo',
