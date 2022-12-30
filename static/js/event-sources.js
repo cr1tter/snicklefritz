@@ -22,6 +22,7 @@ import { SquarespaceEventSources } from './event-sources/squarespace.js';
 import { TockifyEventSources } from './event-sources/tockify.js';
 import { WithFriendsEventSources } from './event-sources/withfriends.js';
 import { WordPressTribeEventsCalendarSources } from './event-sources/wordpress-tribe-events-calendar.js';
+import { WordPressEventsOrganiserSources } from './event-sources/wordpress-events-organiser.js';
 
 const EventSources = [].concat(
     DiceEventSources.map((i) => {
@@ -67,6 +68,10 @@ const EventSources = [].concat(
         return i;
     }),
     WordPressTribeEventsCalendarSources.map((i) => {
+        i.color = (i.color) ? i.color : 'blue';
+        return i;
+    }),
+    WordPressEventsOrganiserSources.map((i) => {
         i.color = (i.color) ? i.color : 'blue';
         return i;
     })
