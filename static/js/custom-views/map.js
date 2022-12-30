@@ -1,4 +1,5 @@
 import { sliceEvents, createPlugin } from 'https://cdn.skypack.dev/@fullcalendar/core@6.0.1?min';
+import momentTimezone from 'https://cdn.skypack.dev/moment-timezone@0.5.40?min';
 import FullCalendarEvent from '../event.js';
 
 const MapViewConfig = {
@@ -26,8 +27,20 @@ const MapViewConfig = {
                     properties: Object.assign({}, e.def.extendedProps)
                 };
                 f.properties.title = e.def.title;
-                f.properties.dateRange = e.instance.range; // TODO: Are these times wrong?
                 f.properties.description =  e.def.extendedProps?.description;
+
+                // TODO: Something about these dates are strange. They seem to
+                // be passed into this function with incorrect timezone settings.
+                // We're just going to ignore that whole thing and pretend that
+                // the UTC timezone is actually showing the correct local time?
+                // We'll also use the Moment.js library to make this easier to
+                // work with, for now, until we figure out why these events data
+                // are coming in here a little bit skewed.
+                f.properties.dateRange = {
+                    start: momentTimezone(e.instance.range.start).tz('UTC'),
+                    end: momentTimezone(e.instance.range.end).tz('UTC')
+                };
+
                 geojson.features.push(f);
             }
         });
@@ -42,7 +55,7 @@ const MapViewConfig = {
         // Add the features.
         L.geoJSON(geojson, {
             onEachFeature: function (feature, layer) {
-                layer.bindTooltip(`${feature.properties.dateRange.start.toLocaleTimeString()}: ${feature.properties.title} @ ${feature.properties?.location?.eventVenue?.name}`);
+                layer.bindTooltip(`${feature.properties.dateRange.start.format('LT')}: ${feature.properties.title} @ ${feature.properties?.location?.eventVenue?.name}`);
                 layer.bindPopup(feature.properties.description, {
                     maxHeight: '250'
                 });
