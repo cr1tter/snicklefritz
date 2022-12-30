@@ -26,8 +26,9 @@ const MapViewConfig = {
                     geometry: e.def.extendedProps.location.geoJSON,
                     properties: Object.assign({}, e.def.extendedProps)
                 };
-                f.properties.title = e.def.title;
-                f.properties.description =  e.def.extendedProps?.description;
+                f.properties.title       = e.def.title;
+                f.properties.url         = e.def.url;
+                f.properties.description = e.def.extendedProps?.description;
 
                 // TODO: Something about these dates are strange. They seem to
                 // be passed into this function with incorrect timezone settings.
@@ -55,11 +56,22 @@ const MapViewConfig = {
         // Add the features.
         L.geoJSON(geojson, {
             onEachFeature: function (feature, layer) {
-                layer.bindTooltip(`${feature.properties.dateRange.start.format('LT')}: ${feature.properties.title} @ ${feature.properties?.location?.eventVenue?.name}`);
-                layer.bindPopup(feature.properties.description, {
+                var strTooltip = `${feature.properties.dateRange.start.format('LT')}: ${feature.properties.title}`;
+                if (feature.properties.location.eventVenue) {
+                    strTooltip += ` @ ${feature.properties?.location?.eventVenue?.name}`;
+                }
+                layer.bindTooltip(strTooltip);
+
+                var htmlDescription             = `<h1><a href="${feature.properties.url}">${feature.properties.title}</a></h1>`;
+                //var strippedOriginalDescription = feature.properties?.description?.replace(/(<([^>]+)>)/gi, '')?.trim();
+                // Strip all HTML except for links.
+                var strippedOriginalDescription = feature.properties
+                    ?.description
+                    ?.replace(/<(?!\/?a(?=>|\s.*>))\/?.*?>/gi, '')
+                    ?.trim();
+                layer.bindPopup(`${htmlDescription}<p>${strippedOriginalDescription}</p>`, {
                     maxHeight: '250'
                 });
-
             }
         }).addTo(map);
     },
