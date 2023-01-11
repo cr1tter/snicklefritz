@@ -91,6 +91,23 @@ export const DiceEventSources = [
         }
     },
     {
+        name: 'The Sultan Room',
+        id: 'the-sultan-room',
+        className: 'the-sultan-room',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new Dice({
+                // Pulled from https://thesultanroom.com/
+                url: 'https://events-api.dice.fm/v1/events?page[size]=24&types=linkout,event&filter[venues][]=The%20Sultan%20Room&filter[venues][]=The%20Turk%27s%20Inn&filter[venues][]=The%20Sultan%20Room%20Rooftop&filter[promoters][]=Varun%20Kataria%20dba%20Turks%20Group%20LLC',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback,
+                headers: {
+                   'x-api-key': 'j3UZPWFkiQ2UFTppf79rFatRpao3ol7l5PWjmTE9'
+                }
+            });
+        }
+    },
+    {
         name: 'Union Pool',
         id: 'union-pool',
         className: 'union-pool',
