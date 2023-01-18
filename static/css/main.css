@@ -102,3 +102,22 @@ header p {
         transform: rotate(360deg);
     }
 }
+
+/**
+ * @group Custom views.
+ */
+#map {
+    min-height: 300px;
+    height: 80%;
+}
+.leaflet-popup-content h1 {
+    border-bottom: none;
+    font-size: large;
+    line-height: 1em;
+}
+.leaflet-popup-content h1 img {
+    display: block;
+    margin: .5em auto;
+    max-height: 150px;
+    max-width: 100%;
+}

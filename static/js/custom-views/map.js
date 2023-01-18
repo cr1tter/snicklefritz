@@ -5,7 +5,7 @@ import FullCalendarEvent from '../event.js';
 const MapViewConfig = {
     classNames: [ 'map-view' ],
     content: function (props) {
-        var html = '<div id="map" style="height: 300px;"></div>';
+        var html = '<div id="map"></div>';
         return {
             html: html
         }
@@ -29,6 +29,7 @@ const MapViewConfig = {
                 f.properties.title       = e.def.title;
                 f.properties.url         = e.def.url;
                 f.properties.description = e.def.extendedProps?.description;
+                f.properties.image = e.def.extendedProps?.image;
 
                 // TODO: Something about these dates are strange. They seem to
                 // be passed into this function with incorrect timezone settings.
@@ -62,14 +63,14 @@ const MapViewConfig = {
                 }
                 layer.bindTooltip(strTooltip);
 
-                var htmlDescription             = `<h1><a href="${feature.properties.url}">${feature.properties.title}</a></h1>`;
+                var htmlDescriptionHeader = `<header><h1><a href="${feature.properties.url}" title="View publisher info for ${feature.properties.title}">${feature.properties.title}<img src="${feature.properties.image}" alt="Poster image for '${feature.properties.title}'" /></a></h1></header>`;
                 //var strippedOriginalDescription = feature.properties?.description?.replace(/(<([^>]+)>)/gi, '')?.trim();
                 // Strip all HTML except for links.
                 var strippedOriginalDescription = feature.properties
                     ?.description
                     ?.replace(/<(?!\/?a(?=>|\s.*>))\/?.*?>/gi, '')
                     ?.trim();
-                layer.bindPopup(`${htmlDescription}<p>${strippedOriginalDescription}</p>`, {
+                layer.bindPopup(`${htmlDescriptionHeader}<p>${strippedOriginalDescription}</p>`, {
                     maxHeight: '250'
                 });
             }
