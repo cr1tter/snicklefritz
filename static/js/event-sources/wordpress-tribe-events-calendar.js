@@ -24,6 +24,19 @@ export const WordPressTribeEventsCalendarSources = [
         textColor: '#FFF'
     },
     {
+        name: 'Gay Center',
+        id: 'gay-center',
+        className: 'gay-center',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new WordPressTribeEvents({
+                url: corsbase + '/https://gaycenter.org/wp-json/tribe/events/v1/events?per_page=50&geoloc=true&geoloc_lat=40.7127837&geoloc_lng=-74.00594130000002',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'GoMag',
         id: 'gomag',
         className: 'gomag',
