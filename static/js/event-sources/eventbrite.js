@@ -46,6 +46,19 @@ export const EventBriteEventSources = [
         }
     },
     {
+        name: 'Big Milk',
+        id: 'big-milk',
+        className: 'big-milk',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new EventBrite({
+                url: 'https://www.eventbrite.com/o/big-milk-43187278483',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'Brooklyn Comedy Collective',
         id: 'brooklyn-comedy-collective',
         className: 'brooklyn-comedy-collective',
