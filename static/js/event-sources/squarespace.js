@@ -330,6 +330,19 @@ export const SquarespaceEventSources = [
                 failureCallback: failureCallback
             });
         }
+    },
+    {
+        name: 'Zerospace',
+        id: 'zerospace',
+        className: 'zerospace',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new Squarespace({
+                url: 'https://www.zerospace.co/upcoming-events?format=json',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
     }
 ];
 
