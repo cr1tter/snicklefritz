@@ -335,6 +335,19 @@ export const EventBriteEventSources = [
         }
     },
     {
+        name: 'Nicole (@fruitqueer)',
+        id: 'nicole-fruitqueer',
+        className: 'nicole-fruitqueer',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new EventBrite({
+                url: 'https://www.eventbrite.com/o/nicole-54434531973',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         // They have a Tockify but they did not enable Tockify's ICS feed. :(
         name: 'Pagan\'s Paradise',
         id: 'pagans-paradise',
