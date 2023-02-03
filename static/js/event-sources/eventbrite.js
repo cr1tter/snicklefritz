@@ -124,6 +124,19 @@ export const EventBriteEventSources = [
         }
     },
     {
+        name: 'CUNY Anthropology Department',
+        id: 'cuny-anthropology-department',
+        className: 'cuny-anthropology-department',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new EventBrite({
+                url: 'https://www.eventbrite.com/o/anthropology-department-53111918033',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: "Dave's Lesbian Bar",
         id: 'daves-lesbian-bar',
         className: 'daves-lesbian-bar',
