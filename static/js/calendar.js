@@ -4,7 +4,7 @@
  * Effectively, the "app" itself.
  */
 // Import the FullCalendar vendor modules.
-import { Calendar } from 'https://cdn.skypack.dev/@fullcalendar/core@6.0.1?min';
+import { Calendar, sliceEvents } from 'https://cdn.skypack.dev/@fullcalendar/core@6.0.1?min';
 import dayGridPlugin from 'https://cdn.skypack.dev/@fullcalendar/daygrid@6.0.1?min';
 import timeGridPlugin from 'https://cdn.skypack.dev/@fullcalendar/timegrid@6.0.1?min';
 import listPlugin from 'https://cdn.skypack.dev/@fullcalendar/list@6.0.1?min';
@@ -12,14 +12,19 @@ import iCalendarPlugin from 'https://cdn.skypack.dev/@fullcalendar/icalendar@6.0
 import rrulePlugin from 'https://cdn.skypack.dev/@fullcalendar/rrule@6.0.1?min';
 
 // Import our own module code sources.
-import mapPlugin from './custom-views/map.js';
 import EventSources from './event-sources.js';
 import FullCalendarEvent from './event.js';
+import {
+    default as mapPlugin,
+    map,
+    eventProps,
+    addEventsFromTodayTo
+} from './custom-views/map.js';
 
 export const corsbase = 'https://cors.anarchism.nyc';
 export const domparser = new DOMParser();
 
-export default new Calendar(document.getElementById('calendar'), {
+export default calendar = new Calendar(document.getElementById('calendar'), {
     plugins: [
         dayGridPlugin,
         timeGridPlugin,
@@ -278,6 +283,23 @@ export default new Calendar(document.getElementById('calendar'), {
         info.jsEvent.preventDefault();
         if (info.event.url) {
             window.open(info.event.url);
+        }
+    },
+    datesSet: function (dateInfo) {
+        // On the Map view, handle changing markers based on the date
+        // range selected in the calendar.
+        if ('map' == dateInfo.view.type && map) {
+            map.eachLayer(function (layer) {
+                // If the Leaflet Layer has an `onEachFeature` option,
+                // that's because it's a GeoJSON Layer:
+                // https://leafletjs.com/reference.html#geojson
+                if (layer.options.onEachFeature) {
+                    layer.remove();
+                }
+            });
+            eventProps.dateProfile.activeRange.start = dateInfo.start;
+            eventProps.dateProfile.activeRange.end   = dateInfo.end;
+            addEventsFromTodayTo(eventProps, map);
         }
     }
 });
