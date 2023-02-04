@@ -67,9 +67,7 @@ export default calendar = new Calendar(document.getElementById('calendar'), {
     headerToolbar: {
         left: 'prev,next today',
         center: 'title',
-        // When ready, we'll add a "Map" button. But not yet.
-        //right: 'dayGridMonth,timeGridDay,listDay,map'
-        right: 'dayGridMonth,timeGridDay,listDay'
+        right: 'dayGridMonth,timeGridDay,listDay,map'
     },
     initialView: function () {
         return (window.matchMedia("only screen and (max-width: 540px)").matches)

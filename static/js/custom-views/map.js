@@ -50,11 +50,15 @@ export function toGeoJSONFeatureCollection (segments) {
 export function addEventsFromTodayTo (props, map) {
     // Get today's events.
     var segs = sliceEvents(props, true); // allDay=true
-    var geojson = toGeoJSONFeatureCollection(segs);
+    var geoJson = toGeoJSONFeatureCollection(segs);
+    var markers = L.markerClusterGroup();
     // Add the features.
-    L.geoJSON(geojson, {
+    var geoJsonLayer = L.geoJSON(geoJson, {
         onEachFeature: onEachFeature
-    }).addTo(map);
+    });
+    markers.addLayer(geoJsonLayer);
+    map.addLayer(markers);
+    map.fitBounds(markers.getBounds());
 }
 
 // Handler to prepare each GeoJSON Feature (an event item) for the
