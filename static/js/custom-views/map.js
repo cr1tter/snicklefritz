@@ -108,7 +108,8 @@ const MapViewConfig = {
     didMount: function (props) {
         // Center the Map on NYC by default; if the user permits the
         // GeoLocation access prompt, the map will re-center to them.
-        map = L.map('map').setView([40.6975, -73.9795], 10);
+        // The global `L` object is a reference to the Leaflet library.
+        map = L.map('map').setView(new L.latLng(40.6975, -73.9795), 10);
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors - See a mistake? <a href="https://openstreetmap.org/fixthemap">Fix the map</a>!'
@@ -119,6 +120,15 @@ const MapViewConfig = {
             enableHighAccuracy: true
         }).on('locationerror', function (e) {
             console.log(e.message);
+        }).once('locationfound', function (e) {
+            L.marker(e.latlng, {
+                keyboard : false,
+                title    : 'You are here.',
+                alt      : 'You are here.',
+                icon     : new L.icon({
+                    iconUrl: '/static/img/icon.blue.current-position.circle.14x14.png'
+                })
+            }).addTo(map);
         });
         addEventsInRangeTo({
             start: props.dateProfile.activeRange.start,
