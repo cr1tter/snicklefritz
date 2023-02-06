@@ -38,7 +38,7 @@ export const SquarespaceEventSources = [
         className: 'black-flamingo',
         events: async function (fetchInfo, successCallback, failureCallback) {
             await new Squarespace({
-                url: 'https://www.blackflamingonyc.com/events?format=json',
+                url: 'https://www.blackflamingonyc.com/events-1?format=json',
                 fetchInfo: fetchInfo,
                 successCallback: successCallback,
                 failureCallback: failureCallback
