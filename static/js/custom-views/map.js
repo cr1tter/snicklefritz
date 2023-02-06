@@ -3,7 +3,6 @@ import momentTimezone from 'https://cdn.skypack.dev/moment-timezone@0.5.40?min';
 import FullCalendarEvent from '../event.js';
 
 export var map;
-export var eventProps;
 
 // Converts a slice of FullCalendar Event segments to a GeoJSON
 // Feature Collection object.
@@ -47,9 +46,18 @@ export function toGeoJSONFeatureCollection (segments) {
     return geojson;
 }
 
-export function addEventsFromTodayTo (props, map) {
-    // Get today's events.
-    var segs = sliceEvents(props, true); // allDay=true
+/**
+ * Adds events in a given range to the given map.
+ *
+ * @param {object} range An object with `start` and `end` properties to indicate the date range.
+ * @param {Map} map Leaflet Map object to add the events to.
+ */
+export function addEventsInRangeTo (range, map) {
+    var viewData = calendar.view.getCurrentData();
+    viewData.dateProfile.activeRange.start = range.start;
+    viewData.dateProfile.activeRange.end   = range.end;
+
+    var segs = sliceEvents(viewData, true); // allDay=true
     var geoJson = toGeoJSONFeatureCollection(segs);
     var markers = L.markerClusterGroup();
     // Add the features.
@@ -97,7 +105,6 @@ const MapViewConfig = {
         }
     },
     didMount: function (props) {
-        eventProps = props; // Make the `props` exportable?
         // Center the map on New York City.
         // TODO: Center it on the user's current location.
         map = L.map('map').setView([40.6975, -73.9795], 10);
@@ -105,7 +112,10 @@ const MapViewConfig = {
             maxZoom: 19,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors - See a mistake? <a href="https://openstreetmap.org/fixthemap">Fix the map</a>!'
         }).addTo(map);
-        addEventsFromTodayTo(props, map);
+        addEventsInRangeTo({
+            start: props.dateProfile.activeRange.start,
+            end  : props.dateProfile.activeRange.end
+        }, map);
     },
     willUnmount: function (props) {
         // Code that will execute when the view is unloaded.

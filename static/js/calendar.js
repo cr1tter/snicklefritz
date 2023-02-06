@@ -17,8 +17,7 @@ import FullCalendarEvent from './event.js';
 import {
     default as mapPlugin,
     map,
-    eventProps,
-    addEventsFromTodayTo
+    addEventsInRangeTo
 } from './custom-views/map.js';
 
 export const corsbase = 'https://cors.anarchism.nyc';
@@ -295,9 +294,10 @@ export default calendar = new Calendar(document.getElementById('calendar'), {
                     layer.remove();
                 }
             });
-            eventProps.dateProfile.activeRange.start = dateInfo.start;
-            eventProps.dateProfile.activeRange.end   = dateInfo.end;
-            addEventsFromTodayTo(eventProps, map);
+            addEventsInRangeTo({
+                start: dateInfo.start,
+                end  : dateInfo.end
+            }, map);
         }
     }
 });
