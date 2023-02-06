@@ -1,5 +1,6 @@
 import { sliceEvents, createPlugin } from 'https://cdn.skypack.dev/@fullcalendar/core@6.0.1?min';
 import momentTimezone from 'https://cdn.skypack.dev/moment-timezone@0.5.40?min';
+import { default as calendar } from '../calendar.js';
 import FullCalendarEvent from '../event.js';
 
 export var map;
@@ -105,13 +106,20 @@ const MapViewConfig = {
         }
     },
     didMount: function (props) {
-        // Center the map on New York City.
-        // TODO: Center it on the user's current location.
+        // Center the Map on NYC by default; if the user permits the
+        // GeoLocation access prompt, the map will re-center to them.
         map = L.map('map').setView([40.6975, -73.9795], 10);
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors - See a mistake? <a href="https://openstreetmap.org/fixthemap">Fix the map</a>!'
         }).addTo(map);
+        map.locate({
+            setView: true,
+            maxZoom: 16,
+            enableHighAccuracy: true
+        }).on('locationerror', function (e) {
+            console.log(e.message);
+        });
         addEventsInRangeTo({
             start: props.dateProfile.activeRange.start,
             end  : props.dateProfile.activeRange.end

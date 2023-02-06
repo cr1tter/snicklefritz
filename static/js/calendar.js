@@ -23,7 +23,7 @@ import {
 export const corsbase = 'https://cors.anarchism.nyc';
 export const domparser = new DOMParser();
 
-export default calendar = new Calendar(document.getElementById('calendar'), {
+export default new Calendar(document.getElementById('calendar'), {
     plugins: [
         dayGridPlugin,
         timeGridPlugin,
