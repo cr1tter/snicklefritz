@@ -388,6 +388,19 @@ export const EventBriteEventSources = [
         }
     },
     {
+        name: 'Party Dad',
+        id: 'party-dad',
+        className: 'party-dad',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new EventBrite({
+                url: 'https://www.eventbrite.com/o/party-dad-54407191923',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'Queer Social',
         id: 'queer-social',
         className: 'queer-social',
