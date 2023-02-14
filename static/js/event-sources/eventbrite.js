@@ -440,6 +440,19 @@ export const EventBriteEventSources = [
         }
     },
     {
+        name: 'Sundown Bar (Sundownstairs)',
+        id: 'sundown-bar-sundownstairs',
+        className: 'sundown-bar-sundownstairs',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new EventBrite({
+                url: 'https://www.eventbrite.com/o/sundownstairs-59227590153',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'TV Eye',
         id: 'tv-eye',
         className: 'tv-eye',
