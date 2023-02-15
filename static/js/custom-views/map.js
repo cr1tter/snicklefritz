@@ -60,7 +60,9 @@ export function addEventsInRangeTo (range, map) {
 
     var segs = sliceEvents(viewData, true); // allDay=true
     var geoJson = toGeoJSONFeatureCollection(segs);
-    var markers = L.markerClusterGroup();
+    var markers = L.markerClusterGroup({
+        removeOutsideVisibleBounds: false
+    });
     // Add the features.
     var geoJsonLayer = L.geoJSON(geoJson, {
         onEachFeature: onEachFeature
