@@ -23,6 +23,19 @@ import {
 export const corsbase = 'https://cors.anarchism.nyc';
 export const domparser = new DOMParser();
 
+export const calendarHeaderToolbar = {
+    largeScreen: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'dayGridMonth,timeGridDay,listDay,map'
+    },
+    smallScreen: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'listDay,map'
+    }
+}
+
 export default new Calendar(document.getElementById('calendar'), {
     plugins: [
         dayGridPlugin,
@@ -60,14 +73,22 @@ export default new Calendar(document.getElementById('calendar'), {
         listDay: {
             type: 'list',
             duration: { days: 1 },
-            buttonText: 'list'
+            buttonText: 'list',
+            titleFormat: {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
+            }
+        },
+        map: {
+            titleFormat: {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
+            }
         }
     },
-    headerToolbar: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'dayGridMonth,timeGridDay,listDay,map'
-    },
+    headerToolbar: calendarHeaderToolbar.largeScreen,
     initialView: function () {
         return (window.matchMedia("only screen and (max-width: 540px)").matches)
             ? 'listDay': 'dayGridMonth';
