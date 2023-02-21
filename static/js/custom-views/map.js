@@ -85,7 +85,7 @@ function onEachFeature (feature, layer) {
         strTooltip += ` @ ${feature.properties?.location?.eventVenue?.name}`;
     }
     layer.bindTooltip(strTooltip);
-    var htmlDescriptionHeader = `<header><h1><a href="${feature.properties.url}" title="View publisher info for ${feature.properties.title}">${feature.properties.title}<img src="${feature.properties.image}" alt="Poster image for '${feature.properties.title}'" /></a></h1></header>`;
+    var htmlDescriptionHeader = `<header><h1><a href="${feature.properties.url}" title="View publisher info for ${feature.properties.title}" target="_blank">${feature.properties.title}<img src="${feature.properties.image}" alt="Poster image for '${feature.properties.title}'" /></a></h1></header>`;
     //var strippedOriginalDescription = feature.properties?.description?.replace(/(<([^>]+)>)/gi, '')?.trim();
     // Strip all HTML except for links.
     var strippedOriginalDescription = feature.properties
