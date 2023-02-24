@@ -10,6 +10,7 @@ import timeGridPlugin from 'https://cdn.skypack.dev/@fullcalendar/timegrid@6.0.1
 import listPlugin from 'https://cdn.skypack.dev/@fullcalendar/list@6.0.1?min';
 import iCalendarPlugin from 'https://cdn.skypack.dev/@fullcalendar/icalendar@6.0.1?min';
 import rrulePlugin from 'https://cdn.skypack.dev/@fullcalendar/rrule@6.0.1?min';
+import bootstrap5Plugin from 'https://cdn.skypack.dev/@fullcalendar/bootstrap5@6.1.4?min';
 
 // Import our own module code sources.
 import EventSources from './event-sources.js';
@@ -27,33 +28,37 @@ export const calendarHeaderToolbar = {
     largeScreen: {
         left: 'prev,next today',
         center: 'title',
-        right: 'dayGridMonth,timeGridDay,listDay,map'
+        right: 'filter dayGridMonth,timeGridDay,listDay,map'
     },
     smallScreen: {
         left: 'prev,next today',
         center: 'title',
-        right: 'listDay,map'
+        right: 'filter listDay,map'
     }
 }
 
-export default new Calendar(document.getElementById('calendar'), {
+var calendar = new Calendar(document.getElementById('calendar'), {
     plugins: [
         dayGridPlugin,
         timeGridPlugin,
         listPlugin,
         iCalendarPlugin,
         rrulePlugin,
+        bootstrap5Plugin,
         mapPlugin
     ],
     // TODO: This isn't ready yet but its intent is to be able to toggle a given
     //       FullCalendar Event Source on or off so that a visitor can view a
     //       subset of the events on the calendar based on its source at a time.
     customButtons: {
-        calendars: {
-            text: 'Calendars',
+        filter: {
+            text: 'Filter',
+            hint: 'Filter event listings',
+            icon: 'filter',
             click: function () {
-                var el = document.getElementById('calendarsButtonModal');
-                app.getEventSources().forEach(function (s) {
+                $('#calendar-filter-modal').modal({});
+                //document.getElementById('calendar-filter-modal').modal({});
+                calendar.getEventSources().forEach(function (s) {
                     var li = document.createElement('li');
                     var input = document.createElement('input');
                     input.setAttribute('type', 'checkbox');
@@ -69,6 +74,7 @@ export default new Calendar(document.getElementById('calendar'), {
             }
         },
     },
+    themeSystem: 'bootstrap5', // TODO: Does this really change much?
     views: {
         listDay: {
             type: 'list',
@@ -89,6 +95,11 @@ export default new Calendar(document.getElementById('calendar'), {
         }
     },
     headerToolbar: calendarHeaderToolbar.largeScreen,
+    footerToolbar: {
+        left: 'prev,next today',
+        center: '',
+        right: 'filter listDay,map'
+    },
     initialView: function () {
         return (window.matchMedia("only screen and (max-width: 540px)").matches)
             ? 'listDay': 'dayGridMonth';
@@ -322,3 +333,5 @@ export default new Calendar(document.getElementById('calendar'), {
         }
     }
 });
+
+export default calendar;

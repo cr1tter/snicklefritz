@@ -1,0 +1,36 @@
+{% comment %}
+This is the "main" calendar HTML base code. It's the
+primary included file that makes up the bulk of the app
+itself and defines the containing calendar element and
+any of the custom interactive elements needed.
+{% endcomment -%}
+
+<div id="calendar-container">
+
+    <div id="calendar">
+        <noscript>This calendar needs JavaScript to function. Please <a href="https://enable-javascript.com/">enable JavaScript in your browser</a>, or disable any active script blockers for this site.</noscript>
+    </div>
+
+    <div id="calendar-loading-spinner" class="lds-dual-ring"><span>Loading&hellip;</span></div>
+
+</div><!-- #calendar-container -->
+
+<div id="calendar-filter-modal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Filter Calendar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Modal body text goes here.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Apply</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div><!-- #calendar-filter-modal -->

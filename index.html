@@ -2,17 +2,6 @@
 layout: default
 ---
 
-<div id="featured-events">
-{% comment %}
-    <p data-not-valid-after="2023-02-19T04:00:00-0400">
-        <strong>Relive Halloween this post-Valentine's Day</strong> at <a href="https://livecode.nyc/event/20230218-Hallotines.html">Hallotine's &ldquo;Fear and Loathing in Brooklyn&rdquo;</a> on Saturday, February 18<sup>th</sup> 2023.
-        <a href="https://livecode.nyc/event/20230218-Hallotines.html"><img src="https://livecode.nyc/image/2023-hallotines.png" /></a>
-    </p>
-{% endcomment %}
-</div>
-<div id="calendar-container">
-    <div id="calendar">
-        <noscript>This calendar needs JavaScript to function. Please <a href="https://enable-javascript.com/">enable JavaScript in your browser</a>, or disable any active script blockers for this site.</noscript>
-    </div>
-    <div id="calendar-loading-spinner" class="lds-dual-ring"><span>Loading&hellip;</span></div>
-</div>
+{% include featured-events.html %}
+
+{% include calendar.html %}

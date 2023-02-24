@@ -25,6 +25,10 @@ function adjustToolbarButtons () {
     });
 }
 
+// Don't use the `$` variable for jQuery exclusively.
+// https://api.jquery.com/jQuery.noConflict/
+jQuery.noConflict();
+
 if ('loading' === document.readyState) {
     document.addEventListener('DOMCOntentLoaded', function () {
         calendar.render();
