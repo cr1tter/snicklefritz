@@ -7,9 +7,6 @@
  * given their own ECMAScript Module file where they are made
  * compatible, if necessary. Then they're all concatenated
  * into one big array, here.
- *
- * @TODO: Can we paralellize this in some way to make initial
- *        loading ("time to first (calendar) paint") faster?
  */
 import { DiceEventSources } from './event-sources/dice.js';
 import { EventBriteEventSources } from './event-sources/eventbrite.js';

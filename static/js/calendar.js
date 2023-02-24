@@ -56,21 +56,21 @@ var calendar = new Calendar(document.getElementById('calendar'), {
             hint: 'Filter event listings',
             icon: 'filter',
             click: function () {
-                $('#calendar-filter-modal').modal({});
+                jQuery('#calendar-filter-modal').modal().show();
                 //document.getElementById('calendar-filter-modal').modal({});
-                calendar.getEventSources().forEach(function (s) {
-                    var li = document.createElement('li');
-                    var input = document.createElement('input');
-                    input.setAttribute('type', 'checkbox');
-                    input.setAttribute('name', 'calendar_source');
-                    input.setAttribute('id', 'calendar-source-' + s.id);
-                    li.appendChild(input);
-                    var text = document.createTextNode(s.name);
-                    li.appendChild(text);
-                    el.querySelector('#calendarsList').appendChild(li);
-                });
-                var m = new bootstrap.Modal(el);
-                m.show();
+                // calendar.getEventSources().forEach(function (s) {
+                //     var li = document.createElement('li');
+                //     var input = document.createElement('input');
+                //     input.setAttribute('type', 'checkbox');
+                //     input.setAttribute('name', 'calendar_source');
+                //     input.setAttribute('id', 'calendar-source-' + s.id);
+                //     li.appendChild(input);
+                //     var text = document.createTextNode(s.name);
+                //     li.appendChild(text);
+                //     el.querySelector('#calendarsList').appendChild(li);
+                // });
+                // var m = new bootstrap.Modal(el);
+                // m.show();
             }
         },
     },
