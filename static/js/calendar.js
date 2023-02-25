@@ -28,12 +28,14 @@ export const calendarHeaderToolbar = {
     largeScreen: {
         left: 'prev,next today',
         center: 'title',
-        right: 'filter dayGridMonth,timeGridDay,listDay,map'
+        //right: 'filter dayGridMonth,timeGridDay,listDay,map'
+        right: 'dayGridMonth,timeGridDay,listDay,map'
     },
     smallScreen: {
         left: 'prev,next today',
         center: 'title',
-        right: 'filter listDay,map'
+        //right: 'filter listDay,map'
+        right: 'listDay,map'
     }
 }
 
@@ -56,8 +58,7 @@ var calendar = new Calendar(document.getElementById('calendar'), {
             hint: 'Filter event listings',
             icon: 'filter',
             click: function () {
-                jQuery('#calendar-filter-modal').modal().show();
-                //document.getElementById('calendar-filter-modal').modal({});
+                jQuery('#calendar-filter-modal').modal('show');
                 // calendar.getEventSources().forEach(function (s) {
                 //     var li = document.createElement('li');
                 //     var input = document.createElement('input');
@@ -69,8 +70,6 @@ var calendar = new Calendar(document.getElementById('calendar'), {
                 //     li.appendChild(text);
                 //     el.querySelector('#calendarsList').appendChild(li);
                 // });
-                // var m = new bootstrap.Modal(el);
-                // m.show();
             }
         },
     },
@@ -98,7 +97,8 @@ var calendar = new Calendar(document.getElementById('calendar'), {
     footerToolbar: {
         left: 'prev,next today',
         center: '',
-        right: 'filter listDay,map'
+        //right: 'filter listDay,map'
+        right: 'listDay,map'
     },
     initialView: function () {
         return (window.matchMedia("only screen and (max-width: 540px)").matches)

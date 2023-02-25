@@ -23,7 +23,17 @@ any of the custom interactive elements needed.
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>Modal body text goes here.</p>
+                <p>Choose which events to show or hide.</p>
+                <form>
+                    <fieldset id="filter-event-sources">
+                        <legend>Sources</legend>
+                        <ul></ul>
+                    </fieldset>
+                    <fieldset id="filter-event-categories">
+                        <legend>Categories</legend>
+                        <ul></ul>
+                    </fieldset>
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
