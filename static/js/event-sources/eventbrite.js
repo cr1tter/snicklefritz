@@ -453,19 +453,6 @@ export const EventBriteEventSources = [
         }
     },
     {
-        name: 'TV Eye',
-        id: 'tv-eye',
-        className: 'tv-eye',
-        events: async function (fetchInfo, successCallback, failureCallback) {
-            await new EventBrite({
-                url: 'https://www.eventbrite.com/o/tv-eye-28766931741',
-                fetchInfo: fetchInfo,
-                successCallback: successCallback,
-                failureCallback: failureCallback
-            });
-        }
-    },
-    {
         name: 'The Bell House',
         id: 'the-bell-house',
         className: 'the-bell-house',
@@ -498,19 +485,6 @@ export const EventBriteEventSources = [
         events: async function (fetchInfo, successCallback, failureCallback) {
             await new EventBrite({
                 url: 'https://www.eventbrite.com/o/the-nova-experiment-17863009866',
-                fetchInfo: fetchInfo,
-                successCallback: successCallback,
-                failureCallback: failureCallback
-            });
-        }
-    },
-    {
-        name: 'The Sultan Room',
-        id: 'the-sultan-room',
-        className: 'the-sultan-room',
-        events: async function (fetchInfo, successCallback, failureCallback) {
-            await new EventBrite({
-                url: 'https://www.eventbrite.com/o/the-sultan-room-18078001345',
                 fetchInfo: fetchInfo,
                 successCallback: successCallback,
                 failureCallback: failureCallback
