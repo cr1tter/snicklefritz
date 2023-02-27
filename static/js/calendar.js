@@ -40,8 +40,6 @@ export const calendarHeaderToolbar = {
     }
 }
 
-customElements.define('calendar-filter-list-item', calendarFilterListItem);
-
 var calendar = new Calendar(document.getElementById('calendar'), {
     plugins: [
         dayGridPlugin,
@@ -67,14 +65,15 @@ var calendar = new Calendar(document.getElementById('calendar'), {
                     var y = b.internalEventSource.extendedProps.name;
                     return x.localeCompare(y);
                 }).forEach(function (s) {
-                     var el = document.createElement('calendar-filter-list-item');
-                     var nameSlot = document.createElement('span');
-                     nameSlot.setAttribute('slot', 'item-name');
-                     nameSlot.appendChild(document.createTextNode(s.internalEventSource.extendedProps.name));
-                     el.appendChild(nameSlot);
-                     document.getElementById('filter-event-sources')
-                         .querySelector('ul')
-                         .appendChild(el);
+                    var el = document.createElement('calendar-filter-list-item');
+                    el.dataset.id = s.id;
+                    var nameSlot = document.createElement('span');
+                    nameSlot.setAttribute('slot', 'item-name');
+                    nameSlot.appendChild(document.createTextNode(s.internalEventSource.extendedProps.name));
+                    el.appendChild(nameSlot);
+                    document.getElementById('filter-event-sources')
+                        .querySelector('ul')
+                        .appendChild(el);
                 });
             }
         },
