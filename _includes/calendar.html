@@ -23,16 +23,42 @@ any of the custom interactive elements needed.
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <template id="filter-list-item-template">
+                    <style>
+li {
+    list-style-type: none;
+    text-align: left;
+}
+                    </style>
+                    <li>
+                        <input class="form-check-input"
+                            type="checkbox"
+                            value=""
+                        />
+                        <label class="form-check-label" for="">
+                            <slot name="item-name">Item name</slot>
+                        </label>
+                    </li>
+                </template>
                 <p>Choose which events to show or hide.</p>
                 <form>
-                    <fieldset id="filter-event-sources">
+                    <fieldset id="filter-event-sources" class="form-group">
                         <legend>Sources</legend>
-                        <ul></ul>
+                        <ul>
+                            <!--
+                                Dynamically fills with
+                                list items based on the
+                                event sources defined.
+                            -->
+                        </ul>
                     </fieldset>
-                    <fieldset id="filter-event-categories">
+                    <!-- TODO: Not yet implemented.
+                    <fieldset id="filter-event-categories" class="form-group">
                         <legend>Categories</legend>
-                        <ul></ul>
+                        <ul>
+                        </ul>
                     </fieldset>
+                    -->
                 </form>
             </div>
             <div class="modal-footer">

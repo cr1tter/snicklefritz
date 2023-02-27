@@ -20,6 +20,7 @@ import {
     map,
     addEventsInRangeTo
 } from './custom-views/map.js';
+import { default as calendarFilterListItem } from './custom-elements/calendar-filter-list-item.js';
 
 export const corsbase = 'https://cors.anarchism.nyc';
 export const domparser = new DOMParser();
@@ -38,6 +39,8 @@ export const calendarHeaderToolbar = {
         right: 'listDay,map'
     }
 }
+
+customElements.define('calendar-filter-list-item', calendarFilterListItem);
 
 var calendar = new Calendar(document.getElementById('calendar'), {
     plugins: [
@@ -59,21 +62,24 @@ var calendar = new Calendar(document.getElementById('calendar'), {
             icon: 'filter',
             click: function () {
                 jQuery('#calendar-filter-modal').modal('show');
-                // calendar.getEventSources().forEach(function (s) {
-                //     var li = document.createElement('li');
-                //     var input = document.createElement('input');
-                //     input.setAttribute('type', 'checkbox');
-                //     input.setAttribute('name', 'calendar_source');
-                //     input.setAttribute('id', 'calendar-source-' + s.id);
-                //     li.appendChild(input);
-                //     var text = document.createTextNode(s.name);
-                //     li.appendChild(text);
-                //     el.querySelector('#calendarsList').appendChild(li);
-                // });
+                calendar.getEventSources().sort(function (a, b) {
+                    var x = a.internalEventSource.extendedProps.name;
+                    var y = b.internalEventSource.extendedProps.name;
+                    return x.localeCompare(y);
+                }).forEach(function (s) {
+                     var el = document.createElement('calendar-filter-list-item');
+                     var nameSlot = document.createElement('span');
+                     nameSlot.setAttribute('slot', 'item-name');
+                     nameSlot.appendChild(document.createTextNode(s.internalEventSource.extendedProps.name));
+                     el.appendChild(nameSlot);
+                     document.getElementById('filter-event-sources')
+                         .querySelector('ul')
+                         .appendChild(el);
+                });
             }
         },
     },
-    themeSystem: 'bootstrap5', // TODO: Does this really change much?
+    themeSystem: 'bootstrap5',
     views: {
         listDay: {
             type: 'list',
