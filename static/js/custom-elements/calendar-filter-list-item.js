@@ -28,7 +28,7 @@ export default class calendarFilterListItem extends HTMLElement {
         inputElement.setAttribute('value', `${this.dataset.id}`);
         labelElement.setAttribute('for', `filter-${this.dataset.id}`);
         var s = calendar.getEventSourceById(this.dataset.id);
-        if ('none' == s.display) {
+        if ('none' == s.internalEventSource.ui.display) {
             inputElement.checked = false;
         } else {
             inputElement.checked = true;
