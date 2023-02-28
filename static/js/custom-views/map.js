@@ -5,11 +5,13 @@ import FullCalendarEvent from '../event.js';
 
 export var map;
 
-// Converts a slice of FullCalendar Event segments to a GeoJSON
-// Feature Collection object.
-//
-// @param segments
-// @return {object} A [GeoJSON Feature Collection](https://geojson.org/geojson-spec.html#examples) object.
+/**
+ * Converts a slice of FullCalendar Event segments to a GeoJSON
+ * Feature Collection object.
+ *
+ * @param segments
+ * @return {object} A [GeoJSON Feature Collection](https://geojson.org/geojson-spec.html#examples) object.
+ */
 export function toGeoJSONFeatureCollection (segments) {
     var geojson = {
         type: 'FeatureCollection',
@@ -72,13 +74,15 @@ export function addEventsInRangeTo (range, map) {
     map.fitBounds(markers.getBounds());
 }
 
-// Handler to prepare each GeoJSON Feature (an event item) for the
-// Leaflet Map it's about to be added to. Mostly sets up the event
-// popup and binds the Marker Layer to the correct Map feature.
-//
-// @param feature {GeoJSON Feature}
-// @param layer {Layer}
-// @return {object} An object with structure `{ feature, layer }`.
+/**
+ * Handler to prepare each GeoJSON Feature (an event item) for the
+ * Leaflet Map it's about to be added to. Mostly sets up the event
+ * popup and binds the Marker Layer to the correct Map feature.
+ *
+ * @param feature {GeoJSON Feature}
+ * @param layer {Layer}
+ * @return {object} An object with structure `{ feature, layer }`.
+ */
 function onEachFeature (feature, layer) {
     var strTooltip = `${feature.properties.dateRange.start.format('LT')}: ${feature.properties.title}`;
     if (feature.properties.location.eventVenue) {

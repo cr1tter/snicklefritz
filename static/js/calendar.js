@@ -95,7 +95,8 @@ var calendar = new Calendar(document.getElementById('calendar'), {
                 year: 'numeric',
                 month: 'short',
                 day: 'numeric'
-            }
+            },
+            nextDayThreshold: '04:00:00'
         }
     },
     headerToolbar: calendarHeaderToolbar.largeScreen,
