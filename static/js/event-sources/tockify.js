@@ -31,6 +31,19 @@ export const TockifyEventSources = [
                 failureCallback: failureCallback
             });
         }
+    },
+    {
+        name: 'Thotyssey',
+        id: 'thotyssey',
+        className: 'thotyssey',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new Tockify({
+                url: `https://tockify.com/api/ngevent?max=100&calname=thotyssey&start-inclusive=true&longForm=true&showAll=true`,
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
     }
 ];
 
