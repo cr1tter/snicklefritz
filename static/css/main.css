@@ -27,6 +27,20 @@ footer {
     font-size: 14px;
 }
 
+#sister-sites {
+    margin-bottom: 1rem;
+}
+#sister-sites p,
+#sister-sites ul,
+#sister-sites li {
+    display: inline;
+    margin: 0;
+    padding: 0;
+}
+#sister-sites li:not(:last-child)::after {
+    content: ", ";
+}
+
 /**
  * @group Typography.
  */
