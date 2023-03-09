@@ -136,6 +136,10 @@ const MapViewConfig = {
                 })
             }).addTo(map);
         });
+        const resizeObserver = new ResizeObserver(function () {
+            map.invalidateSize();
+        });
+        resizeObserver.observe(document.getElementById('map'));
         addEventsInRangeTo({
             start: props.dateProfile.activeRange.start,
             end  : props.dateProfile.activeRange.end

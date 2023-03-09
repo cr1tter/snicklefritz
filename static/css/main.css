@@ -125,7 +125,7 @@ header p {
  */
 #map {
     min-height: 300px;
-    height: 80%;
+    height: 90vh;
 }
 .leaflet-popup-content h1 {
     border-bottom: none;

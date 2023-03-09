@@ -99,6 +99,7 @@ var calendar = new Calendar(document.getElementById('calendar'), {
             nextDayThreshold: '04:00:00'
         }
     },
+    height: '100vh',
     headerToolbar: calendarHeaderToolbar.largeScreen,
     footerToolbar: {
         left: 'prev,next today',
@@ -112,6 +113,7 @@ var calendar = new Calendar(document.getElementById('calendar'), {
     }(),
     nowIndicator: true,
     defaultTimedEventDuration: '02:00', // Most events are longer than one hour.
+    weekNumbers: true,
     loading: function (isLoading) {
         if (isLoading) {
             document.getElementById('calendar-loading-spinner').style.display = 'block';
