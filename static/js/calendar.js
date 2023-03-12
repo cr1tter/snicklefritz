@@ -111,6 +111,7 @@ var calendar = new Calendar(document.getElementById('calendar'), {
         return (window.matchMedia("only screen and (max-width: 540px)").matches)
             ? 'listDay': 'dayGridMonth';
     }(),
+    initialDate: new URLSearchParams(window.location.search).get('initialDate'),
     nowIndicator: true,
     defaultTimedEventDuration: '02:00', // Most events are longer than one hour.
     weekNumbers: true,
