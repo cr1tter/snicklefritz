@@ -137,6 +137,19 @@ export const SquarespaceEventSources = [
         }
     },
     {
+        name: 'Nina Vicious',
+        id: 'nina-vicious',
+        className: 'nina-vicious',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new Squarespace({
+                url: 'https://www.ninavicious.com/events?format=json',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'Nowhere Bar',
         id: 'nowhere-bar',
         className: 'nowhere-bar',
