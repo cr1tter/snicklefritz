@@ -59,6 +59,19 @@ export const SquarespaceEventSources = [
     //     }
     // },
     {
+        name: 'Bush BK',
+        id: 'bush-bk',
+        className: 'bush-bk',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new Squarespace({
+                url: 'https://www.bushbk.com/events?format=json',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'Cherry on Top',
         id: 'cherry-on-top',
         className: 'cherry-on-top',
