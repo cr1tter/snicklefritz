@@ -46,6 +46,19 @@ export const EventBriteEventSources = [
         }
     },
     {
+        name: 'Barnard Vagelos Computational Science Center',
+        id: 'barnard-vagelos-computational-science-center',
+        className: 'barnard-vagelos-computational-science-center',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new EventBrite({
+                url: 'https://www.eventbrite.com/o/barnard-vagelos-computational-science-center-34292236013',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'Big Milk',
         id: 'big-milk',
         className: 'big-milk',
