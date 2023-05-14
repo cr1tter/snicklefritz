@@ -6,6 +6,19 @@ import { corsbase } from '../calendar.js'
 
 export const GoogleCalendarEventSources = [
     {
+        name: 'Billie Bullock',
+        id: 'billie-bullock',
+        className: 'billie-bullock',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new GoogleCalendar({
+                url: 'https://calendar.google.com/calendar/ical/heybilliebullock%40gmail.com/public/basic.ics',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'Caffiene Underground',
         id: 'caffiene-underground',
         className: 'caffiene-underground',
