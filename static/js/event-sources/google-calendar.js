@@ -60,6 +60,19 @@ export const GoogleCalendarEventSources = [
         }
     },
     {
+        name: 'Happy Fun Hideaway',
+        id: 'happy-fun-hideaway',
+        className: 'hart-bar',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new GoogleCalendar({
+                url: 'https://calendar.google.com/calendar/ical/df0602291afe16242665e5d462f9086f30f7d420b9aa4edb1d9eb159e5c970e5@group.calendar.google.com/public/basic.ics',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'Hart Bar',
         id: 'hart-bar',
         className: 'hart-bar',
