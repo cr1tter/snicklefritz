@@ -148,6 +148,19 @@ export const GoogleCalendarEventSources = [
             });
         }
     },
+    {
+        name: 'Verse BK',
+        id: 'verse-bk',
+        className: 'verse-bk',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new GoogleCalendar({
+                url: 'https://calendar.google.com/calendar/ical/c_qi5b592teecmbi4l2jk7ff69ao@group.calendar.google.com/public/basic.ics',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    }
 ];
 
 export default function GoogleCalendar (optionsObj) {
