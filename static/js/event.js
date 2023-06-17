@@ -68,13 +68,13 @@ export default class FullCalendarEvent {
                 location: {
                     geoJSON: geoJSON,
                     eventVenue: {
-                        name: item.location.name,
+                        name: item.location?.name,
                         address: {
-                            streetAddress: item.location.streetAddress,
-                            addressLocality: item.location.addressLocality,
-                            addressRegion: item.location.addressRegion,
-                            postalCode: item.location.postalCode,
-                            addressCountry: item.location.addressCountry
+                            streetAddress: item.location?.streetAddress,
+                            addressLocality: item.location?.addressLocality,
+                            addressRegion: item.location?.addressRegion,
+                            postalCode: item.location?.postalCode,
+                            addressCountry: item.location?.addressCountry
                         },
                         geo: item.location?.geo
                     }

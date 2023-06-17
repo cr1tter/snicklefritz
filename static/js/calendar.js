@@ -274,6 +274,23 @@ var calendar = new Calendar(document.getElementById('calendar'), {
             },
             color: '#2E2E2D',
             textColor: '#FFF',
+        },
+        {
+            name: 'Transgression',
+            id: 'transgression',
+            className: 'transgression',
+            events: async function (fetchInfo, successCallback, failureCallback) {
+                var response = await fetch('https://transgression.party/events/');
+                var html = await response.text();
+                var doc = domparser.parseFromString(html, 'text/html');
+                var ld_json = JSON.parse(doc.querySelector('.yoast-schema-graph').textContent);
+                var itemList = ld_json['@graph'].find(function (x) {
+                    return 'ItemList' === x['@type'] }
+                ).itemListElement;
+                successCallback(itemList.map(FullCalendarEvent.fromSchemaDotOrg));
+            },
+            color: 'black',
+            textColor: 'white',
         }
 
         // Paragon uses Resident Advisor, which is hard(?) to scrape because they never
