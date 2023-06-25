@@ -322,6 +322,19 @@ export const EventBriteEventSources = [
         }
     },
     {
+        name: 'Miss Bloom Sex Educator',
+        id: 'miss-bloom-sex-educator',
+        className: 'miss-bloom-sex-educator',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new EventBrite({
+                url: 'https://www.eventbrite.com/o/miss-bloom-sex-educator-31043208919',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'Museum of Reclaimed Urban Space (MoRUS)',
         id: 'morus',
         className: 'morus',

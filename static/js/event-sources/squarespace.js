@@ -228,6 +228,19 @@ export const SquarespaceEventSources = [
         }
     },
     {
+        name: 'Suzanne Bartsch',
+        id: 'suzanne-bartsch',
+        className: 'suzanne-bartsch',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new Squarespace({
+                url: 'https://www.susannebartsch.com/upcoming-events?format=json',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'TailGate Brooklyn',
         id: 'tailgate-brooklyn',
         className: 'tailgate-brooklyn',
