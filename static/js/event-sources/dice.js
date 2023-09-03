@@ -23,6 +23,23 @@ export const DiceEventSources = [
         }
     },
     {
+        name: "Knockdown Center",
+        id: 'knockdown-center',
+        className: 'knockdown-center',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new Dice({
+                url: 'https://events-api.dice.fm/v1/events?page%5Bsize%5D=24&types=linkout,event&filter%5Bvenues%5D%5B%5D=Knockdown%20Center',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback,
+                headers: {
+                    // Actually C'mon Everybody's API key, but, shrug?
+                    'x-api-key': 'PyghT2k59li4oGXIef8t4Git2vRl58H7WAuUJGpd'
+                }
+            });
+        }
+    },
+    {
         name: 'Our Wicked Lady',
         id: 'our-wicked-lady',
         className: 'our-wicked-lady',
