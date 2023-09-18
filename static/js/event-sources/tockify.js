@@ -7,6 +7,19 @@ import FullCalendarEvent from '../event.js';
 
 export const TockifyEventSources = [
     {
+        name: 'Brooklyn Art Haus',
+        id: 'brooklyn-art-haus',
+        className: 'brooklyn-art-haus',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new Tockify({
+                url: `https://tockify.com/api/ngevent?max=100&calname=brooklyn.art.haus&start-inclusive=true&longForm=true&showAll=true`,
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'Bushwick Daily',
         id: 'bushwick-daily',
         className: 'bushwick-daily',
