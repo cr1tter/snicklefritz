@@ -1,5 +1,5 @@
-import { sliceEvents, createPlugin } from 'https://cdn.skypack.dev/@fullcalendar/core@6.0.1?min';
-import momentTimezone from 'https://cdn.skypack.dev/moment-timezone@0.5.40?min';
+import { sliceEvents, createPlugin } from 'https://cdn.skypack.dev/@fullcalendar/core@6.1.8?min';
+import momentTimezone from 'https://cdn.skypack.dev/moment-timezone@0.5.43?min';
 import { default as calendar } from '../calendar.js';
 import FullCalendarEvent from '../event.js';
 
