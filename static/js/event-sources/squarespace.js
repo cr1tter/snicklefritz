@@ -98,6 +98,19 @@ export const SquarespaceEventSources = [
         }
     },
     {
+        name: 'Father Knows Best',
+        id: 'father-knows-best',
+        className: 'father-knows-best',
+        events: async function (fetchInfo, successCallback, failureCallback) {
+            await new Squarespace({
+                url: 'https://www.fathersbk.com/events?format=json',
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback
+            });
+        }
+    },
+    {
         name: 'Hot Rabbit',
         id: 'hot-rabbit',
         className: 'hot-rabbit',
