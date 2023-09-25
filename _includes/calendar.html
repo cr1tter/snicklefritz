@@ -23,31 +23,39 @@ any of the custom interactive elements needed.
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <template id="filter-list-item-template">
-                    <style>
-li {
-    list-style-type: none;
-    text-align: left;
-}
-                    </style>
-                    <li>
-                        <input class="form-check-input"
-                            id=""
-                            type="checkbox"
-                            checked="checked"
-                            value=""
-                        />
-                        <label class="form-check-label" for="">
-                            <slot name="item-name">Event source name</slot>
-                        </label>
-                    </li>
-                </template>
                 <p>Choose which events to show or hide.</p>
                 <form>
                     <fieldset id="filter-event-sources" class="form-group">
                         <legend>Sources</legend>
                         <details>
                             <summary>Filter all events by their source</summary>
+                            <p style="text-align: right; font-size: x-small; margin-bottom: 0;">
+                                <button type="button" value="on">Check all</button>
+                                <button type="button" value="off">Uncheck all</button>
+                                {% comment %}
+                                Empty string as `value` attribute will toggle state.
+                                {% endcomment -%}
+                                <button type="button" value="">Toggle all</button>
+                            </p>
+                            <template id="filter-list-item-template">
+                                <style>
+                                li {
+                                    list-style-type: none;
+                                    text-align: left;
+                                }
+                                </style>
+                                <li>
+                                    <input class="form-check-input"
+                                        id=""
+                                        type="checkbox"
+                                        checked="checked"
+                                        value=""
+                                    />
+                                    <label class="form-check-label" for="">
+                                        <slot name="item-name">Event source name</slot>
+                                    </label>
+                                </li>
+                            </template>
                             <ul>
                                 <!--
                                     Dynamically fills with
@@ -56,6 +64,7 @@ li {
                                 -->
                             </ul>
 <script type="module">
+// Generate list items out of each EventSource object in the Calendar.
 import { default as calendar } from '{% link static/js/calendar.js %}';
 window.addEventListener('DOMContentLoaded', function (e) {
     calendar.getEventSources().sort(function (a, b) {
@@ -72,6 +81,32 @@ window.addEventListener('DOMContentLoaded', function (e) {
         document.getElementById('filter-event-sources')
             .querySelector('ul')
             .appendChild(el);
+    });
+});
+
+// Make the "Check all" and "Uncheck all" buttons do their thing.
+document.querySelectorAll('#filter-event-sources button').forEach(function ( btn ) {
+    btn.addEventListener('click', function ( e ) {
+        document.querySelectorAll('#filter-event-sources calendar-filter-list-item')
+        .forEach(function ( x ) {
+            var q;
+            switch ( btn.value ) {
+                case 'on':
+                    q = ':not(:checked)';
+                    break;
+                case 'off':
+                    q = ':checked';
+                    break;
+                case '':
+                default:
+                    q = '';
+                    break;
+            }
+            var el = x.shadowRoot.querySelector(`input[type="checkbox"]${q}`);
+            if ( el ) {
+                el.click();
+            }
+        });
     });
 });
 </script>

@@ -1,3 +1,6 @@
+---
+layout: none
+---
 /**
  * Calendar is the main calendar-handling code.
  *
@@ -13,14 +16,14 @@ import rrulePlugin from 'https://cdn.skypack.dev/@fullcalendar/rrule@6.1.9?min';
 import bootstrap5Plugin from 'https://cdn.skypack.dev/@fullcalendar/bootstrap5@6.1.9?min';
 
 // Import our own module code sources.
-import EventSources from './event-sources.js';
-import FullCalendarEvent from './event.js';
+import EventSources from '{% link static/js/event-sources.js %}';
+import FullCalendarEvent from '{% link static/js/event.js %}';
 import {
     default as mapPlugin,
     map,
     addEventsInRangeTo
-} from './custom-views/map.js';
-import { default as calendarFilterListItem } from './custom-elements/calendar-filter-list-item.js';
+} from '{% link static/js/custom-views/map.js %}';
+import { default as calendarFilterListItem } from '{% link static/js/custom-elements/calendar-filter-list-item.js %}';
 
 export const corsbase = 'https://cors.anarchism.nyc';
 export const domparser = new DOMParser();
@@ -68,6 +71,9 @@ var calendar = new Calendar(document.getElementById('calendar'), {
                 year: 'numeric',
                 month: 'short',
                 day: 'numeric'
+            },
+            noEventsContent: {
+                html: `No events to display. Are you <a href="#" onclick="document.querySelector('.fc-filter-button').click();">filtering</a>?`
             }
         },
         map: {
