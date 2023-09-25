@@ -138,3 +138,7 @@ header p {
     max-height: 150px;
     max-width: 100%;
 }
+
+fieldset summary {
+    text-align: left;
+}

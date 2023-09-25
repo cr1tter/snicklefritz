@@ -46,13 +46,36 @@ li {
                 <form>
                     <fieldset id="filter-event-sources" class="form-group">
                         <legend>Sources</legend>
-                        <ul>
-                            <!--
-                                Dynamically fills with
-                                list items based on the
-                                event sources defined.
-                            -->
-                        </ul>
+                        <details>
+                            <summary>Filter all events by their source</summary>
+                            <ul>
+                                <!--
+                                    Dynamically fills with
+                                    list items based on the
+                                    event sources defined.
+                                -->
+                            </ul>
+<script type="module">
+import { default as calendar } from '{% link static/js/calendar.js %}';
+window.addEventListener('DOMContentLoaded', function (e) {
+    calendar.getEventSources().sort(function (a, b) {
+        var x = a.internalEventSource.extendedProps.name;
+        var y = b.internalEventSource.extendedProps.name;
+        return x.localeCompare(y);
+    }).forEach(function (s) {
+        var el = document.createElement('calendar-filter-list-item');
+        el.dataset.id = s.id;
+        var nameSlot = document.createElement('span');
+        nameSlot.setAttribute('slot', 'item-name');
+        nameSlot.appendChild(document.createTextNode(s.internalEventSource.extendedProps.name));
+        el.appendChild(nameSlot);
+        document.getElementById('filter-event-sources')
+            .querySelector('ul')
+            .appendChild(el);
+    });
+});
+</script>
+                        </details>
                     </fieldset>
                     <!-- TODO: Not yet implemented.
                     <fieldset id="filter-event-categories" class="form-group">
@@ -64,8 +87,7 @@ li {
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Apply</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Apply</button>
             </div>
         </div>
     </div>

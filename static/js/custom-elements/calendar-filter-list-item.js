@@ -8,6 +8,7 @@
  */
 
 import { default as calendar } from '../calendar.js';
+import { default as EventSources } from '../event-sources.js';
 
 export default class calendarFilterListItem extends HTMLElement {
     constructor () {
@@ -38,22 +39,26 @@ export default class calendarFilterListItem extends HTMLElement {
     }
 
     /**
-     * Shows or hides the FullCalendar Event Source
+     * Adds (shows) or removes (hides) the FullCalendar Event Source
      * associated with this Custom Element filter item.
+     *
+     * Instead of using the `display` property for an EventSource, we
+     * simply `.remove()` the `EventSource` object itself. Then, when
+     * we want to make it visible again, we re-add it to the calendar.
+     * This is a workaround until the `EventSource.display` property
+     * can be used to toggle the display of events after they've been
+     * added in the initial calendar rendering step.
      */
     toggleDisplay () {
         var inputElement = this;
         var s = calendar.getEventSourceById(inputElement.value);
-        // Match each event with source's internal ID.
-        var sid = s.internalEventSource.sourceId;
-        calendar.getEvents().forEach(function (x) {
-            if (sid == x._def.sourceId) {
-                x.setProp(
-                    'display',
-                    (inputElement.checked) ? 'auto' : 'none'
-                );
-            }
-        });
+        if ( inputElement.checked ) {
+            calendar.addEventSource(EventSources.find( function (x) {
+                return x.id === inputElement.value
+            }));
+        } else {
+            s.remove()
+        }
     }
 };
 

@@ -29,14 +29,12 @@ export const calendarHeaderToolbar = {
     largeScreen: {
         left: 'prev,next today',
         center: 'title',
-        //right: 'filter dayGridMonth,timeGridDay,listDay,map'
-        right: 'dayGridMonth,timeGridDay,listDay,map'
+        right: 'filter dayGridMonth,timeGridDay,listDay,map'
     },
     smallScreen: {
         left: 'prev,next today',
         center: 'title',
-        //right: 'filter listDay,map'
-        right: 'listDay,map'
+        right: 'filter listDay,map'
     }
 }
 
@@ -50,9 +48,6 @@ var calendar = new Calendar(document.getElementById('calendar'), {
         bootstrap5Plugin,
         mapPlugin
     ],
-    // TODO: This isn't ready yet but its intent is to be able to toggle a given
-    //       FullCalendar Event Source on or off so that a visitor can view a
-    //       subset of the events on the calendar based on its source at a time.
     customButtons: {
         filter: {
             text: 'Filter',
@@ -60,21 +55,6 @@ var calendar = new Calendar(document.getElementById('calendar'), {
             icon: 'filter',
             click: function () {
                 jQuery('#calendar-filter-modal').modal('show');
-                calendar.getEventSources().sort(function (a, b) {
-                    var x = a.internalEventSource.extendedProps.name;
-                    var y = b.internalEventSource.extendedProps.name;
-                    return x.localeCompare(y);
-                }).forEach(function (s) {
-                    var el = document.createElement('calendar-filter-list-item');
-                    el.dataset.id = s.id;
-                    var nameSlot = document.createElement('span');
-                    nameSlot.setAttribute('slot', 'item-name');
-                    nameSlot.appendChild(document.createTextNode(s.internalEventSource.extendedProps.name));
-                    el.appendChild(nameSlot);
-                    document.getElementById('filter-event-sources')
-                        .querySelector('ul')
-                        .appendChild(el);
-                });
             }
         },
     },
@@ -104,8 +84,7 @@ var calendar = new Calendar(document.getElementById('calendar'), {
     footerToolbar: {
         left: 'prev,next today',
         center: '',
-        //right: 'filter listDay,map'
-        right: 'listDay,map'
+        right: 'filter listDay,map'
     },
     initialView: function () {
         return (window.matchMedia("only screen and (max-width: 540px)").matches)
