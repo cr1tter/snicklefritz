@@ -16,14 +16,14 @@ import rrulePlugin from 'https://cdn.skypack.dev/@fullcalendar/rrule@6.1.9?min';
 import bootstrap5Plugin from 'https://cdn.skypack.dev/@fullcalendar/bootstrap5@6.1.9?min';
 
 // Import our own module code sources.
-import EventSources from '{% link static/js/event-sources.js %}';
-import FullCalendarEvent from '{% link static/js/event.js %}';
+import EventSources from '{{ site.baseurl }}{% link static/js/event-sources.js %}';
+import FullCalendarEvent from '{{ site.baseurl }}{% link static/js/event.js %}';
 import {
     default as mapPlugin,
     map,
     addEventsInRangeTo
-} from '{% link static/js/custom-views/map.js %}';
-import { default as calendarFilterListItem } from '{% link static/js/custom-elements/calendar-filter-list-item.js %}';
+} from '{{ site.baseurl }}{% link static/js/custom-views/map.js %}';
+import { default as calendarFilterListItem } from '{{ site.baseurl }}{% link static/js/custom-elements/calendar-filter-list-item.js %}';
 
 export const corsbase = 'https://cors.anarchism.nyc';
 export const domparser = new DOMParser();

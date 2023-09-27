@@ -65,7 +65,7 @@ any of the custom interactive elements needed.
                             </ul>
 <script type="module">
 // Generate list items out of each EventSource object in the Calendar.
-import { default as calendar } from '{% link static/js/calendar.js %}';
+import { default as calendar } from '{{ site.baseurl }}{% link static/js/calendar.js %}';
 window.addEventListener('DOMContentLoaded', function (e) {
     calendar.getEventSources().sort(function (a, b) {
         var x = a.internalEventSource.extendedProps.name;
