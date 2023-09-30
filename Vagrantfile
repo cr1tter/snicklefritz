@@ -33,6 +33,7 @@ Vagrant.configure("2") do |config|
     docker compose up --detach
 
     # Install the site source code.
+    gem install bundler:$(tail -n 1 /vagrant/Gemfile.lock | tr -d ' ')
     cd /vagrant && sudo -u vagrant bundle install
 
     # Point the site to the development CORS proxy.
