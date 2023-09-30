@@ -5,61 +5,6 @@
 import { corsbase } from '../calendar.js';
 import FullCalendarEvent from '../event.js';
 
-export const TockifyEventSources = [
-    {
-        name: 'Brooklyn Art Haus',
-        id: 'brooklyn-art-haus',
-        className: 'brooklyn-art-haus',
-        events: async function (fetchInfo, successCallback, failureCallback) {
-            await new Tockify({
-                url: `https://tockify.com/api/ngevent?max=100&calname=brooklyn.art.haus&start-inclusive=true&longForm=true&showAll=true`,
-                fetchInfo: fetchInfo,
-                successCallback: successCallback,
-                failureCallback: failureCallback
-            });
-        }
-    },
-    {
-        name: 'Bushwick Daily',
-        id: 'bushwick-daily',
-        className: 'bushwick-daily',
-        events: async function (fetchInfo, successCallback, failureCallback) {
-            await new Tockify({
-                url: `https://tockify.com/api/ngevent?max=100&calname=bushwickdaily&start-inclusive=true&longForm=true&showAll=true`,
-                fetchInfo: fetchInfo,
-                successCallback: successCallback,
-                failureCallback: failureCallback
-            });
-        }
-    },
-    {
-        name: 'Metropolitan Anarchist Coordinating Council of NYC',
-        id: 'maccnyc',
-        className: 'event-maccnyc',
-        events: async function (fetchInfo, successCallback, failureCallback) {
-            await new Tockify({
-                url: `https://tockify.com/api/ngevent?max=100&calname=mlsupport&start-inclusive=true&longForm=true&showAll=true`,
-                fetchInfo: fetchInfo,
-                successCallback: successCallback,
-                failureCallback: failureCallback
-            });
-        }
-    },
-    {
-        name: 'Thotyssey',
-        id: 'thotyssey',
-        className: 'thotyssey',
-        events: async function (fetchInfo, successCallback, failureCallback) {
-            await new Tockify({
-                url: `https://tockify.com/api/ngevent?max=100&calname=thotyssey&start-inclusive=true&longForm=true&showAll=true`,
-                fetchInfo: fetchInfo,
-                successCallback: successCallback,
-                failureCallback: failureCallback
-            });
-        }
-    }
-];
-
 export default function Tockify (optionsObj) {
     var url = new URL(optionsObj.url);
     url.searchParams.append('startms', optionsObj.fetchInfo.start.getTime());

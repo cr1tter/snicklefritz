@@ -5,7 +5,7 @@
 // Let's just declare this here.
 const corsbase = 'https://cors.anarchism.nyc';
 
-export const IcalendarEventSources = [
+const IcalendarEventSources = [
     {
         name: 'Livecode.NYC',
         id: 'livecode-nyc',
@@ -58,3 +58,5 @@ export const IcalendarEventSources = [
 //        format: 'ics'
 //    }
 ];
+
+export default IcalendarEventSources;

@@ -21,3 +21,4 @@ To get your own copy of NYCAnarchistEvents running locally, do this:
     ```sh
     bundle exec jekyll server
     ```
+1. Set your own event sources in [the `static/js/event-source-data.js` file](static/js/event-source-data.js).

@@ -7,22 +7,6 @@
 import { corsbase } from '../calendar.js';
 import FullCalendarEvent from '../event.js';
 
-export const WordPressEventsOrganiserSources = [
-    {
-        name: 'The Seneca',
-        id: 'the-seneca',
-        className: 'the-seneca',
-        events: async function (fetchInfo, successCallback, failureCallback) {
-            await new WordPressEventsOrganiser({
-                url: corsbase + '/https://www.thesenecanyc.com/wp-admin/admin-ajax.php?action=eventorganiser-fullcal&timeformat=g:i%20a&users_events=false',
-                fetchInfo: fetchInfo,
-                successCallback: successCallback,
-                failureCallback: failureCallback
-            });
-        }
-    }
-];
-
 export default function WordPressEventsOrganiser (optionsObj) {
     this.events = [];
 
@@ -40,8 +24,8 @@ export default function WordPressEventsOrganiser (optionsObj) {
 };
 
 WordPressEventsOrganiser.prototype.fetch = async function (url) {
-    this.url = url;
-    var response = await fetch(url);
+    this.url = corsbase + '/' + url;
+    var response = await fetch(this.url);
     var json = {};
     try {
         var json = await response.json();

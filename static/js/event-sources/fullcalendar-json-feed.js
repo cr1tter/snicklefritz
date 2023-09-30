@@ -2,7 +2,7 @@
  * Utility module to support native FullCalendar JSON feed
  * event sources.
  */
-export const JSONFeedEventSources = [
+const JSONFeedEventSources = [
     {
         name: 'TechLearningCollective.com',
         className: 'event-techlearningcollective',
@@ -13,3 +13,4 @@ export const JSONFeedEventSources = [
         color: 'blue'
     }
 ];
+export default JSONFeedEventSources;
