@@ -11,14 +11,21 @@
  * ```javascript
  * [
  *     {
- *         sourceType: 'Constructor', // name of default export from event source plugin
- *         options: {}, // various options to set on the event source itself
- *         sources: [ // list of individual sources that require the given Constructor
- *             // different values here, usually at a minimum:
- *             name: 'Source name',
- *             id: 'source-name-for-html-id',
- *             className: 'source-name-for-html-class',
- *             url: 'https://example.com/blah.ical'
+ *         sourceType: 'Constructor', // Name of default export from event source plugin.
+ *         options: {
+ *             // Various options to set on the event source itself.
+ *             // For details, see
+ *             //     https://fullcalendar.io/docs/event-source-object#options
+ *         },
+ *         // List of individual sources that require the given Constructor:
+ *         sources: [
+ *             // Different values here, usually at a minimum:
+ *             {
+ *                 name: 'Source name',
+ *                 id: 'source-name-for-html-id',
+ *                 className: 'source-name-for-html-class',
+ *                 url: 'https://example.com/blah.ical'
+ *             }
  *         ]
  *     }
  * ]
@@ -37,8 +44,10 @@ const EventSourceData = [
                 className: 'cmon-everybody',
                 // Pulled from https://www.cmoneverybody.com/events
                 url: 'https://events-api.dice.fm/v1/events?page%5Bsize%5D=24&types=linkout,event&filter%5Bvenues%5D%5B%5D=C%27mon%20Everybody&filter%5Bvenues%5D%5B%5D=Cmon%20Everybody',
-                headers: {
-                    'x-api-key': 'PyghT2k59li4oGXIef8t4Git2vRl58H7WAuUJGpd'
+                extraParams: {
+                    headers: {
+                        'x-api-key': 'PyghT2k59li4oGXIef8t4Git2vRl58H7WAuUJGpd'
+                    }
                 }
             },
             {
@@ -46,9 +55,11 @@ const EventSourceData = [
                 id: 'knockdown-center',
                 className: 'knockdown-center',
                 url: 'https://events-api.dice.fm/v1/events?page%5Bsize%5D=24&types=linkout,event&filter%5Bvenues%5D%5B%5D=Knockdown%20Center',
-                headers: {
-                    // Actually C'mon Everybody's API key, but, shrug?
-                    'x-api-key': 'PyghT2k59li4oGXIef8t4Git2vRl58H7WAuUJGpd'
+                extraParams: {
+                    headers: {
+                        // Actually C'mon Everybody's API key, but, shrug?
+                        'x-api-key': 'PyghT2k59li4oGXIef8t4Git2vRl58H7WAuUJGpd'
+                    }
                 }
             },
             {
@@ -57,8 +68,10 @@ const EventSourceData = [
                 className: 'our-wicked-lady',
                 // Pulled from https://www.ourwickedlady.com/
                 url: 'https://events-api.dice.fm/v1/events?page[size]=24&types=linkout,event&filter[promoters][]=Our%20Wicked%20Lady%20LLC',
-                headers: {
-                    'x-api-key': 'vgtVSu5LGc3TMBuE36FwF1hn26kkt6xi5ThPJrqg'
+                extraParams: {
+                    headers: {
+                        'x-api-key': 'vgtVSu5LGc3TMBuE36FwF1hn26kkt6xi5ThPJrqg'
+                    }
                 }
             },
             {
@@ -67,8 +80,10 @@ const EventSourceData = [
                 className: 'purgatory-bk',
                 // Pulled from https://www.purgatorybk.com/events
                 url: 'https://events-api.dice.fm/v1/events?page%5Bsize%5D=24&types=linkout,event&filter%5Bvenues%5D%5B%5D=purgatory&filter%5Bvenues%5D%5B%5D=Purgatory&filter%5Bvenues%5D%5B%5D=Purgatory%20Events%20LLC',
-                headers: {
-                    'x-api-key': 'VKEBoWiYzJ9uJ8tjR15aD6lL4RnUz8hb4kIYYxFA'
+                extraParams: {
+                    headers: {
+                        'x-api-key': 'VKEBoWiYzJ9uJ8tjR15aD6lL4RnUz8hb4kIYYxFA'
+                    }
                 }
             },
             {
@@ -77,8 +92,10 @@ const EventSourceData = [
                 className: 'saint-vitus',
                 // Pulled from https://www.saintvitusbar.com/events
                 url: 'https://events-api.dice.fm/v1/events?page[size]=24&types=linkout,event&filter[promoters][]=Saint%20Vitus%20LLC%20(dba%20Saint%20Vitus%20Bar)',
-                headers: {
-                    'x-api-key': '1RsJ9u1HnFaj5F5hqFD7F9Idwsqi0o4z7QMQ2uGw'
+                extraParams: {
+                    headers: {
+                        'x-api-key': '1RsJ9u1HnFaj5F5hqFD7F9Idwsqi0o4z7QMQ2uGw'
+                    }
                 }
             },
             {
@@ -87,8 +104,10 @@ const EventSourceData = [
                 className: 'the-brooklyn-monarch',
                 // Pulled from https://www.thebrooklynmonarch.com/shows
                 url: 'https://events-api.dice.fm/v1/events?page[size]=24&types=linkout,event&filter[venues][]=The%20Brooklyn%20Monarch',
-                headers: {
-                    'x-api-key': 'IC6oEVsHlf1eZRkq5Oeuc9XszjvuJCw76K8NSeip'
+                extraParams: {
+                    headers: {
+                        'x-api-key': 'IC6oEVsHlf1eZRkq5Oeuc9XszjvuJCw76K8NSeip'
+                    }
                 }
             },
             {
@@ -97,8 +116,10 @@ const EventSourceData = [
                 className: 'the-sultan-room',
                 // Pulled from https://thesultanroom.com/
                 url: 'https://events-api.dice.fm/v1/events?page[size]=24&types=linkout,event&filter[venues][]=The%20Sultan%20Room&filter[venues][]=The%20Turk%27s%20Inn&filter[venues][]=The%20Sultan%20Room%20Rooftop&filter[promoters][]=Varun%20Kataria%20dba%20Turks%20Group%20LLC',
-                headers: {
-                    'x-api-key': 'j3UZPWFkiQ2UFTppf79rFatRpao3ol7l5PWjmTE9'
+                extraParams: {
+                    headers: {
+                        'x-api-key': 'j3UZPWFkiQ2UFTppf79rFatRpao3ol7l5PWjmTE9'
+                    }
                 }
             },
             {
@@ -107,8 +128,10 @@ const EventSourceData = [
                 className: 'union-pool',
                 // Pulled from https://www.union-pool.com/calendar
                 url: 'https://events-api.dice.fm/v1/events?page%5Bsize%5D=24&types=linkout,event&filter%5Bpromoters%5D%5B%5D=Loop%20De%20Lou%20Production%20Corp%20dba%20Union%20Pool&filter%5Bflags%5D%5B%5D=going_ahead&filter%5Bflags%5D%5B%5D=postponed&filter%5Bflags%5D%5B%5D=rescheduled',
-                headers: {
-                    'x-api-key': '7rU0bJyVtM5s3vDdYNiuQ4UtDo6pAnmH1QgXsI7E'
+                extraParams: {
+                    headers: {
+                        'x-api-key': '7rU0bJyVtM5s3vDdYNiuQ4UtDo6pAnmH1QgXsI7E'
+                    }
                 }
             }
         ]
@@ -484,6 +507,88 @@ const EventSourceData = [
         ]
     },
     {
+        // For "events from an iCalendar feed" type
+        // of event source, see:
+        //     https://fullcalendar.io/docs/icalendar
+        sourceType: 'ics',
+        options: {
+            format: 'ics'
+        },
+        sources: [
+            {
+                name: 'Livecode.NYC',
+                id: 'livecode-nyc',
+                className: 'livecode-nyc',
+                url: 'https://livecode.nyc/calendar.ics',
+            },
+            {
+                name: 'NYC Anarchist Bookfair',
+                id: 'nyc-anarchist-bookfair',
+                className: 'nyc-anarchist-bookfair',
+                url: 'https://anarchistbookfair.net/?ical=1',
+                useCorsProxy: true
+            },
+            // These calendars hosted on Meetup.com will fail due
+            // to a missing CORS header. Current workaround is to
+            // use a CORS proxy. This can be tightened down when
+            // https://github.com/fullcalendar/fullcalendar/issues/4627#issuecomment-831402797 
+            // is resolved.
+            {
+                name: 'NYC Mesh',
+                id: 'nycmesh',
+                className: 'nycmesh',
+                url: 'https://www.meetup.com/nycmesh/events/ical/',
+                useCorsProxy: true,
+                color: '#FC0'
+            },
+            {
+                name: 'NYC Tri-State Area Bisexual+ SGL Queer & Questioning Meetup',
+                id: 'nyc-tri-state-area-bisexual-sgl-queer-questioning-meetup',
+                className: 'nyc-tri-state-area-bisexual-sgl-queer-questioning-meetup',
+                url: 'https://www.meetup.com/bisexual-nyc/events/ical/',
+                useCorsProxy: true,
+                color: '#FC0'
+
+            },
+            {
+                name: 'DEFCON201',
+                id: 'defcon201',
+                className: 'defcon201',
+                url: 'https://www.meetup.com/DEFCON201/events/ical/',
+                useCorsProxy: true,
+                color: '#FC0'
+            }
+            // Not sure if this group is active anymore, so remove them for now.
+            //{
+            //    name: 'New York CryptoParty Network',
+            //    id: 'newyorkcryptopartynetwork',
+            //    className: 'newyorkcryptopartynetwork',
+            //    url: 'https://www.meetup.com/New-York-Cryptoparty-Network/events/ical/',
+            //    useCorsProxy: true
+            //}
+        ]
+    },
+    {
+        // For handling "events (as a json feed)" which are natively
+        // supported in FullCalendar. See:
+        //     https://fullcalendar.io/docs/events-json-feed
+        sourceType: 'json',
+        options: {
+            format: 'json'
+        },
+        sources: [
+            {
+                name: 'TechLearningCollective.com',
+                className: 'event-techlearningcollective',
+                id: 'techlearningcollective',
+                // Use the FullCalendar custom JSON feed until its bug #6173 is resolved.
+                // See https://github.com/fullcalendar/fullcalendar/issues/6173
+                url: 'https://techlearningcollective.com/events/all-fullcalendar-io.json',
+                color: 'blue'
+            }
+        ]
+    },
+    {
         sourceType: 'SeeTicketsEvents',
         options: {
             color: '#FFB200'
@@ -815,10 +920,8 @@ const EventSourceData = [
                 id: 'flux-factory',
                 className: 'flux-factory',
                 url: 'https://www.fluxfactory.org/wp-json/tribe/events/v1/events?per_page=50&geoloc=true&geoloc_lat=40.7127837&geoloc_lng=-74.00594130000002',
-                options: {
-                    color: '#597432',
-                    textColor: '#FFF'
-                }
+                color: '#597432',
+                textColor: '#FFF'
             },
             {
                 name: 'Gay Center',
@@ -831,9 +934,7 @@ const EventSourceData = [
                 id: 'gomag',
                 className: 'gomag',
                 url: 'http://gomag.com/wp-json/tribe/events/v1/events?per_page=50&geoloc=true&geoloc_lat=40.7127837&geoloc_lng=-74.00594130000002',
-                options: {
-                    color: '#ed008c'
-                }
+                color: '#ed008c'
             },
             {
                 name: 'Iffy Books',
@@ -852,29 +953,23 @@ const EventSourceData = [
                 id: 'lesbian-sex-mafia',
                 className: 'lesbian-sex-mafia',
                 url: 'https://lesbiansexmafia.org/wp-json/tribe/events/v1/events?per_page=50&geoloc=true&geoloc_lat=40.7127837&geoloc_lng=-74.00594130000002',
-                options: {
-                    color: '#000',
-                    textColor: '#FFF'
-                }
+                color: '#000',
+                textColor: '#FFF'
             },
             {
                 name: 'The Eulenspiegel Society',
                 id: 'the-eulenspiegel-society',
                 className: 'the-eulenspiegel-society',
                 url: 'https://www.tes.org/wp-json/tribe/events/v1/events?per_page=50&geoloc=true&geoloc_lat=40.7127837&geoloc_lng=-74.00594130000002',
-                options: {
-                    color: '#000',
-                    textColor: '#FFF'
-                }
+                color: '#000',
+                textColor: '#FFF'
             },
             {
                 name: 'The Brick',
                 id: 'the-brick',
                 className: 'the-brick',
                 url: 'https://www.bricktheater.com/wp-json/tribe/events/v1/events?per_page=50',
-                options: {
-                    color: '#ed008c'
-                }
+                color: '#ed008c'
             },
             {
                 name: 'The People\'s Forum',

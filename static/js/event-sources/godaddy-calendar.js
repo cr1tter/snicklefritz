@@ -5,7 +5,6 @@
  *
  * https://www.godaddy.com/help/show-a-public-calendar-on-my-website-24592
  */
-import { corsbase } from '../calendar.js';
 import FullCalendarEvent from '../event.js';
 
 export default function GoDaddy (optionsObj) {
@@ -21,7 +20,6 @@ export default function GoDaddy (optionsObj) {
 
 GoDaddy.prototype.fetch = async function (url) {
     this.url = url;
-    //var response = await fetch(corsbase + '/' + url);
     var response = await fetch(url);
     var json = {};
     try {
