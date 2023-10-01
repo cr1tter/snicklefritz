@@ -40,12 +40,6 @@ EventConstructors.WordPressTribeEvents = WordPressTribeEvents;
 // object for FullCalendar to make use of.
 const EventSources = EventSourceData.flatMap(function (element, index, array) {
     return element.sources.map(function (source) {
-        function withCorsProxy ( url ) {
-            return ( element?.options?.useCorsProxy || source.useCorsProxy )
-                ? `${corsbase}/${url}`
-                : url;
-        }
-
         // This is the object we'll return.
         var eventSourceObject = {};
 
@@ -60,14 +54,23 @@ const EventSources = EventSourceData.flatMap(function (element, index, array) {
         //     https://fullcalendar.io/docs/event-source-object#options
         Object.assign(eventSourceObject, {
             // Options we define.
-            name: source.name,
+            location: source.location,         // for static venue map pins.
             useCorsProxy: source.useCorsProxy, // for automatically munging the URL
+            originUrl: source.originUrl,       // for GoDaddy API.
+            movementId: source.movementId,     // for WithFriends scraper.
 
             // General Event Source Options defined by FullCalendar.
-            allow: source.allow,
-            backgroundColor: source.backgroundColor,
+            name: source.name,
+            id: source.id,
             className: source.className,
-            color: source.color,
+
+            // Set these (and only these?) conditionally.
+            ...( source.backgroundColor && { backgroundColor: source.backgroundColor }),
+            ...( source.color && { color: source.color }),
+            ...( source.textColor && { textColor: source.textColor }),
+
+            // The other possible FC-supported options.
+            allow: source.allow,
             constraint: source.constraint,
             defaultAllDay: source.defaultAllDay,
             display: source.display,
@@ -75,12 +78,10 @@ const EventSources = EventSourceData.flatMap(function (element, index, array) {
             editable: source.editable,
             eventDataTransform: source.eventDataTransform,
             failure: source.failure,
-            id: source.id,
             overlap: source.overlap,
             resourceEditable: source.resourceEditable,
             startEditable: source.startEditable,
             success: source.success,
-            textColor: source.textColor,
 
             // FullCalendar-defined options for JSON or iCalendar feeds.
             url: source.url,
@@ -97,33 +98,32 @@ const EventSources = EventSourceData.flatMap(function (element, index, array) {
             // FullCalendar-defined options for Google Calendar API.
             // https://fullcalendar.io/docs/google-calendar
             googleCalendarId: source.googleCalendarId,
-            googleCalendarApiKey: source.googleCalendarApiKey,
-
-            // The FullCalendar-defined `events` function callback.
-            // This is what we use for most of the event sources.
-            events: async function (fetchInfo, successCallback, failureCallback) {
-                await new EventConstructors[element.sourceType]({
-                    // These parameters are for FullCalendar.
-                    fetchInfo: fetchInfo,
-                    successCallback: successCallback,
-                    failureCallback: failureCallback,
-
-                    // These parameters are for our source type plugin.
-                    url: source.url,
-                    headers: ( source?.extraParams?.headers ) ? source.extraParams.headers : {},
-                    originUrl: ( source.originUrl ) ? source.originUrl : null,
-                    location: ( source.location ) ? source.location : {},
-                    movementId: ( source.movementId ) ? source.movementId : {}
-                });
-            }
+            googleCalendarApiKey: source.googleCalendarApiKey
         });
+
+        // The FullCalendar-defined `events` function callback.
+        // This is what we use for most of the event sources.
+        eventSourceObject.events = async function (fetchInfo, successCallback, failureCallback) {
+            await new EventConstructors[element.sourceType]({
+                // These parameters are for FullCalendar.
+                fetchInfo: fetchInfo,
+                successCallback: successCallback,
+                failureCallback: failureCallback,
+
+                // These parameters are for our source type plugin.
+                url: eventSourceObject.url,
+                headers: ( eventSourceObject?.extraParams?.headers ) ? eventSourceObject.extraParams.headers : {},
+                originUrl: ( eventSourceObject.originUrl ) ? eventSourceObject.originUrl : null,
+                location: ( eventSourceObject.location ) ? eventSourceObject.location : {},
+                movementId: ( eventSourceObject.movementId ) ? eventSourceObject.movementId : {}
+            });
+        };
 
         // Natively supported source types don't use an `events` function.
         switch ( element.sourceType ) {
             case 'ics':
             case 'json':
                 delete eventSourceObject.events;
-                eventSourceObject.url = withCorsProxy(source.url);
                 break;
             default:
                 // Special case for when we're using Google
