@@ -529,36 +529,32 @@ const EventSourceData = [
                 useCorsProxy: true
             },
             // These calendars hosted on Meetup.com will fail due
-            // to a missing CORS header. Current workaround is to
-            // use a CORS proxy. This can be tightened down when
-            // https://github.com/fullcalendar/fullcalendar/issues/4627#issuecomment-831402797 
-            // is resolved.
-            {
-                name: 'NYC Mesh',
-                id: 'nycmesh',
-                className: 'nycmesh',
-                url: 'https://www.meetup.com/nycmesh/events/ical/',
-                useCorsProxy: true,
-                color: '#FC0'
-            },
-            {
-                name: 'NYC Tri-State Area Bisexual+ SGL Queer & Questioning Meetup',
-                id: 'nyc-tri-state-area-bisexual-sgl-queer-questioning-meetup',
-                className: 'nyc-tri-state-area-bisexual-sgl-queer-questioning-meetup',
-                url: 'https://www.meetup.com/bisexual-nyc/events/ical/',
-                useCorsProxy: true,
-                color: '#FC0'
-
-            },
-            {
-                name: 'DEFCON201',
-                id: 'defcon201',
-                className: 'defcon201',
-                url: 'https://www.meetup.com/DEFCON201/events/ical/',
-                useCorsProxy: true,
-                color: '#FC0'
-            }
-            // Not sure if this group is active anymore, so remove them for now.
+            // to a hostile business decision by Meetup itself.
+            // See: https://web.archive.org/web/20231001230958/https://github.com/juniorguru/teemup#why
+            //{
+            //    name: 'NYC Mesh',
+            //    id: 'nycmesh',
+            //    className: 'nycmesh',
+            //    url: 'https://www.meetup.com/nycmesh/events/ical/',
+            //    useCorsProxy: true,
+            //    color: '#FC0'
+            //},
+            //{
+            //    name: 'NYC Tri-State Area Bisexual+ SGL Queer & Questioning Meetup',
+            //    id: 'nyc-tri-state-area-bisexual-sgl-queer-questioning-meetup',
+            //    className: 'nyc-tri-state-area-bisexual-sgl-queer-questioning-meetup',
+            //    url: 'https://www.meetup.com/bisexual-nyc/events/ical/',
+            //    useCorsProxy: true,
+            //    color: '#FC0'
+            //},
+            //{
+            //    name: 'DEFCON201',
+            //    id: 'defcon201',
+            //    className: 'defcon201',
+            //    url: 'https://www.meetup.com/DEFCON201/events/ical/',
+            //    useCorsProxy: true,
+            //    color: '#FC0'
+            //},
             //{
             //    name: 'New York CryptoParty Network',
             //    id: 'newyorkcryptopartynetwork',
@@ -588,40 +584,41 @@ const EventSourceData = [
             }
         ]
     },
-    {
-        sourceType: 'SeeTicketsEvents',
-        options: {
-            color: '#FFB200'
-        },
-        sources: [
-            {
-                name: 'Baby\'s All Right',
-                id: 'babys-all-right',
-                className: 'babys-all-right',
-                // From https://wl.seetickets.us/BabysAllRightBrooklyn
-                url: 'https://wl.seetickets.us/wafform.aspx?_act=eventcalendarwidget&AJAX=1&FetchEvents=1&_pky=6066969&afflky=BabysAllRightBrooklyn',
-                location: {
-                    geoJSON: {
-                        type: "Point",
-                        coordinates: [-73.9656801, 40.7101318]
-                    }
-                }
-            },
-            {
-                name: 'TV Eye',
-                id: 'tv-eye',
-                className: 'tv-eye',
-                // From https://wl.seetickets.us/TVEye
-                url: 'https://wl.seetickets.us/wafform.aspx?_act=eventcalendarwidget&AJAX=1&FetchEvents=1&_pky=9324820&afflky=TVEye',
-                location: {
-                    geoJSON: {
-                        type: "Point",
-                        coordinates: [-73.9074125, 40.6978584]
-                    }
-                }
-            }
-        ]
-    },
+    // September 2023: SeeTickets.us seems to be blocking our CORS proxy.
+    //{
+    //    sourceType: 'SeeTicketsEvents',
+    //    options: {
+    //        color: '#FFB200'
+    //    },
+    //    sources: [
+    //        {
+    //            name: 'Baby\'s All Right',
+    //            id: 'babys-all-right',
+    //            className: 'babys-all-right',
+    //            // From https://wl.seetickets.us/BabysAllRightBrooklyn
+    //            url: 'https://wl.seetickets.us/wafform.aspx?_act=eventcalendarwidget&AJAX=1&FetchEvents=1&_pky=6066969&afflky=BabysAllRightBrooklyn',
+    //            location: {
+    //                geoJSON: {
+    //                    type: "Point",
+    //                    coordinates: [-73.9656801, 40.7101318]
+    //                }
+    //            }
+    //        },
+    //        {
+    //            name: 'TV Eye',
+    //            id: 'tv-eye',
+    //            className: 'tv-eye',
+    //            // From https://wl.seetickets.us/TVEye
+    //            url: 'https://wl.seetickets.us/wafform.aspx?_act=eventcalendarwidget&AJAX=1&FetchEvents=1&_pky=9324820&afflky=TVEye',
+    //            location: {
+    //                geoJSON: {
+    //                    type: "Point",
+    //                    coordinates: [-73.9074125, 40.6978584]
+    //                }
+    //            }
+    //        }
+    //    ]
+    //},
     {
         sourceType: 'Squarespace',
         options: {
@@ -660,12 +657,13 @@ const EventSourceData = [
                 className: 'bush-bk',
                 url: 'https://www.bushbk.com/events?format=json'
             },
-            {
-                name: 'Cherry on Top',
-                id: 'cherry-on-top',
-                className: 'cherry-on-top',
-                url: 'https://www.cherryontopnyc.com/events?format=json'
-            },
+            // This venue no longer publishes a calendar. :(
+            //{
+            //    name: 'Cherry on Top',
+            //    id: 'cherry-on-top',
+            //    className: 'cherry-on-top',
+            //    url: 'https://www.cherryontopnyc.com/events?format=json'
+            //},
             {
                 name: 'Club Cumming',
                 id: 'club-cumming',
@@ -762,12 +760,13 @@ const EventSourceData = [
                 className: 'the-broadway',
                 url: 'https://www.thebroadway.nyc/showcalendar?format=json'
             },
-            {
-                name: 'The Q NYC',
-                id: 'the-q-nyc',
-                className: 'the-q-nyc',
-                url: 'https://theqnyc.com/events?format=json'
-            },
+            // This venue seems to have lost their website.
+            //{
+            //    name: 'The Q NYC',
+            //    id: 'the-q-nyc',
+            //    className: 'the-q-nyc',
+            //    url: 'https://theqnyc.com/events?format=json'
+            //},
             {
                 name: 'The Taillor Group',
                 id: 'the-taillor-group',
@@ -804,12 +803,13 @@ const EventSourceData = [
                 className: 'yu-and-me-books',
                 url: 'https://www.yuandmebooks.com/events?format=json'
             },
-            {
-                name: 'Zerospace',
-                id: 'zerospace',
-                className: 'zerospace',
-                url: 'https://www.zerospace.co/upcoming-events?format=json'
-            }
+            // This venue has also removed their event listings.
+            //{
+            //    name: 'Zerospace',
+            //    id: 'zerospace',
+            //    className: 'zerospace',
+            //    url: 'https://www.zerospace.co/upcoming-events?format=json'
+            //}
         ]
     },
     {
