@@ -527,7 +527,7 @@ const EventSourceData = [
                 className: 'nyc-anarchist-bookfair',
                 url: 'https://anarchistbookfair.net/?ical=1',
                 useCorsProxy: true
-            },
+            }
             // These calendars hosted on Meetup.com will fail due
             // to a hostile business decision by Meetup itself.
             // See: https://web.archive.org/web/20231001230958/https://github.com/juniorguru/teemup#why
@@ -803,6 +803,12 @@ const EventSourceData = [
                 className: 'yu-and-me-books',
                 url: 'https://www.yuandmebooks.com/events?format=json'
             },
+            {
+                name: 'Zum Schneider NYC',
+                id: 'zum-schneider-nyc',
+                className: 'zum-schneider-nyc',
+                url: 'https://nyc.zumschneider.com/upcoming-events-shows?format=json'
+            }
             // This venue has also removed their event listings.
             //{
             //    name: 'Zerospace',
