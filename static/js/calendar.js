@@ -42,6 +42,26 @@ export const calendarHeaderToolbar = {
     }
 }
 
+/**
+ * Changes the toolbar buttons that are visible and their size based
+ * on the size of the screen. This helps adjust for mobile screens.
+ *
+ * @return void
+ */
+function adjustToolbarButtons () {
+    if (window.matchMedia("only screen and (max-width: 540px)").matches) {
+        calendar.setOption('headerToolbar', calendarHeaderToolbar.smallScreen);
+        document.querySelectorAll('.fc-toolbar .btn').forEach(function (btn) {
+            btn.classList.add('btn-sm');
+        });
+    } else {
+        calendar.setOption('headerToolbar', calendarHeaderToolbar.largeScreen);
+        document.querySelectorAll('.fc-toolbar .btn').forEach(function (btn) {
+            btn.classList.remove('btn-sm');
+        });
+    }
+}
+
 var calendar = new Calendar(document.getElementById('calendar'), {
     plugins: [
         dayGridPlugin,
@@ -125,7 +145,10 @@ var calendar = new Calendar(document.getElementById('calendar'), {
             window.open(info.event.url);
         }
     },
+    // Called whenever the FullCalendar View is changed.
     datesSet: function (dateInfo) {
+        adjustToolbarButtons();
+
         // On the Map view, handle changing markers based on the date
         // range selected in the calendar.
         if ('map' == dateInfo.view.type && map) {
@@ -142,6 +165,9 @@ var calendar = new Calendar(document.getElementById('calendar'), {
                 end  : dateInfo.end
             }, map);
         }
+    },
+    windowResize: function (arg) {
+        adjustToolbarButtons();
     }
 });
 
