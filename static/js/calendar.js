@@ -69,7 +69,6 @@ var calendar = new Calendar(document.getElementById('calendar'), {
             duration: { days: 1 },
             buttonText: 'list',
             titleFormat: {
-                year: 'numeric',
                 month: 'short',
                 day: 'numeric'
             },
@@ -79,7 +78,6 @@ var calendar = new Calendar(document.getElementById('calendar'), {
         },
         map: {
             titleFormat: {
-                year: 'numeric',
                 month: 'short',
                 day: 'numeric'
             },
