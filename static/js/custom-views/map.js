@@ -135,7 +135,7 @@ const MapViewConfig = {
                 title    : 'You are here.',
                 alt      : 'You are here.',
                 icon     : new L.icon({
-                    iconUrl: '/static/img/icon.blue.current-position.circle.14x14.png'
+                    iconUrl: '{{ site.baseurl }}{% link static/img/icon.blue.current-position.circle.14x14.png %}'
                 })
             }).addTo(map);
         });
