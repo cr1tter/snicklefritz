@@ -17,7 +17,6 @@ import bootstrap5Plugin from 'https://cdn.skypack.dev/@fullcalendar/bootstrap5@6
 
 // Import our own module code sources.
 import EventSources from '{{ site.baseurl }}{% link static/js/event-sources.js %}';
-import { default as OneOffEventSources } from '{{ site.baseurl }}{% link static/js/one-off-event-source-data.js %}';
 import FullCalendarEvent from '{{ site.baseurl }}{% link static/js/event.js %}';
 import {
     default as mapPlugin,
@@ -40,7 +39,7 @@ export const calendarHeaderToolbar = {
         center: 'title',
         right: 'filter listDay,map'
     }
-}
+};
 
 /**
  * Changes the toolbar buttons that are visible and their size based
@@ -129,7 +128,7 @@ var calendar = new Calendar(document.getElementById('calendar'), {
         document.getElementById('calendar-loading-spinner').style.display = 'none';
     },
     progressiveEventRendering: true,
-    eventSources: EventSources.concat(OneOffEventSources),
+    eventSources: EventSources,
     eventDidMount: function (info) {
         info.el.setAttribute('title', info.event.title);
         if ('listDay' == info.view.type) {

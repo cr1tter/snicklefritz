@@ -35,11 +35,12 @@ EventConstructors.WordPressEventsOrganiser = WordPressEventsOrganiser;
 import { default as WordPressTribeEvents } from './event-sources/wordpress-tribe-events-calendar.js';
 EventConstructors.WordPressTribeEvents = WordPressTribeEvents;
 
-// Finally, we loop over the site-specific data and
-// for each type of event source we construct an
-// object for FullCalendar to make use of.
+// Finally, we loop over the site-specific data and for each type of
+// event source we construct an object for FullCalendar to make use of
+// except for the `one-off` event sources, as they're currently
+// complete FullCalendar objects.
 const EventSources = EventSourceData.flatMap(function (element, index, array) {
-    return element.sources.map(function (source) {
+    return ( 'one-off' === element.sourceType ) ? element.sources : element.sources.map(function (source) {
         // This is the object we'll return.
         var eventSourceObject = {};
 
