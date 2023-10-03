@@ -50,14 +50,14 @@ export default class calendarFilterListItem extends HTMLElement {
      * added in the initial calendar rendering step.
      */
     toggleDisplay () {
-        var inputElement = this;
-        var s = calendar.getEventSourceById(inputElement.value);
-        if ( inputElement.checked ) {
-            calendar.addEventSource(EventSources.find( function (x) {
-                return x.id === inputElement.value
-            }));
+        var el = this;
+        if ( el.checked ) {
+            var s = EventSources.find(function (x) {
+                return x.id === el.value
+            });
+            calendar.addEventSource(s);
         } else {
-            s.remove()
+            calendar.getEventSourceById(el.value).remove();
         }
     }
 };
