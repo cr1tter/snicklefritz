@@ -6,7 +6,7 @@ import FullCalendarEvent from '../event.js';
 
 export default function Dice (optionsObj) {
     var url = optionsObj.url;
-    this.requestHeaders = optionsObj.headers;
+    this.requestHeaders = optionsObj.extraParams.headers;
     return this.fetch(url).then((dice_events) => {
         optionsObj.successCallback(dice_events.parse().events.map(
             this.toFullCalendarEventObject.bind(this)

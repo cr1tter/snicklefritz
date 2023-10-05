@@ -105,19 +105,11 @@ const EventSources = EventSourceData.flatMap(function (element, index, array) {
         // The FullCalendar-defined `events` function callback.
         // This is what we use for most of the event sources.
         eventSourceObject.events = async function (fetchInfo, successCallback, failureCallback) {
-            await new EventConstructors[element.sourceType]({
-                // These parameters are for FullCalendar.
+            await new EventConstructors[element.sourceType](Object.assign(eventSourceObject, {
                 fetchInfo: fetchInfo,
                 successCallback: successCallback,
                 failureCallback: failureCallback,
-
-                // These parameters are for our source type plugin.
-                url: eventSourceObject.url,
-                headers: ( eventSourceObject?.extraParams?.headers ) ? eventSourceObject.extraParams.headers : {},
-                originUrl: ( eventSourceObject.originUrl ) ? eventSourceObject.originUrl : null,
-                location: ( eventSourceObject.location ) ? eventSourceObject.location : {},
-                movementId: ( eventSourceObject.movementId ) ? eventSourceObject.movementId : {}
-            });
+            }));
         };
 
         // Natively supported source types don't use an `events` function.
