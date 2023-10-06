@@ -4,7 +4,7 @@
  */
 
 /**
- * The `EventSourceData` constant is the main data
+ * The `MainEventSourceData` constant is the main data
  * structure for sourcing event information. It's
  * a nested structure that looks like this:
  *
@@ -31,7 +31,7 @@
  * ]
  * ```
  */
-const EventSourceData = [
+const MainEventSourceData = [
     {
         sourceType: 'Dice',
         options: {
@@ -994,4 +994,4 @@ const EventSourceData = [
     }
 ];
 
-export default EventSourceData;
+export default MainEventSourceData;

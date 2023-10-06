@@ -6,6 +6,7 @@
  */
 import { corsbase, domparser } from '../calendar.js';
 import FullCalendarEvent from '../event.js';
+import { convert12To24HourTime } from '../utils.js';
 
 export default function ModernEventsCalendarEvents (optionsObj) {
     this.events = [];
@@ -40,24 +41,7 @@ ModernEventsCalendarEvents.prototype.parse = function () {
     var doc = domparser.parseFromString(this.html, 'text/html');
     doc.querySelectorAll('script[type="application/ld+json"]').forEach(function (el) {
         var times = el.nextElementSibling.querySelector('.mec-event-time').textContent
-            .trim().split(' - ').map(function (str) {
-                var h;
-                var m;
-                if ( str.match(/ am$/) ) {
-                    [h, m] = str.match(/^(\d?\d):(\d\d)/).slice(1);
-                    if ( '12' === h ) {
-                        h = '00';
-                    }
-                } else {
-                    h = parseInt(str.match(/^\d?\d/)[0]) + 12; // Convert to 24-hour.
-                    m = str.match(/:(\d\d) /)[1];
-                    if ( '24' === h ) {
-                        h = '12';
-                    }
-                }
-                h.toString().padStart(2, '0');
-                return [h, m];
-            });
+            .trim().split(' - ').map(convert12To24HourTime);
         var data = FullCalendarEvent.fromSchemaDotOrg(JSON.parse(el.textContent));
         data.start = new Date(`${data.start} ${times[0].join(':')}`);
         data.end = new Date(`${data.end} ${times[1].join(':')}`);
