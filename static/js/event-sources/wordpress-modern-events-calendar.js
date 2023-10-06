@@ -7,7 +7,7 @@
 import { corsbase, domparser } from '../calendar.js';
 import FullCalendarEvent from '../event.js';
 
-export default function ModernEventsCalendarEvent (optionsObj) {
+export default function ModernEventsCalendarEvents (optionsObj) {
     this.events = [];
     this.useCorsProxy = optionsObj.useCorsProxy;
 
@@ -18,7 +18,7 @@ export default function ModernEventsCalendarEvent (optionsObj) {
     });
 };
 
-ModernEventsCalendarEvent.prototype.fetch = async function (url) {
+ModernEventsCalendarEvents.prototype.fetch = async function (url) {
     this.url = (this.useCorsProxy)
         ? new URL(`${corsbase}/${url.toString()}`)
         : url;
@@ -35,7 +35,7 @@ ModernEventsCalendarEvent.prototype.fetch = async function (url) {
     return this;
 };
 
-ModernEventsCalendarEvent.prototype.parse = function () {
+ModernEventsCalendarEvents.prototype.parse = function () {
     var events = [];
     var doc = domparser.parseFromString(this.html, 'text/html');
     doc.querySelectorAll('script[type="application/ld+json"]').forEach(function (el) {

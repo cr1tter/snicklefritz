@@ -34,8 +34,8 @@ import { default as WordPressEventsOrganiser } from './event-sources/wordpress-e
 EventConstructors.WordPressEventsOrganiser = WordPressEventsOrganiser;
 import { default as WordPressTribeEvents } from './event-sources/wordpress-tribe-events-calendar.js';
 EventConstructors.WordPressTribeEvents = WordPressTribeEvents;
-import { default as ModernEventsCalendarEvent } from './event-sources/wordpress-modern-events-calendar.js';
-EventConstructors.ModernEventsCalendarEvent = ModernEventsCalendarEvent;
+import { default as ModernEventsCalendarEvents } from './event-sources/wordpress-modern-events-calendar.js';
+EventConstructors.ModernEventsCalendarEvents = ModernEventsCalendarEvents;
 
 // Finally, we loop over the site-specific data and for each type of
 // event source we construct an object for FullCalendar to make use of
