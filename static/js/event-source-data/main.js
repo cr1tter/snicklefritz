@@ -266,6 +266,12 @@ const MainEventSourceData = [
                 url: 'https://www.eventbrite.com/o/soo-intoit-amp-roiiiboiiii-49152333613'
             },
             {
+                name: 'The Woods',
+                id: 'the-woods',
+                className: 'the-woods',
+                url: 'https://www.eventbrite.com/o/the-woods-12421786066'
+            },
+            {
                 name: 'Lakeside Prospect Park',
                 id: 'lakeside-prospect-park',
                 className: 'lakeside-prospect-park',
