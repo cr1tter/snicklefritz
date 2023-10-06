@@ -9,8 +9,11 @@ import FullCalendarEvent from '../event.js';
 
 export default function WordPressTribeEvents (optionsObj) {
     this.events = [];
+    this.url = new URL(optionsObj.url);
+    this.useCorsProxy = optionsObj.useCorsProxy;
 
-    var url = new URL(optionsObj.url);
+    // Set up initial HTTP query.
+    var url = this.url;
     var url_start_date = optionsObj.fetchInfo.start.toISOString().replace(/T.*/, ' 00:00:00');
     var url_end_date = optionsObj.fetchInfo.end.toISOString().replace(/T.*/, ' 00:00:00');
     url.searchParams.set('start_date', url_start_date);
@@ -31,17 +34,16 @@ WordPressTribeEvents.prototype.fetchAll = async function (url) {
     await this.fetch(url);
     this.parse();
     while (this.json.next_rest_url) {
-        let u = (url.host === new URL(corsbase).host)
-            ? corsbase + '/' + this.json.next_rest_url
-            : this.json.next_rest_url;
-        await this.fetch(u);
+        await this.fetch(new URL(this.json.next_rest_url));
         this.parse();
     }
     return this;
 };
 
 WordPressTribeEvents.prototype.fetch = async function (url) {
-    this.url = corsbase + '/' + url;
+    var url = (this.useCorsProxy)
+        ? new URL(`${corsbase}/${url.toString()}`)
+        : url;
     var response = await fetch(url);
     var json = {};
     try {

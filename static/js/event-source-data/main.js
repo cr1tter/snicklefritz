@@ -940,6 +940,7 @@ const EventSourceData = [
                 id: 'gomag',
                 className: 'gomag',
                 url: 'http://gomag.com/wp-json/tribe/events/v1/events?per_page=50&geoloc=true&geoloc_lat=40.7127837&geoloc_lng=-74.00594130000002',
+                useCorsProxy: true,
                 color: '#ed008c'
             },
             {
