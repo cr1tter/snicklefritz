@@ -13,7 +13,7 @@ description: Events and happenings in the Anarchist jurisdiction (lmao) of New Y
 lang: "en_US" # The primary human language you write in.
 timezone: "America/New_York"
 type: Website
-logo: &logo favicon.ico
+logo: &logo static/img/BlackFlagSymbol.svg
 
 author:
   name: Anarcho-Tech NYC

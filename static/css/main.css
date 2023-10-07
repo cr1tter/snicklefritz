@@ -67,6 +67,11 @@ header h1 {
 header p {
     font-size: 21px;
 }
+#site-logo {
+    max-width: 1em;
+    margin-bottom: 5px;
+    vertical-align: text-top;
+}
 
 #calendar-container {
     position: relative;
