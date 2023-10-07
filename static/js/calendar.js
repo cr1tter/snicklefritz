@@ -47,7 +47,7 @@ export const calendarHeaderToolbar = {
  *
  * @return void
  */
-function adjustToolbarButtons () {
+export function adjustToolbarButtons () {
     if (window.matchMedia("only screen and (max-width: 540px)").matches) {
         calendar.setOption('headerToolbar', calendarHeaderToolbar.smallScreen);
         document.querySelectorAll('.fc-toolbar .btn').forEach(function (btn) {

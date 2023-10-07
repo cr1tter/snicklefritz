@@ -7,6 +7,7 @@
  *       can be used as proper event sources?
  */
 import { corsbase, domparser } from '../calendar.js';
+import { default as FullCalendarEvent } from '../event.js';
 const OneOffEventSources = [
     {
         sourceType: 'one-off',

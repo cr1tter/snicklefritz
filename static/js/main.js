@@ -1,7 +1,7 @@
 ---
 layout: none
 ---
-import { default as calendar, calendarHeaderToolbar } from '{{ site.baseurl }}{% link static/js/calendar.js %}';
+import { default as calendar, adjustToolbarButtons } from '{{ site.baseurl }}{% link static/js/calendar.js %}';
 
 function removePastFeaturedEvents () {
     var els = document.getElementById('featured-events').querySelectorAll('[data-not-valid-after]');
