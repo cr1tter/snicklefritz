@@ -50,7 +50,7 @@ Tockify.prototype.toFullCalendarEventObject = function (e) {
     return new FullCalendarEvent({
         title: e.content.summary.text,
         start: start.setTime(e.when.start.millis),
-        end: end.setTime(e.when.end.millis),
+        end: end.setTime(e.when?.end?.millis),
         url: url,
         extendedProps: {
             description: e.content.description.text,
