@@ -1,6 +1,7 @@
 ---
 layout: none
 ---
+{%- include globals.liquid %}
 import { sliceEvents, createPlugin } from 'https://cdn.skypack.dev/@fullcalendar/core@6.1.9?min';
 import momentTimezone from 'https://cdn.skypack.dev/moment-timezone@0.5.43?min';
 import { default as calendar } from '{{ site.baseurl }}{% link static/js/calendar.js %}';
@@ -118,7 +119,7 @@ const MapViewConfig = {
         // Center the Map on NYC by default; if the user permits the
         // GeoLocation access prompt, the map will re-center to them.
         // The global `L` object is a reference to the Leaflet library.
-        map = L.map('map').setView(new L.latLng(40.6975, -73.9795), 10);
+        map = L.map('map').setView(new L.latLng({{ global_this_site.adr.geo.latitude | default: "40.6975" }}, {{ global_this_site.adr.geo.longitude | default: "-73.9795" }}), 10);
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors - See a mistake? <a href="https://openstreetmap.org/fixthemap">Fix the map</a>!'

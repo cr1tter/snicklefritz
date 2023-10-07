@@ -19,6 +19,53 @@ author:
   name: Anarcho-Tech NYC
   email:
 
+# List of other sites to link to in the site footer
+# along with some information about them.
+#
+# Please keep this list alphabetized by `adr.locality`.
+sister_sites:
+  - title: Anarchism Dot NYC
+    url: https://Anarchism.NYC
+    adr:
+      locality: New York
+      region: NY
+      country_name: United States
+      geo:
+        latitude: "40.6975"
+        longitude: "-73.9795"
+    issue_tracker: https://github.com/AnarchoTechNYC/NYCAnarchistEvents/issues
+  - title: Anarchism Dot BOS
+    url: https://readymouse.github.io/AnarchistEventsBOS/
+    adr:
+      locality: Boston
+      region: MA
+      country_name: United States
+      geo:
+        latitude: 42.3125
+        longitude: -70.9979
+    issue_tracker: https://github.com/ReadyMouse/AnarchistEventsBOS/issues
+  - title: RVA.rip
+    url: https://rva.rip/
+    adr:
+      locality: Richmond
+      region: VA
+      country_name: United States
+      geo:
+        latitude: 37.5248
+        longitude: -77.4932
+    issue_tracker: https://github.com/natviii/rva.rip/issues
+  - title: San Francisco/Bay Area, CA
+    url: https://bay.lgbt/
+    adr:
+      locality: San Francisco
+      region: CA
+      country_name: United States
+      geo:
+        latitude: 37.7848
+        longitude: -122.7283
+    issue_tracker: https://github.com/ivyraine/bay.lgbt/issues
+
+
 #twitter:
 #  card: summary_large_image
 #  username:
