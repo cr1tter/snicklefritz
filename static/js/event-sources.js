@@ -20,6 +20,10 @@ EventConstructors.Dice = Dice;
 
 import { default as EventBrite } from './event-sources/eventbrite.js';
 EventConstructors.EventBrite = EventBrite;
+
+import { default as ForbiddenTickets } from './event-sources/forbidden-tickets.js';
+EventConstructors.ForbiddenTickets = ForbiddenTickets;
+
 import { default as GoDaddy } from './event-sources/godaddy-calendar.js';
 EventConstructors.GoDaddy = GoDaddy;
 

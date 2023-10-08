@@ -407,6 +407,27 @@ const MainEventSourceData = [
         ]
     },
     {
+        sourceType: 'ForbiddenTickets',
+        options: {
+            color: 'black',
+            textColor: 'white'
+        },
+        sources: [
+            {
+                name: 'Kat Scratch Studios',
+                id: 'kat-scratch-studios',
+                className: 'kat-scratch-studios',
+                url: 'https://forbiddentickets.com/events/kat-scratch-studios/json'
+            },
+            {
+                name: 'Naughty Nytes NYC',
+                id: 'naughty-nytes-nyc',
+                className: 'naughty-nytes-nyc',
+                url: 'https://forbiddentickets.com/events/naughty-nytes-nyc/json'
+            }
+        ]
+    },
+    {
         sourceType: 'GoDaddy',
         options: {
             color: '#14DCDC'
