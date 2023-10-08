@@ -151,11 +151,17 @@ const OneOffEventSources = [
                     var html = await response.text();
                     var doc = Utils.domparser.parseFromString(html, 'text/html');
                     var events = JSON.parse(doc.getElementById('__NEXT_DATA__').textContent).props.pageProps.events;
-                    successCallback(events.map(function (item) {
+                    successCallback(events.map(function ( item ) {
                         return {
                             title: item.eventName,
                             start: new Date(item.date),
-                            url: 'https://www.jupiterdisco.com/calendar/' + item.slug.current
+                            url: item.residentAdvisorLink,
+                            extendedProps: {
+                                description: ( item.description )
+                                    ? item.description[0].children[0].text
+                                    : undefined,
+                                categories: item.genre
+                            }
                         };
                     }));
                 },
