@@ -10,10 +10,10 @@
 import { default as calendar } from '../calendar.js';
 import { default as EventSources } from '../event-sources.js';
 
-export default class calendarFilterListItem extends HTMLElement {
+export default class calendarFilterEventSourceListItem extends HTMLElement {
     constructor () {
         super();
-        let templateContent = document.getElementById('filter-list-item-template').content;
+        let templateContent = document.getElementById('filter-event-source-list-item-template').content;
 
         const shadowRoot = this.attachShadow({
             mode: 'open'
@@ -62,4 +62,4 @@ export default class calendarFilterListItem extends HTMLElement {
     }
 };
 
-window.customElements.define('calendar-filter-list-item', calendarFilterListItem);
+window.customElements.define('calendar-filter-event-source-list-item', calendarFilterEventSourceListItem);

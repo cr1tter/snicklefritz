@@ -126,6 +126,15 @@ header p {
 }
 
 /**
+ * @group Calendar filtering modal.
+ */
+#calendar-filter-modal details p {
+    text-align: right;
+    font-size: x-small;
+    margin-bottom: 0;
+}
+
+/**
  * @group Custom views.
  */
 #map {

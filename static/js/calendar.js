@@ -23,7 +23,7 @@ import {
     map,
     addEventsInRangeTo
 } from '{{ site.baseurl }}{% link static/js/custom-views/map.js %}';
-import { default as calendarFilterListItem } from '{{ site.baseurl }}{% link static/js/custom-elements/calendar-filter-list-item.js %}';
+import { default as calendarFilterEventSourceListItem } from '{{ site.baseurl }}{% link static/js/custom-elements/calendar-filter-event-source-list-item.js %}';
 
 export const calendarHeaderToolbar = {
     largeScreen: {

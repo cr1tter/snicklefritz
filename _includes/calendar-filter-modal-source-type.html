@@ -1,0 +1,43 @@
+<fieldset id="filter-event-source-types" class="form-group">
+    <legend>Source types</legend>
+    <details>
+        <summary>Filter events by their source type</summary>
+        <p>
+            <button type="button" value="on">Check all</button>
+            <button type="button" value="off">Uncheck all</button>
+            {% comment %}
+            Empty string as `value` attribute will toggle state.
+            {% endcomment -%}
+            <button type="button" value="">Toggle all</button>
+        </p>
+        <template id="filter-source-type-list-item-template">
+            <style>
+            li {
+                list-style-type: none;
+                text-align: left;
+            }
+            </style>
+            <li>
+                <input class="form-check-input"
+                    id=""
+                    type="checkbox"
+                    checked="checked"
+                    value="Dice"
+                />
+                <label class="form-check-label" for="">
+                    <slot name="source-type-name">Dice</slot>
+                </label>
+            </li>
+        </template>
+        <ul>
+            <!--
+                Dynamically fills with
+                list items based on the
+                event source types defined.
+            -->
+        </ul>
+        <script type="module">
+        // TODO: Not yet implemented.
+        </script>
+    </details>
+</fieldset>

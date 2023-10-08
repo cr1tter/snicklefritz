@@ -71,6 +71,7 @@ const EventSources = EventSourceData.flatMap(function (element, index, array) {
         //     https://fullcalendar.io/docs/event-source-object#options
         Object.assign(eventSourceObject, {
             // Options we define.
+            sourceType: element.sourceType,    // for better filtering.
             location: source.location,         // for static venue map pins.
             useCorsProxy: source.useCorsProxy, // for automatically munging the URL
             originUrl: source.originUrl,       // for GoDaddy API.

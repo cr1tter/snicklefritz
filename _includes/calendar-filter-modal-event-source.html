@@ -1,0 +1,87 @@
+<fieldset id="filter-event-sources" class="form-group">
+    <legend>Sources</legend>
+    <details>
+        <summary>Filter all events by their source</summary>
+        <p>
+            <button type="button" value="on">Check all</button>
+            <button type="button" value="off">Uncheck all</button>
+            {% comment %}
+            Empty string as `value` attribute will toggle state.
+            {% endcomment -%}
+            <button type="button" value="">Toggle all</button>
+        </p>
+        <template id="filter-event-source-list-item-template">
+            <style>
+            li {
+                list-style-type: none;
+                text-align: left;
+            }
+            </style>
+            <li>
+                <input class="form-check-input"
+                    id=""
+                    type="checkbox"
+                    checked="checked"
+                    value=""
+                />
+                <label class="form-check-label" for="">
+                    <slot name="event-source-name">Event source name</slot>
+                </label>
+            </li>
+        </template>
+        <ul>
+            <!--
+                Dynamically fills with
+                list items based on the
+                event sources defined.
+            -->
+        </ul>
+        <script type="module">
+        // Generate list items out of each EventSource object in the Calendar.
+        import { default as calendar } from '{{ site.baseurl }}{% link static/js/calendar.js %}';
+        window.addEventListener('DOMContentLoaded', function (e) {
+            calendar.getEventSources().sort(function (a, b) {
+                var x = a.internalEventSource.extendedProps.name;
+                var y = b.internalEventSource.extendedProps.name;
+                return x.localeCompare(y);
+            }).forEach(function (s) {
+                var el = document.createElement('calendar-filter-event-source-list-item');
+                el.dataset.id = s.id;
+                var nameSlot = document.createElement('span');
+                nameSlot.setAttribute('slot', 'event-source-name');
+                nameSlot.appendChild(document.createTextNode(s.internalEventSource.extendedProps.name));
+                el.appendChild(nameSlot);
+                document.getElementById('filter-event-sources')
+                    .querySelector('ul')
+                    .appendChild(el);
+            });
+        });
+
+        // Make the "Check all" and "Uncheck all" buttons do their thing.
+        document.querySelectorAll('#filter-event-sources button').forEach(function ( btn ) {
+            btn.addEventListener('click', function ( e ) {
+                document.querySelectorAll('#filter-event-sources calendar-filter-event-source-list-item')
+                .forEach(function ( x ) {
+                    var q;
+                    switch ( btn.value ) {
+                        case 'on':
+                            q = ':not(:checked)';
+                            break;
+                        case 'off':
+                            q = ':checked';
+                            break;
+                        case '':
+                        default:
+                            q = '';
+                            break;
+                    }
+                    var el = x.shadowRoot.querySelector(`input[type="checkbox"]${q}`);
+                    if ( el ) {
+                        el.click();
+                    }
+                });
+            });
+        });
+        </script>
+    </details>
+</fieldset>
