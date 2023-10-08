@@ -482,7 +482,7 @@ const MainEventSourceData = [
                 name: 'Happy Fun Hideaway',
                 id: 'happy-fun-hideaway',
                 className: 'hart-bar',
-                url: 'https://calendar.google.com/calendar/ical/df0602291afe16242665e5d462f9086f30f7d420b9aa4edb1d9eb159e5c970e5@group.calendar.google.com/public/basic.ics'
+                url: 'https://calendar.google.com/calendar/ical/df0602291afe16242665e5d462f9086f30f7d420b9aa4edb1d9eb159e5c970e5%40group.calendar.google.com/public/basic.ics'
             },
             {
                 name: 'Hart Bar',
