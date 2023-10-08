@@ -7,7 +7,8 @@ import FullCalendarEvent from '../event.js';
 export default function Tockify ( optionsObj ) {
     this.url = new URL(optionsObj.url);
 
-    var url = this.url.searchParams.append(
+    var url = this.url;
+    url.searchParams.append(
         'startms',
         optionsObj.fetchInfo.start.getTime()
     );
