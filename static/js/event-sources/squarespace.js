@@ -2,26 +2,26 @@
  * Utility module to support the calendar's Squarespace
  * event sources.
  */
-import { corsbase } from '../calendar.js';
+import { useCorsProxy } from '../utils.js';
 import FullCalendarEvent from '../event.js';
 
-export default function Squarespace (optionsObj) {
-    var url = new URL(optionsObj.url);
+export default function Squarespace ( optionsObj ) {
+    this.url = new URL(optionsObj.url);
+
     // TODO: Fetch next month's events, but only after a view change.
 //    var url_start_date = (optionsObj.fetchInfo.start.getMonth() + 1).toString().padStart(2, '0')
 //        + '-' + optionsObj.fetchInfo.start.getFullYear();
 //    url.searchParams.set('month', url_start_date);
 
-    return this.fetch(url).then((ss) => {
+    return this.fetch(this.url).then((ss) => {
         optionsObj.successCallback(ss.parse().events.map(
             this.toFullCalendarEventObject.bind(this)
         ));
     });
 };
 
-Squarespace.prototype.fetch = async function (url) {
-    this.url = url;
-    var response = await fetch(corsbase + '/' + url);
+Squarespace.prototype.fetch = async function ( url ) {
+    var response = await fetch(useCorsProxy(url));
     var json = {};
     try {
         var json = await response.json();
@@ -38,7 +38,7 @@ Squarespace.prototype.parse = function () {
     return this;
 };
 
-Squarespace.prototype.toFullCalendarEventObject = function (e) {
+Squarespace.prototype.toFullCalendarEventObject = function ( e ) {
     return new FullCalendarEvent({
         title: e.title,
         start: e.startDate,
@@ -57,9 +57,9 @@ Squarespace.prototype.toFullCalendarEventObject = function (e) {
                     address: {
                         streetAddress: e.location.addressLine1,
                         // TODO: Some of these are not provided.
-//                        addressLocality: e.location.addressLine2.split(',')[0].trim(),
-//                        addressRegion: e.location.addressLine2.split(',')[1].trim(),
-//                        postalCode: e.location.addressLine2.split(',')[2].trim(),
+                        //addressLocality: e.location.addressLine2.split(',')[0].trim(),
+                        //addressRegion: e.location.addressLine2.split(',')[1].trim(),
+                        //postalCode: e.location.addressLine2.split(',')[2].trim(),
                         addressCountry: e.location.addressCountry
                     },
                     geo: {

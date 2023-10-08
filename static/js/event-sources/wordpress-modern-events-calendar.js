@@ -4,9 +4,8 @@
  *
  * @see https://webnus.net/modern-events-calendar/
  */
-import { corsbase, domparser } from '../calendar.js';
+import { useCorsProxy, domparser, convert12To24HourTime } from '../utils.js';
 import FullCalendarEvent from '../event.js';
-import { convert12To24HourTime } from '../utils.js';
 
 export default function ModernEventsCalendarEvents (optionsObj) {
     this.events = [];
@@ -20,9 +19,7 @@ export default function ModernEventsCalendarEvents (optionsObj) {
 };
 
 ModernEventsCalendarEvents.prototype.fetch = async function (url) {
-    this.url = (this.useCorsProxy)
-        ? new URL(`${corsbase}/${url.toString()}`)
-        : url;
+    this.url = (this.useCorsProxy) ? useCorsProxy(url) : url;
     var response = await fetch(this.url);
     var html;
     try {

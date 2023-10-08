@@ -4,28 +4,30 @@
  *
  * @see https://wp-event-organiser.com
  */
-import { corsbase } from '../calendar.js';
+import { useCorsProxy } from '../utils.js';
 import FullCalendarEvent from '../event.js';
 
-export default function WordPressEventsOrganiser (optionsObj) {
+export default function WordPressEventsOrganiser ( optionsObj ) {
+    this.url = new URL(optionsObj.url);
+    this.useCorsProxy = optionsObj.useCorsProxy;
     this.events = [];
 
-    var url = new URL(optionsObj.url);
+    var url = this.url;
     var url_start_date = optionsObj.fetchInfo.start.toISOString().replace(/T.*/, '');
     var url_end_date = optionsObj.fetchInfo.end.toISOString().replace(/T.*/, '');
     url.searchParams.set('start', url_start_date);
     url.searchParams.set('end', url_end_date);
 
-    return this.fetch(url).then((eo) => {
+    return this.fetch(url).then( ( eo ) => {
         optionsObj.successCallback(eo.parse().events.map(
             this.toFullCalendarEventObject.bind(this)
         ));
     });
 };
 
-WordPressEventsOrganiser.prototype.fetch = async function (url) {
-    this.url = corsbase + '/' + url;
-    var response = await fetch(this.url);
+WordPressEventsOrganiser.prototype.fetch = async function ( url ) {
+    var url = (this.useCorsProxy) ? useCorsProxy(url) : url;
+    var response = await fetch(url);
     var json = {};
     try {
         var json = await response.json();
@@ -43,7 +45,7 @@ WordPressEventsOrganiser.prototype.parse = function () {
     return this;
 };
 
-WordPressEventsOrganiser.prototype.toFullCalendarEventObject = function (e) {
+WordPressEventsOrganiser.prototype.toFullCalendarEventObject = function ( e ) {
     // TODO: This doesn't actually provide venue details, yet.
 //    var geoJSON = (e.venue.geo_lat && e.venue.geo_lng)
 //        ? {

@@ -2,21 +2,24 @@
  * Utility module to support the calendar's Tockify
  * event sources.
  */
-import { corsbase } from '../calendar.js';
 import FullCalendarEvent from '../event.js';
 
-export default function Tockify (optionsObj) {
-    var url = new URL(optionsObj.url);
-    url.searchParams.append('startms', optionsObj.fetchInfo.start.getTime());
-    this.url = url;
-    return this.fetch(this.url).then((t) => {
+export default function Tockify ( optionsObj ) {
+    this.url = new URL(optionsObj.url);
+
+    var url = this.url.searchParams.append(
+        'startms',
+        optionsObj.fetchInfo.start.getTime()
+    );
+
+    return this.fetch(url).then( ( t ) => {
         optionsObj.successCallback(t.parse().events.map(
             this.toFullCalendarEventObject.bind(this)
         ));
     });
 }
 
-Tockify.prototype.fetch = async function (url) {
+Tockify.prototype.fetch = async function ( url ) {
     var response = await fetch(url);
     var json = {};
     try {
@@ -33,7 +36,7 @@ Tockify.prototype.parse = function () {
     return this;
 }
 
-Tockify.prototype.toFullCalendarEventObject = function (e) {
+Tockify.prototype.toFullCalendarEventObject = function ( e ) {
     var start = new Date();
     var end  = new Date();
     var url = (e.content.customButtonLink)

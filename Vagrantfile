@@ -37,7 +37,7 @@ Vagrant.configure("2") do |config|
     cd /vagrant && sudo -u vagrant bundle install
 
     # Point the site to the development CORS proxy.
-    sed -i'' -e '/export const corsbase/ s/https:/http:/' -e '/export const corsbase/ s/cors.anarchism.nyc/localhost:8080/' static/js/calendar.js
+    sed -i'' -e '/^const corsbase/ s/https:/http:/' -e '/^const corsbase/ s/cors.anarchism.nyc/localhost:8080/' static/js/utils.js
 
     bundle exec jekyll server --host 0.0.0.0 --detach
   EOF
@@ -46,7 +46,7 @@ Vagrant.configure("2") do |config|
     t.run_remote = {
       inline: <<~EOF
         rm -rf /vagrant/cors-anywhere
-        sed -i'' -e '/export const corsbase/ s/http:/https:/' -e '/export const corsbase/ s/localhost:8080/cors.anarchism.nyc/' /vagrant/static/js/calendar.js
+        sed -i'' -e '/^const corsbase/ s/http:/https:/' -e '/^const corsbase/ s/localhost:8080/cors.anarchism.nyc/' /vagrant/static/js/utils.js
       EOF
     }
   end

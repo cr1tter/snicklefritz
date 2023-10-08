@@ -2,22 +2,21 @@
  * Utility module to support the calendar's WithFriends
  * event sources.
  */
-import { corsbase, domparser } from '../calendar.js';
+import { useCorsProxy, domparser } from '../utils.js';
 import FullCalendarEvent from '../event.js';
 
-export default function WithFriends (optionsObj) {
+export default function WithFriends ( optionsObj ) {
     // A `movementId` is WithFriends' name for an organizer.
     this.movementId = optionsObj.movementId;
-    var url = new URL(`https://withfriends.co/Movement/${this.movementId}/Incremental_Events:Display_Infinite_Scroll=1,Display_Item_Element=li,Display_Item_Classes=Event_List_Item%20wf-event%20wf-front,Display_Iterator_Element=None,Display_Increment=5,Display_Template_Alias=New_List,Display_Segment=Upcoming,Display_Property_Alias=Events,Display_Front=1,Display_Item_Type=Movement,Display_Item=${this.movementId}`);
+    this.url = new URL(`https://withfriends.co/Movement/${this.movementId}/Incremental_Events:Display_Infinite_Scroll=1,Display_Item_Element=li,Display_Item_Classes=Event_List_Item%20wf-event%20wf-front,Display_Iterator_Element=None,Display_Increment=5,Display_Template_Alias=New_List,Display_Segment=Upcoming,Display_Property_Alias=Events,Display_Front=1,Display_Item_Type=Movement,Display_Item=${this.movementId}`);
 
-    return this.fetch(url).then((wf) => {
+    return this.fetch(this.url).then( ( wf ) => {
         optionsObj.successCallback(wf.parse().events);
     });
 };
 
-WithFriends.prototype.fetch = async function (url) {
-    this.url = url;
-    var response = await fetch(corsbase + '/' + url, {
+WithFriends.prototype.fetch = async function ( url ) {
+    var response = await fetch(useCorsProxy(url), {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'

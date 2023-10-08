@@ -2,20 +2,19 @@
  * Utility module to support the calendar's EventBrite
  * event sources.
  */
-import { corsbase, domparser } from '../calendar.js';
+import { useCorsProxy, domparser } from '../utils.js';
 import FullCalendarEvent from '../event.js';
 
-export default function EventBrite (optionsObj) {
-    var url = new URL(optionsObj.url);
+export default function EventBrite ( optionsObj ) {
+    this.url = new URL(optionsObj.url);
 
-    return this.fetch(url).then((eb) => {
+    return this.fetch(this.url).then( ( eb ) => {
         optionsObj.successCallback(eb.parse().events);
     });
 };
 
 EventBrite.prototype.fetch = async function (url) {
-    this.url = url;
-    var response = await fetch(corsbase + '/' + url);
+    var response = await fetch(useCorsProxy(url));
     var json = {}
     try {
         var html = await response.text();

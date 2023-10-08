@@ -73,6 +73,9 @@ sister_sites:
 # Location of this site in Onionland.
 #onion:
 
+# Base URL of a CORS proxy to use.
+cors_proxy_base_url: https://cors.anarchism.nyc
+
 # Build settings
 markdown: kramdown
 exclude:

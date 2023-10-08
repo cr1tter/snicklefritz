@@ -917,7 +917,8 @@ const MainEventSourceData = [
                 name: 'The Seneca',
                 id: 'the-seneca',
                 className: 'the-seneca',
-                url: 'https://www.thesenecanyc.com/wp-admin/admin-ajax.php?action=eventorganiser-fullcal&timeformat=g:i%20a&users_events=false'
+                url: 'https://www.thesenecanyc.com/wp-admin/admin-ajax.php?action=eventorganiser-fullcal&timeformat=g:i%20a&users_events=false',
+                useCorsProxy: true
             }
         ]
     },

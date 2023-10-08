@@ -6,7 +6,7 @@
  * TODO: Still need to figure out how to generalize these so that they
  *       can be used as proper event sources?
  */
-import { corsbase, domparser } from '../calendar.js';
+import * as Utils from '../utils.js';
 import { default as FullCalendarEvent } from '../event.js';
 const OneOffEventSources = [
     {
@@ -43,9 +43,9 @@ const OneOffEventSources = [
                 id: 'eastville-comedy-club',
                 className: 'eastville-comedy-club',
                 events: async function (fetchInfo, successCallback, failureCallback) {
-                    var response = await fetch(corsbase + '/https://www.eastvillecomedy.com/calendar');
+                    var response = await fetch(Utils.useCorsProxy('https://www.eastvillecomedy.com/calendar'));
                     var html = await response.text();
-                    var doc = domparser.parseFromString(html, 'text/html');
+                    var doc = Utils.domparser.parseFromString(html, 'text/html');
                     var ld_json = JSON.parse(doc.querySelector('script[type="application/ld+json"]').innerText);
                     successCallback(ld_json.map(FullCalendarEvent.fromSchemaDotOrg));
                 },
@@ -58,9 +58,9 @@ const OneOffEventSources = [
                 id: 'eris-evolution',
                 className: 'eris-evolution',
                 events: async function (fetchInfo, successCallback, failureCallback) {
-                    var response = await fetch(corsbase + '/https://www.erisevolution.com/events/');
+                    var response = await fetch(Utils.useCorsProxy('https://www.erisevolution.com/events/'));
                     var html = await response.text();
-                    var doc = domparser.parseFromString(html, 'text/html');
+                    var doc = Utils.domparser.parseFromString(html, 'text/html');
                     var events = [];
                     var items = doc.querySelectorAll('.event');
                     for (var i = 0; i < items.length; i++) {
@@ -89,11 +89,11 @@ const OneOffEventSources = [
                 id: 'elsewhere-brooklyn',
                 className: 'elsewhere-brooklyn',
                 events: async function (fetchInfo, successCallback, failureCallback) {
-                    var response = await fetch(corsbase + '/https://www.elsewherebrooklyn.com/events');
+                    var response = await fetch(Utils.useCorsProxy('https://www.elsewherebrooklyn.com/events'));
                     var html = await response.text();
-                    var doc = domparser.parseFromString(html, 'text/html');
+                    var doc = Utils.domparser.parseFromString(html, 'text/html');
                     var buildId = JSON.parse(doc.getElementById('__NEXT_DATA__').textContent).buildId;
-                    var response = await fetch(corsbase + `/https://www.elsewherebrooklyn.com/_next/data/${buildId}/events.json`);
+                    var response = await fetch(Utils.useCorsProxy(`https://www.elsewherebrooklyn.com/_next/data/${buildId}/events.json`));
                     var json = await response.json();
                     successCallback(json.pageProps.initialEventData.events.map(function (item) {
                         return {
@@ -114,9 +114,9 @@ const OneOffEventSources = [
                 id: 'hacienda-villa',
                 className: 'hacienda-villa',
                 events: async function (fetchInfo, successCallback, failureCallback) {
-                    var response = await fetch(corsbase + '/https://www.wearehacienda.com/events');
+                    var response = await fetch(Utils.useCorsProxy('https://www.wearehacienda.com/events'));
                     var html = await response.text();
-                    var doc = domparser.parseFromString(html, 'text/html');
+                    var doc = Utils.domparser.parseFromString(html, 'text/html');
                     var items = doc.querySelectorAll('.more-event');
                     var events = [];
                     for (var i = 0; i < items.length; i++) {
@@ -147,9 +147,9 @@ const OneOffEventSources = [
                 id: 'jupiter-disco',
                 className: 'jupiter-disco',
                 events: async function (fetchInfo, successCallback, failureCallback) {
-                    var response = await fetch(corsbase + '/https://www.jupiterdisco.com/calendar');
+                    var response = await fetch(Utils.useCorsProxy('https://www.jupiterdisco.com/calendar'));
                     var html = await response.text();
-                    var doc = domparser.parseFromString(html, 'text/html');
+                    var doc = Utils.domparser.parseFromString(html, 'text/html');
                     var events = JSON.parse(doc.getElementById('__NEXT_DATA__').textContent).props.pageProps.events;
                     successCallback(events.map(function (item) {
                         return {
@@ -170,7 +170,7 @@ const OneOffEventSources = [
                 events: async function (fetchInfo, successCallback, failureCallback) {
                     var response = await fetch('https://transgression.party/events/');
                     var html = await response.text();
-                    var doc = domparser.parseFromString(html, 'text/html');
+                    var doc = Utils.domparser.parseFromString(html, 'text/html');
                     var ld_json = JSON.parse(doc.querySelector('.yoast-schema-graph').textContent);
                     var itemList = ld_json['@graph'].find(function (x) {
                         return 'ItemList' === x['@type'] }
@@ -190,9 +190,9 @@ const OneOffEventSources = [
             //    id: 'paragon-broadway',
             //    className: 'paragon-broadway',
             //    events: async function (fetchInfo, successCallback, failureCallback) {
-            //        var response = await fetch(corsbase + '/https://ra.co/widget/eventlisting?promoter=108635');
+            //        var response = await fetch(Utils.useCorsProxy('https://ra.co/widget/eventlisting?promoter=108635'));
             //        var html = await response.text();
-            //        var doc = domparser.parseFromString(html, 'text/html');
+            //        var doc = Utils.domparser.parseFromString(html, 'text/html');
             //        var items = doc.querySelectorAll('.events');
             //        events = [];
             //        for (var i = 0; i < items.length; i++) {

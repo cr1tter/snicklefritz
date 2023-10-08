@@ -2,7 +2,7 @@
  * Utility module to support the calendar's Google Calendar
  * event sources.
  */
-import { corsbase } from '../calendar.js'
+import { useCorsProxy } from '../utils.js'
 
 export default function GoogleCalendar (optionsObj) {
     return this.fetch(optionsObj.url).then((gcal) => {
@@ -17,7 +17,7 @@ export default function GoogleCalendar (optionsObj) {
  */
 GoogleCalendar.prototype.fetch = async function (url) {
     this.url = url;
-    var response = await fetch(corsbase + '/' + url);
+    var response = await fetch(useCorsProxy(url));
     var ics = await response.text();
     this.ics = ics;
     return this;

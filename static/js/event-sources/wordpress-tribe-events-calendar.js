@@ -4,7 +4,7 @@
  *
  * @see https://theeventscalendar.com/
  */
-import { corsbase } from '../calendar.js';
+import { useCorsProxy } from '../utils.js';
 import FullCalendarEvent from '../event.js';
 
 export default function WordPressTribeEvents (optionsObj) {
@@ -41,9 +41,7 @@ WordPressTribeEvents.prototype.fetchAll = async function (url) {
 };
 
 WordPressTribeEvents.prototype.fetch = async function (url) {
-    var url = (this.useCorsProxy)
-        ? new URL(`${corsbase}/${url.toString()}`)
-        : url;
+    var url = (this.useCorsProxy) ? useCorsProxy(url) : url;
     var response = await fetch(url);
     var json = {};
     try {

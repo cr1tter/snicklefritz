@@ -4,14 +4,15 @@
  *
  * @see https://seetickets.us/
  */
-import { corsbase } from '../calendar.js';
+import { useCorsProxy } from '../utils.js';
 import FullCalendarEvent from '../event.js';
 
-export default function SeeTicketsEvents (optionsObj) {
+export default function SeeTicketsEvents ( optionsObj ) {
     this.events = [];
     this.location = optionsObj.location;
+    this.url = optionsObj.url;
 
-    var url = new URL(optionsObj.url);
+    var url = new URL(this.url);
     var url_start_date = optionsObj.fetchInfo.start.getTime() / 1000;
     var url_end_date = optionsObj.fetchInfo.end.getTime() / 1000;
     url.searchParams.set('start', url_start_date);
@@ -24,9 +25,8 @@ export default function SeeTicketsEvents (optionsObj) {
     });
 };
 
-SeeTicketsEvents.prototype.fetch = async function (url) {
-    this.url = corsbase + '/' + url;
-    var response = await fetch(this.url);
+SeeTicketsEvents.prototype.fetch = async function ( url ) {
+    var response = await fetch(useCorsProxy(this.url));
     var json = {};
     try {
         var json = await response.json();
