@@ -34,6 +34,29 @@ sister_sites:
         latitude: "40.6975"
         longitude: "-73.9795"
     issue_tracker: https://github.com/AnarchoTechNYC/NYCAnarchistEvents/issues
+    other_local_aggregators:
+      - name: Nonsense NYC
+        url: https://www.nonsensenyc.com/
+        for:
+          - independent art
+          - weird events
+          - strange happenings
+          - unique parties
+          - senseless culture
+      - name: Oh My Rockness
+        url: https://www.ohmyrockness.com/
+        for:
+          - indie concerts
+      - name: Infosec-Conferences.com
+        url: https://infosec-conferences.com/us-state/new-york/
+        for:
+          - cybersecurity conferences
+          - infosec events
+      - name: The Skint
+        url: https://www.theskint.com/
+        for:
+          - free
+          - cheap
   - title: Anarchism Dot BOS
     url: https://readymouse.github.io/AnarchistEventsBOS/
     adr:
@@ -44,6 +67,11 @@ sister_sites:
         latitude: 42.3125
         longitude: -70.9979
     issue_tracker: https://github.com/ReadyMouse/AnarchistEventsBOS/issues
+    other_local_aggregators:
+      - name: MeetBoston
+        url: https://www.meetboston.com/events/
+        for:
+          - Boston area highlights
   - title: RVA.rip
     url: https://rva.rip/
     adr:
@@ -64,7 +92,6 @@ sister_sites:
         latitude: 37.7848
         longitude: -122.7283
     issue_tracker: https://github.com/ivyraine/bay.lgbt/issues
-
 
 #twitter:
 #  card: summary_large_image

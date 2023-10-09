@@ -26,8 +26,7 @@ footer {
     margin-top: 20px;
     font-size: 14px;
 }
-
-#sister-sites {
+footer div {
     margin-bottom: 1rem;
 }
 #sister-sites p,
@@ -39,6 +38,15 @@ footer {
 }
 #sister-sites li:not(:last-child)::after {
     content: ", ";
+}
+#sister-sites li:last-child::before {
+     content: " and ";
+}
+#sister-sites li:last-child::after {
+    content: ".";
+}
+#other-local-aggregators ul {
+    list-style-type: none;
 }
 
 /**

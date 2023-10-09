@@ -11,4 +11,20 @@
     </ul>
 </div>
 
+{% if global_this_site.other_local_aggregators | length %}
+<div id="other-local-aggregators">
+    <details>
+        <summary><strong>Not your vibe?</strong> Other local aggregators for&hellip;</summary>
+        <ul>
+            {% assign aggregators = global_this_site.other_local_aggregators | sort: "name" %}{% for a in aggregators %}
+            <li>
+                &hellip;{% for i in a.for %}{% if forloop.last and forloop.length > 1 %}or {% endif %}<span>{{ i }}</span>{% unless forloop.last %}, {% endunless %}{% endfor %}:
+                <a href="{{ a.url }}" rel="nofollow">{{ a.name }}</a>.
+            </li>
+            {% endfor %}
+        </ul>
+    </details>
+</div>
+{% endif %}
+
 <p><cite>{{ site.title }}</cite> is a project of {{ site.author.name }}. Come on out and dance, or it isn't your revolution.</p>
