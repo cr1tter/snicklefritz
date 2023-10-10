@@ -266,6 +266,12 @@ const MainEventSourceData = [
                 url: 'https://www.eventbrite.com/o/soo-intoit-amp-roiiiboiiii-49152333613'
             },
             {
+                name: 'Stone Circle Theatre',
+                id: 'stone-circle-theatre',
+                className: 'stone-circle-theatre',
+                url: 'https://www.eventbrite.com/o/stone-circle-theatre-58642664133'
+            },
+            {
                 name: 'The Woods',
                 id: 'the-woods',
                 className: 'the-woods',
