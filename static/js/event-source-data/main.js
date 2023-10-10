@@ -752,6 +752,12 @@ const MainEventSourceData = [
                 url: 'https://nookbk.com/events?format=json'
             },
             {
+                name: 'OutSmartNYC',
+                id: 'outsmartnyc',
+                className: 'outsmartnyc',
+                url: 'https://www.outsmartnyc.info/new-events?format=json'
+            },
+            {
                 name: 'POWRPLNT',
                 id: 'powrplnt',
                 className: 'powrplnt',
