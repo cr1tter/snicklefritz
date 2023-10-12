@@ -48,10 +48,10 @@ Squarespace.prototype.toFullCalendarEventObject = function ( e ) {
             description: e.body,
             image: e.assetUrl,
             location: {
-                geoJSON: {
+                geoJSON: (e.location.mapLat && e.location.mapLng) ? {
                     type: "Point",
                     coordinates: [e.location.mapLng, e.location.mapLat]
-                },
+                } : undefined,
                 eventVenue: {
                     name: e.location.addressTitle,
                     address: {
