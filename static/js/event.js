@@ -13,7 +13,7 @@ export default class FullCalendarEvent {
                 image: null,
                 location: {
                     geoJSON: {
-                        type: "Point",
+                        type: 'Point',
                         coordinates: [null, null] // Longitude, Latitude
                     },
                     // Should be Schema.org EventVenue, type of Place.

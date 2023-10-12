@@ -37,11 +37,11 @@ ModernEventsCalendarEvents.prototype.parse = function () {
     var events = [];
     var doc = domparser.parseFromString(this.html, 'text/html');
     doc.querySelectorAll('script[type="application/ld+json"]').forEach(function (el) {
-        var times = el.nextElementSibling.querySelector('.mec-event-time').textContent
+        var [startTime, endTime] = el.nextElementSibling.querySelector('.mec-event-time').textContent
             .trim().split(' - ').map(convert12To24HourTime);
         var data = FullCalendarEvent.fromSchemaDotOrg(JSON.parse(el.textContent));
-        data.start = new Date(`${data.start} ${times[0].join(':')}`);
-        data.end = new Date(`${data.end} ${times[1].join(':')}`);
+        data.start = new Date(`${data.start} ${startTime}`);
+        data.end = new Date(`${data.end} ${endTime}`);
         events.push(data);
     });
     this.events = events;

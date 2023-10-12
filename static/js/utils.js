@@ -22,12 +22,11 @@ export function useCorsProxy ( url ) {
 /**
  * Simplistically converts a 12-hour time format string to a 24-hour time.
  *
- * @param str {String} The 12-hour formatted time string, e.g., `"8:00 am"`
- * @return
+ * @param str {String} The 12-hour formatted time string, e.g., `"8:00 am"`.
+ * @return {String} The 24-hour formatted time string, e.g., `"20:00"`.
  */
 export function convert12To24HourTime (str) {
-    var h;
-    var m;
+    var h, m;
     if ( str.match(/ am$/) ) {
         [h, m] = str.match(/^(\d?\d):(\d\d)/).slice(1);
         if ( '12' === h ) {
@@ -41,5 +40,5 @@ export function convert12To24HourTime (str) {
         }
     }
     h.toString().padStart(2, '0');
-    return [h, m];
+    return [h, m].join(':');
 }
