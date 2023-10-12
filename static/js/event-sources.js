@@ -56,7 +56,7 @@ EventConstructors.ModernEventsCalendarEvents = ModernEventsCalendarEvents;
 // except for the `one-off` event sources, as they're currently
 // complete FullCalendar objects.
 const EventSources = EventSourceData.flatMap(function (element, index, array) {
-    return ( 'one-off' === element.sourceType ) ? element.sources : element.sources.map(function (source) {
+    return element.sources.map(function (source) {
         // This is the object we'll return.
         var eventSourceObject = {};
 
@@ -119,23 +119,30 @@ const EventSources = EventSourceData.flatMap(function (element, index, array) {
             googleCalendarApiKey: source.googleCalendarApiKey
         });
 
-        // The FullCalendar-defined `events` function callback.
-        // This is what we use for most of the event sources.
-        eventSourceObject.events = async function (fetchInfo, successCallback, failureCallback) {
-            await new EventConstructors[element.sourceType](Object.assign(eventSourceObject, {
-                fetchInfo: fetchInfo,
-                successCallback: successCallback,
-                failureCallback: failureCallback,
-            }));
-        };
-
-        // Natively supported source types don't use an `events` function.
         switch ( element.sourceType ) {
             case 'ics':
             case 'json':
-                delete eventSourceObject.events;
+                // For these FullCalendar event source types, we don't
+                // use an `events` function at all.
                 break;
+            case 'one-off':
+                eventSourceObject.events = source.events;
+                break;
+            case 'GoogleCalendar':
+                // Fall through to the `default` case but also note
+                // that if there's a `sourceGoogleCalendarApiKey`
+                // member in the object, we do more processing below.
             default:
+                // The FullCalendar-defined `events` function callback.
+                // This is what we use for most of the event sources.
+                eventSourceObject.events = async function (fetchInfo, successCallback, failureCallback) {
+                    await new EventConstructors[element.sourceType](Object.assign(eventSourceObject, {
+                        fetchInfo: fetchInfo,
+                        successCallback: successCallback,
+                        failureCallback: failureCallback,
+                    }));
+                };
+
                 // Special case for when we're using Google
                 // Calendar API proper.
                 // TODO: This should probably be treated as
