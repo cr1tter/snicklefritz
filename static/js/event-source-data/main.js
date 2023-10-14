@@ -430,6 +430,12 @@ const MainEventSourceData = [
                 id: 'naughty-nytes-nyc',
                 className: 'naughty-nytes-nyc',
                 url: 'https://forbiddentickets.com/events/naughty-nytes-nyc/json'
+            },
+            {
+                name: 'Submit NYC',
+                id: 'submit-nyc',
+                className: 'submit-nyc',
+                url: 'https://forbiddentickets.com/events/submit-nyc/json'
             }
         ]
     },
