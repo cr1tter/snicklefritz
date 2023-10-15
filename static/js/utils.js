@@ -27,14 +27,14 @@ export function useCorsProxy ( url ) {
  */
 export function convert12To24HourTime (str) {
     var h, m;
-    if ( str.match(/ am$/) ) {
+    if ( str.match(/ ?am$/) ) {
         [h, m] = str.match(/^(\d?\d):(\d\d)/).slice(1);
         if ( '12' === h ) {
             h = '00';
         }
     } else {
         h = parseInt(str.match(/^\d?\d/)[0]) + 12;
-        m = str.match(/:(\d\d) /)[1];
+        m = str.match(/:(\d\d)/)[1];
         if ( '24' === h ) {
             h = '12';
         }
