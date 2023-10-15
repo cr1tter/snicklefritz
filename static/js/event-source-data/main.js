@@ -227,6 +227,12 @@ const MainEventSourceData = [
                 url: 'https://www.eventbrite.com/o/farm-to-people-19804387040'
             },
             {
+                name: 'Footlight Presents (Eventbrite)',
+                id: 'footlight-presents-eventbrite',
+                className: 'footlight-presents-eventbrite',
+                url: 'https://www.eventbrite.com/o/footlight-presents-55346078443'
+            },
+            {
                 name: 'Geneva Rust-Orta',
                 id: 'geneva-rust-orta',
                 className: 'geneva-rust-orta',
@@ -312,6 +318,12 @@ const MainEventSourceData = [
                 id: 'morus',
                 className: 'morus',
                 url: 'https://www.eventbrite.com/o/museum-of-reclaimed-urban-space-18102992064'
+            },
+            {
+                name: 'NYC Resistor (Eventbrite)',
+                id: 'nyc-resistor-eventbrite',
+                className: 'nyc-resistor-eventbrite',
+                url: 'https://www.eventbrite.com/o/nyc-resistor-52408308'
             },
             {
                 name: 'New Women Space',
@@ -477,7 +489,7 @@ const MainEventSourceData = [
                 url: 'https://calendar.google.com/calendar/ical/013k1i3tkls5tas280vio8cfm4%40group.calendar.google.com/public/basic.ics'
             },
             {
-                name: 'Footlight Presents',
+                name: 'Footlight Presents (Google Calendar)',
                 id: 'footlight-presents',
                 className: 'footlight-presents',
                 url: 'https://calendar.google.com/calendar/ical/q2eve034kguv4h52j3291udvbo%40group.calendar.google.com/public/basic.ics'
@@ -503,7 +515,7 @@ const MainEventSourceData = [
                 url: 'https://calendar.google.com/calendar/ical/qhsrkjv5s7mb4vidjem575jvt4%40group.calendar.google.com/public/basic.ics'
             },
             {
-                name: 'NYC Resistor',
+                name: 'NYC Resistor (Google Calendar)',
                 id: 'nycresistor',
                 className: 'nycresistor',
                 url: 'https://calendar.google.com/calendar/ical/p2m2av9dhrh4n1ub7jlsc68s7o%40group.calendar.google.com/public/basic.ics'
