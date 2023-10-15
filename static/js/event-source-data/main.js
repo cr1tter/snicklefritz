@@ -527,10 +527,10 @@ const MainEventSourceData = [
                 url: 'https://calendar.google.com/calendar/ical/tvrptkil8r120s1guaefhp23hs%40group.calendar.google.com/public/basic.ics'
             },
             {
-                name: 'Phase Space',
-                id: 'phase-space',
-                className: 'phase-space',
-                url: 'https://calendar.google.com/calendar/ical/q14jhdv41fng6q1b2826dp92rs%40group.calendar.google.com/public/basic.ics'
+                name: 'Polyphase Portal',
+                id: 'polyphase-portal',
+                className: 'polyphase-portal',
+                url: 'https://calendar.google.com/calendar/ical/polyphaseportal%40gmail.com/public/basic.ics'
             },
             {
                 name: 'The Lot Radio',
@@ -554,6 +554,12 @@ const MainEventSourceData = [
                 id: 'vers-bk',
                 className: 'vers-bk',
                 url: 'https://calendar.google.com/calendar/ical/c_qi5b592teecmbi4l2jk7ff69ao%40group.calendar.google.com/public/basic.ics'
+            },
+            {
+                name: 'Wavefield',
+                id: 'wavefield',
+                className: 'wavefield',
+                url: 'https://calendar.google.com/calendar/ical/a5a95266f754c12ddb84a86a9bba50933bd640f510db74f8a7e502a512071907%40group.calendar.google.com/public/basic.ics'
             }
         ]
     },
@@ -955,6 +961,12 @@ const MainEventSourceData = [
                 id: 'spectacle-microcinema',
                 className: 'spectacle-microcinema',
                 movementId: '335653',
+            },
+            {
+                name: 'Wavefield (WithFriends)',
+                id: 'wavefield-withfriends',
+                className: 'wavefield-withfriends',
+                movementId: '16319383'
             }
         ]
     },
