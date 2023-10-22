@@ -82,7 +82,9 @@ var calendar = new Calendar(document.getElementById('calendar'), {
     views: {
         listDay: {
             type: 'list',
-            duration: { days: 1 },
+            duration: {
+                days: 1
+            },
             buttonText: 'list',
             titleFormat: {
                 month: 'short',
@@ -126,9 +128,9 @@ var calendar = new Calendar(document.getElementById('calendar'), {
     },
     progressiveEventRendering: true,
     eventSources: EventSources,
-    eventDidMount: function (info) {
+    eventDidMount: function ( info ) {
         info.el.setAttribute('title', info.event.title);
-        if ('listDay' == info.view.type) {
+        if ( 'listDay' == info.view.type ) {
             info.el.querySelector('a').appendChild(document.createTextNode(
                 ` - via ${info.event.source.internalEventSource?.extendedProps?.name}`
             ));
