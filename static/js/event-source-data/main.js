@@ -641,6 +641,24 @@ const MainEventSourceData = [
             }
         ]
     },
+    {
+        sourceType: 'ResidentAdvisor',
+        options: {
+            url: 'https://ra.co/graphql'
+        },
+        sources: [
+            {
+                name: 'Paragon Broadway',
+                className: 'paragon-broadway',
+                id: 'paragon-broadway',
+                extraParams: {
+                    gqlVariables: {
+                        club: '195815' // String, not Number.
+                    }
+                }
+            }
+        ]
+    },
     // September 2023: SeeTickets.us seems to be blocking our CORS proxy.
     //{
     //    sourceType: 'SeeTicketsEvents',

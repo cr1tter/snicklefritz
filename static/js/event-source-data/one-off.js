@@ -185,38 +185,7 @@ const OneOffEventSources = [
                 },
                 color: 'black',
                 textColor: 'white',
-            }
 
-            // Paragon uses Resident Advisor, which is hard(?) to scrape because they never
-            // reveal show times on listing pages, only on individual pages. However, this
-            // club's shows are always 9pm to 3am, so we can simply hardcode that data now.
-            // Frustratingly, Resident Advisor also actively blocks certain IP ranges.
-            //{
-            //    name: 'Paragon Broadway',
-            //    id: 'paragon-broadway',
-            //    className: 'paragon-broadway',
-            //    events: async function (fetchInfo, successCallback, failureCallback) {
-            //        var response = await fetch(Utils.useCorsProxy('https://ra.co/widget/eventlisting?promoter=108635'));
-            //        var html = await response.text();
-            //        var doc = Utils.domparser.parseFromString(html, 'text/html');
-            //        var items = doc.querySelectorAll('.events');
-            //        events = [];
-            //        for (var i = 0; i < items.length; i++) {
-            //            var date_el = items[i].querySelector('.flag').textContent.trim();
-            //            var date = date_el.substring(0, date_el.length - 2); // Strip the annoying slash.
-            //            var title = items[i].querySelector('.title a').textContent.trim();
-            //            var event_id = items[i].querySelector('.title a').getAttribute('href').match(/\d+$/)[0];
-            //            events.push({
-            //                title: title,
-            //                start: new Date(`${date} 21:00`), // Paragon's shows always start at 9 PM.
-            //                url: `https://ra.co/events/${url}`
-            //            });
-            //        }
-            //        successCallback(events);
-            //    },
-            //    color: '#2E2E2D',
-            //    textColor: '#FFF',
-            //}
         ]
     }
 ];

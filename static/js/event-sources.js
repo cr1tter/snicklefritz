@@ -30,6 +30,9 @@ EventConstructors.GoDaddy = GoDaddy;
 import { default as GoogleCalendar } from './event-sources/google-calendar.js';
 EventConstructors.GoogleCalendar = GoogleCalendar;
 
+import { default as ResidentAdvisor } from './event-sources/resident-advisor.js';
+EventConstructors.ResidentAdvisor = ResidentAdvisor;
+
 import { default as SeeTicketsEvents } from './event-sources/seetickets.js';
 EventConstructors.SeeTicketsEvents = SeeTicketsEvents;
 
@@ -83,9 +86,10 @@ const EventSources = EventSourceData.flatMap(function (element, index, array) {
             className: source.className,
 
             // Set these (and only these?) conditionally.
+            ...( source.url             && { url            : source.url }),
             ...( source.backgroundColor && { backgroundColor: source.backgroundColor }),
-            ...( source.color && { color: source.color }),
-            ...( source.textColor && { textColor: source.textColor }),
+            ...( source.color           && { color          : source.color }),
+            ...( source.textColor       && { textColor      : source.textColor }),
 
             // The other possible FC-supported options.
             allow: source.allow,
@@ -101,8 +105,7 @@ const EventSources = EventSourceData.flatMap(function (element, index, array) {
             startEditable: source.startEditable,
             success: source.success,
 
-            // FullCalendar-defined options for JSON or iCalendar feeds.
-            url: source.url,
+            // More FullCalendar-defined options for JSON or iCalendar feeds.
             format: element?.options?.format,
 
             // FullCalendar-defined options for JSON feeds only.
