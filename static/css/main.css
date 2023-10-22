@@ -19,6 +19,8 @@ body {
     display: block;
     margin: 0 auto;
     max-width: 100%;
+    min-height: 250px;
+    max-height: 90vh;
 }
 #calendar {
     border-width: 5px 0;
