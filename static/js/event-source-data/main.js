@@ -644,16 +644,108 @@ const MainEventSourceData = [
     {
         sourceType: 'ResidentAdvisor',
         options: {
-            url: 'https://ra.co/graphql'
+            url: 'https://ra.co/graphql',
+            color: '#FF4849',
+            textColor: '#FFF'
         },
         sources: [
+            {
+                name: 'Baby\'s All Right',
+                className: 'babys-all-right',
+                id: 'babys-all-right',
+                extraParams: {
+                    gqlVariables: {
+                        club: '85157'
+                    }
+                }
+            },
+            {
+                name: 'Basement',
+                className: 'Basement',
+                id: 'basement',
+                extraParams: {
+                    gqlVariables: {
+                        club: '165976'
+                    }
+                }
+            },
+            {
+                name: 'Bossa Nova Civic Club',
+                className: 'bossa-nova-civic-club',
+                id: 'bossa-nova-civic-club',
+                extraParams: {
+                    gqlVariables: {
+                        club: '71292'
+                    }
+                }
+            },
+            {
+                name: 'Brooklyn Steel',
+                className: 'brooklyn-steel',
+                id: 'brooklyn-steel',
+                extraParams: {
+                    gqlVariables: {
+                        club: '132312'
+                    }
+                }
+            },
+            {
+                name: 'Good Room BK',
+                className: 'good-room-bk',
+                id: 'good-room-bk',
+                extraParams: {
+                    gqlVariables: {
+                        club: '97606'
+                    }
+                }
+            },
+            {
+                name: 'Hell Phone',
+                className: 'hell-phone',
+                id: 'hell-phone',
+                extraParams: {
+                    gqlVariables: {
+                        club: '110403'
+                    }
+                }
+            },
+            {
+                name: 'H0l0 Warehouse',
+                className: 'h0l0-warehouse',
+                id: 'h0l0-warehouse',
+                extraParams: {
+                    gqlVariables: {
+                        club: '167751'
+                    }
+                }
+            },
+            {
+                name: 'Nowadays',
+                className: 'nowadays',
+                id: 'nowadays',
+                extraParams: {
+                    gqlVariables: {
+                        club: '105873'
+                    }
+                }
+            },
             {
                 name: 'Paragon Broadway',
                 className: 'paragon-broadway',
                 id: 'paragon-broadway',
                 extraParams: {
                     gqlVariables: {
-                        club: '195815' // String, not Number.
+                        club: '195815'
+                    }
+                }
+            },
+            {
+                name: 'TV Eye (Resident Advisor)',
+                className: 'tv-eye-resident-advisor',
+                id: 'tv-eye-resident-advisor',
+                extraParams: {
+                    gqlVariables: {
+                        club: '188683'
                     }
                 }
             }
@@ -680,7 +772,7 @@ const MainEventSourceData = [
     //            }
     //        },
     //        {
-    //            name: 'TV Eye',
+    //            name: 'TV Eye (SeeTickets)',
     //            id: 'tv-eye',
     //            className: 'tv-eye',
     //            // From https://wl.seetickets.us/TVEye

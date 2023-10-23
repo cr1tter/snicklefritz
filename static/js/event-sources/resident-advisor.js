@@ -89,7 +89,7 @@ export default function ResidentAdvisor ( optionsObj ) {
         indices: [
             'EVENT'
         ],
-        pageSize: 20,
+        pageSize: 100,
         page: 1,
         aggregations: [],
         filters: [
