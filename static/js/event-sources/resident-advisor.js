@@ -34,12 +34,10 @@ fragment eventFragment on IListingItem {
     id
     title
     attending
-    date
     startTime
+    endTime
     contentUrl
     queueItEnabled
-    flyerFront
-    newEventForm
     images {
       id
       filename
@@ -149,7 +147,7 @@ ResidentAdvisor.prototype.toFullCalendarEventObject = function ( e ) {
     return new FullCalendarEvent({
         title: e.title,
         start: new Date(e.startTime),
-        //end: e.date_end, // TODO: Query for this is not yet implemented.
+        end: new Date(e.endTime),
         url: `https://ra.co${e.contentUrl}`,
         extendedProps: {
             //description: e.raw_description, // TODO: Query for this is not yet implemented.
