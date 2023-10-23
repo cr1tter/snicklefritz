@@ -185,6 +185,7 @@ const OneOffEventSources = [
                 },
                 color: 'black',
                 textColor: 'white',
+            }
 
         ]
     }
