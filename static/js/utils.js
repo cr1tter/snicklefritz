@@ -1,6 +1,10 @@
 ---
 layout: none
 ---
+import { gql, GraphQLClient } from 'https://cdn.skypack.dev/graphql-request@6.1.0?min';
+
+export { gql, GraphQLClient };
+
 /**
  * Simplistic and "good enough" helper functions, mostly for dealing
  * with common one-off event source type issues.

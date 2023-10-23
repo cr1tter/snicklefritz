@@ -5,10 +5,116 @@
 import FullCalendarEvent from '../event.js';
 import * as Utils from '../utils.js';
 
+const gqlQueryDocument = Utils.gql`
+query GET_DEFAULT_EVENTS_LISTING($indices: [IndexType!], $aggregations: [ListingAggregationType!], $filters: [FilterInput], $pageSize: Int, $page: Int, $sortField: FilterSortFieldType, $sortOrder: FilterSortOrderType, $baseFilters: [FilterInput]) {
+  listing(indices: $indices, aggregations: [], filters: $filters, pageSize: $pageSize, page: $page, sortField: $sortField, sortOrder: $sortOrder) {
+    data {
+      ...eventFragment
+      __typename
+    }
+    totalResults
+    __typename
+  }
+  aggregations: listing(indices: $indices, aggregations: $aggregations, filters: $baseFilters, pageSize: 0, sortField: $sortField, sortOrder: $sortOrder) {
+    aggregations {
+      type
+      values {
+        value
+        name
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+}
+
+fragment eventFragment on IListingItem {
+  ... on Event {
+    id
+    title
+    attending
+    date
+    startTime
+    contentUrl
+    queueItEnabled
+    flyerFront
+    newEventForm
+    images {
+      id
+      filename
+      alt
+      type
+      crop
+      __typename
+    }
+    artists {
+      id
+      name
+      __typename
+    }
+    venue {
+      id
+      name
+      contentUrl
+      live
+      area {
+        id
+        name
+        urlName
+        country {
+          id
+          name
+          urlCode
+          __typename
+        }
+        __typename
+      }
+      __typename
+    }
+    pick {
+      id
+      blurb
+      __typename
+    }
+    __typename
+  }
+  __typename
+}
+`.trim();
+
 export default function ResidentAdvisor ( optionsObj ) {
     this.url          = new URL(optionsObj.url);
-    this.fetchInfo    = optionsObj.fetchInfo;
-    this.gqlVariables = optionsObj.extraParams.gqlVariables;
+    this.gqlVariables = {
+        indices: [
+            'EVENT'
+        ],
+        pageSize: 20,
+        page: 1,
+        aggregations: [],
+        filters: [
+            {
+                type: 'CLUB',
+                value: optionsObj.extraParams.gqlVariables.club
+            },
+            {
+                type: 'DATERANGE',
+                value: `{"gte":"${optionsObj.fetchInfo.start.toISOString()}"}`
+            }
+        ],
+        sortOrder: 'ASCENDING',
+        sortField: 'DATE',
+        baseFilters: [
+            {
+                type: 'CLUB',
+                value: optionsObj.extraParams.gqlVariables.club
+            },
+            {
+                type: 'DATERANGE',
+                value: `{"gte":"${optionsObj.fetchInfo.start.toISOString()}"}`
+            }
+        ]
+    }
     return this.fetch(this.url).then((ra) => {
         optionsObj.successCallback(ra.parse().events.map(
             this.toFullCalendarEventObject.bind(this)
@@ -23,61 +129,19 @@ export default function ResidentAdvisor ( optionsObj ) {
  * @return {ResidentAdvisor}
  */
 ResidentAdvisor.prototype.fetch = async function ( url ) {
-    var query = 'query GET_DEFAULT_EVENTS_LISTING($indices: [IndexType!], $aggregations: [ListingAggregationType!], $filters: [FilterInput], $pageSize: Int, $page: Int, $sortField: FilterSortFieldType, $sortOrder: FilterSortOrderType, $baseFilters: [FilterInput]) {\n  listing(indices: $indices, aggregations: [], filters: $filters, pageSize: $pageSize, page: $page, sortField: $sortField, sortOrder: $sortOrder) {\n    data {\n      ...eventFragment\n      __typename\n    }\n    totalResults\n    __typename\n  }\n  aggregations: listing(indices: $indices, aggregations: $aggregations, filters: $baseFilters, pageSize: 0, sortField: $sortField, sortOrder: $sortOrder) {\n    aggregations {\n      type\n      values {\n        value\n        name\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment eventFragment on IListingItem {\n  ... on Event {\n    id\n    title\n    attending\n    date\n    startTime\n    contentUrl\n    queueItEnabled\n    flyerFront\n    newEventForm\n    images {\n      id\n      filename\n      alt\n      type\n      crop\n      __typename\n    }\n    artists {\n      id\n      name\n      __typename\n    }\n    venue {\n      id\n      name\n      contentUrl\n      live\n      area {\n        id\n        name\n        urlName\n        country {\n          id\n          name\n          urlCode\n          __typename\n        }\n        __typename\n      }\n      __typename\n    }\n    pick {\n      id\n      blurb\n      __typename\n    }\n    __typename\n  }\n  __typename\n}\n'
-    var response = await fetch(Utils.useCorsProxy(url), {
-        method: 'POST',
-        referrer: 'https://ra.co/events',
-        headers: {
+    const graphQLClient = new Utils.GraphQLClient(
+        Utils.useCorsProxy(url),
+        {
+            'Referer': 'https://ra.co/events',
             'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            operationName: 'GET_DEFAULT_EVENTS_LISTING',
-            variables: {
-                indices: [
-                    'EVENT'
-                ],
-                pageSize: 20,
-                page: 1,
-                aggregations: [],
-                filters: [
-                    {
-                        type: 'CLUB',
-                        value: this.gqlVariables.club
-                    },
-                    {
-                        type: 'DATERANGE',
-                        value: `{"gte":"${this.fetchInfo.start.toISOString()}"}`
-                    }
-                ],
-                sortOrder: 'ASCENDING',
-                sortField: 'DATE',
-                baseFilters: [
-                    {
-                        type: 'CLUB',
-                        value: this.gqlVariables.club
-                    },
-                    {
-                        type: 'DATERANGE',
-                        value: `{"gte":"${this.fetchInfo.start.toISOString()}"}`
-                    }
-                ]
-            },
-            query: query
-        })
-        //body: Utils.graphql`${payload}`
-    });
-    var json = {};
-    try {
-        var json = await response.json();
-    } catch (e) {
-        console.error(e);
-    }
-    this.json = json;
+        }
+    );
+    this.json = await graphQLClient.request(gqlQueryDocument, this.gqlVariables);
     return this;
 }
 
 ResidentAdvisor.prototype.parse = function () {
-    this.events = this.json.data.listing.data;
+    this.events = this.json.listing.data;
     return this;
 }
 
