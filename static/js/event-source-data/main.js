@@ -803,7 +803,7 @@ const MainEventSourceData = [
                 name: 'Avant Gardner',
                 id: 'avant-gardner',
                 className: 'avant-gardner',
-                url: 'https://www.avant-gardner.com/?format=json'
+                url: 'https://www.avant-gardner.com/events?format=json'
             },
             {
                 name: 'Black Flamingo',
