@@ -179,6 +179,12 @@ const MainEventSourceData = [
                 url: 'https://www.eventbrite.com/o/brooklyn-comedy-collective-27620063469'
             },
             {
+                name: 'Brooklyn Hearts Club',
+                id: 'brooklyn-hearts-club',
+                className: 'brooklyn-hearts-club',
+                url: 'https://www.eventbrite.com/o/brooklyn-hearts-club-60043159453'
+            },
+            {
                 name: 'Brooklyn Psychedelic Society',
                 id: 'brooklyn-psychedelic-society',
                 className: 'brooklyn-psychedelic-society',
