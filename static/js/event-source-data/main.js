@@ -965,6 +965,12 @@ const MainEventSourceData = [
                 url: 'https://www.thetranspecos.com/cal?format=json'
             },
             {
+                name: 'Vers',
+                id: 'vers',
+                className: 'vers',
+                url: 'https://www.versnyc.com/events-vers-gay-bar-nyc?format=json'
+            },
+            {
                 name: 'Wandering Barman',
                 id: 'wandering-barman',
                 className: 'wandering-barman',
