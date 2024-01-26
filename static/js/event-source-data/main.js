@@ -726,6 +726,16 @@ const MainEventSourceData = [
                 }
             },
             {
+                name: 'Merge (Resident Advisor)',
+                className: 'merge',
+                id: 'merge',
+                extraParams: {
+                    gqlVariables: {
+                        promoter: '101265'
+                    }
+                }
+            },
+            {
                 name: 'Nowadays',
                 className: 'nowadays',
                 id: 'nowadays',

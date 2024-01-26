@@ -82,8 +82,15 @@ fragment eventFragment on IListingItem {
 `.trim();
 
 export default function ResidentAdvisor ( optionsObj ) {
-    this.url          = new URL(optionsObj.url);
-    this.gqlVariables = {
+    this.url           = new URL(optionsObj.url);
+    var clubOrPromoter = ( optionsObj.extraParams.gqlVariables.promoter ) ? {
+        type: 'PROMOTER',
+        value: optionsObj.extraParams.gqlVariables.promoter
+    } : {
+        type: 'CLUB',
+        value: optionsObj.extraParams.gqlVariables.club
+    };
+    this.gqlVariables  = {
         indices: [
             'EVENT'
         ],
@@ -91,10 +98,7 @@ export default function ResidentAdvisor ( optionsObj ) {
         page: 1,
         aggregations: [],
         filters: [
-            {
-                type: 'CLUB',
-                value: optionsObj.extraParams.gqlVariables.club
-            },
+            clubOrPromoter,
             {
                 type: 'DATERANGE',
                 value: `{"gte":"${optionsObj.fetchInfo.start.toISOString()}"}`
@@ -103,10 +107,7 @@ export default function ResidentAdvisor ( optionsObj ) {
         sortOrder: 'ASCENDING',
         sortField: 'DATE',
         baseFilters: [
-            {
-                type: 'CLUB',
-                value: optionsObj.extraParams.gqlVariables.club
-            },
+            clubOrPromoter,
             {
                 type: 'DATERANGE',
                 value: `{"gte":"${optionsObj.fetchInfo.start.toISOString()}"}`
