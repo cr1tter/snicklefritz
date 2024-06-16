@@ -7,7 +7,7 @@ You can [see me live here](https://anarchism.nyc).
 The easiest way to develop this project is to use [the provided Vagrant environment](Vagrantfile). You'll need to install [Vagrant](https://vagrantup.com/) and [VirtualBox](https://www.virtualbox.org/). Then clone the repository and invoke `vagrant up` in the project's root directory:
 
 ```shell
-git clone https://github.com/AnarchoTechDFW/DGWAnarchoEvents.git
+git clone https://github.com/AnarchoTechDFW/DFWAnarchoEvents.git
 cd DFWAnarchoEvents
 vagrant up
 ```
