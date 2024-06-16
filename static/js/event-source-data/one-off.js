@@ -15,7 +15,7 @@ const OneOffEventSources = [
         sources: [
             // This is actually Bluestockings, but they use Bookmanager for events now.
             // So here is a simple implementation of a Bookmanager event scraper.
-            {
+            /*{
                 name: 'Bluestockings Cooperative',
                 id: 'bluestocksings-cooperative',
                 className: 'bluestockings-cooperative',
@@ -185,7 +185,7 @@ const OneOffEventSources = [
                 },
                 color: 'black',
                 textColor: 'white',
-            }
+            }*/
 
         ]
     }

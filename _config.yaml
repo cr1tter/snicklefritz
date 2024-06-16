@@ -7,16 +7,16 @@
 #####################################################################
 
 # Site settings
-title: Anarchism Dot NYC
+title: Anarcho DFW
 tagline:
-description: Events and happenings in the Anarchist jurisdiction (lmao) of New York City. Stop scrolling insta to find the move.<br />Mostly for the girls, gays, and theys, heavy on the queer because of course we fucking are.
+description: Events and happenings in the Dallas / Denton area. Abolish coercion. Embolden community.
 lang: "en_US" # The primary human language you write in.
-timezone: "America/New_York"
+timezone: "America/Chicago"
 type: Website
 logo: &logo static/img/BlackFlagSymbol.svg
 
 author:
-  name: Anarcho-Tech NYC
+  name: Anarcho-Tech DFW
   email:
 
 # List of other sites to link to in the site footer
@@ -101,7 +101,7 @@ sister_sites:
 #onion:
 
 # Base URL of a CORS proxy to use.
-cors_proxy_base_url: https://cors.anarchism.nyc
+cors_proxy_base_url: https://crossorigin.me
 
 # Build settings
 markdown: kramdown
